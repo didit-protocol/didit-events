@@ -4,7 +4,7 @@
 # the unprivileged node user. Server settings are read from the environment when the container starts, so one image
 # serves every environment. CONTACT_EMAIL, STAFF_EMAIL_DOMAIN and NEXT_PUBLIC_SENTRY_DSN are the exception: the pages
 # get them at build time. Give the container the same CONTACT_EMAIL and STAFF_EMAIL_DOMAIN when it runs.
-FROM node:22-slim AS base
+FROM node:26-slim AS base
 WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1 CI=true
 RUN corepack enable
@@ -36,7 +36,7 @@ RUN pnpm --filter @didit-events/events build
 RUN pnpm --filter @didit-events/core deploy --legacy --prod /migrate \
     && cp docker/migrate.mjs /migrate/migrate.mjs
 
-FROM node:22-slim AS prod
+FROM node:26-slim AS prod
 WORKDIR /app
 ENV NODE_ENV=production PORT=3000 HOSTNAME=0.0.0.0 NEXT_TELEMETRY_DISABLED=1 NEXT_MANUAL_SIG_HANDLE=1
 COPY --from=build --chown=node:node /app/apps/events/.next/standalone ./
