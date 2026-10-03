@@ -1,0 +1,110 @@
+/* A-02 Events list (design/01 Admin). Wide: rows in one bordered box; compact (A-02-1024): short rows, the status
+   chips in a scrolling line under the search, no funnel; narrow (A-02-390): one card per event. The page box is a
+   size container, so the layout follows the content column (with or without the sidebar beside it). Overrides of
+   ui primitives use a doubled class. */
+.page { container: eventslist / inline-size; }
+
+.newEvent.newEvent { gap: 8px; }
+.plus { font-size: 18px; line-height: 1; }
+
+.toolbar { display: flex; align-items: center; gap: 12px; }
+.search { width: 280px; flex: none; }
+.searchField { width: 100%; }
+
+/* Rows: 64px tile column, name, 110px pill, 340px funnel, 20px chevron. */
+.list { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+.row {
+  position: relative; display: grid; grid-template-columns: 64px minmax(0, 1fr) 110px 340px 20px; gap: 24px; align-items: center;
+  padding: 16px 20px; border-bottom: 1px solid var(--border-subtle);
+}
+.row:has(.name:hover) { background: var(--ultra-soft); }
+.date {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; width: 56px; height: 56px;
+  border-radius: var(--radius-sm); background: var(--soft);
+}
+.month { font: 500 10px/normal var(--font-sans); letter-spacing: 0.08em; color: var(--mid-high); }
+.day { font: 500 22px/normal var(--font-sans); letter-spacing: -0.02em; font-feature-settings: "tnum"; color: var(--black); }
+.text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.name { font: 500 15px/normal var(--font-sans); letter-spacing: -0.01em; color: var(--black); text-decoration: none; }
+.name:hover { color: var(--black); text-decoration: none; }
+/* The whole row is the link's hit area. */
+.name::after { content: ""; position: absolute; inset: 0; }
+.name:focus-visible { outline: none; }
+.name:focus-visible::after { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: -2px; border-radius: inherit; }
+.meta { font: 400 13px/normal var(--font-sans); color: var(--high); }
+.counts { display: none; font: 400 13px/normal var(--font-sans); color: var(--high); }
+.pill { justify-self: start; }
+.funnel { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.metric { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.metricHead { display: flex; justify-content: space-between; font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+.metricValue { color: var(--black); font-weight: 500; font-feature-settings: "tnum"; }
+.bar.bar { height: 4px; }
+.invited > div { background: var(--black); }
+.verified > div { background: var(--brand); }
+.checked > div { background: var(--success); }
+.chevron { color: var(--mid-high); }
+
+/* A-02b skeleton rows: 64 / 1fr / 110 / 340. */
+.skRow { grid-template-columns: 64px minmax(0, 1fr) 110px 340px; }
+.skTile.skTile { border-radius: var(--radius-sm); }
+.skText { display: flex; flex-direction: column; gap: 8px; }
+.skLight.skLight { background: var(--ultra-soft); }
+
+/* A-02c/d: centred in the rest of the page, 48px icon, 17px title, 14px help, CTA 16px below. */
+.empty.empty { flex: 1; justify-content: center; gap: 10px; padding: 0 0 80px; border: 0; border-radius: 0; }
+.empty h3 { font-size: 17px; letter-spacing: -0.01em; }
+.empty p { font-size: 14px; }
+.empty.empty > :last-child { margin-top: 6px; }
+.empty > :first-child { display: flex; }
+
+/* The full row needs ~880px: 64 tile, 110 pill, 340 funnel, 20 chevron, gaps and a readable name. */
+@container eventslist (max-width: 880px) {
+  .plus { display: none; }
+  .toolbar { flex-wrap: wrap; gap: 12px; }
+  .search { flex: 1 1 100%; width: auto; }
+  /* The status filter stays: one line that scrolls sideways when it does not fit. The 6px block padding leaves room
+     for the chips' 44px hit areas inside the scroller. */
+  .chips.chips {
+    flex: 1 1 100%; flex-wrap: nowrap; min-width: 0; margin: -6px 0; padding: 6px 28px 6px 0; overflow-x: auto; scrollbar-width: none;
+    /* The right edge fades to show there is more; the end padding lets the last chip clear the fade. */
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
+  }
+  .chips::-webkit-scrollbar { display: none; }
+  .chips a { position: relative; flex: none; }
+  .chips a::after { content: ""; position: absolute; inset: -6px 0; }
+  .row { grid-template-columns: 56px minmax(0, 1fr) 90px; gap: 16px; padding: 14px 16px; }
+  .date { width: 48px; height: 48px; }
+  .month { font-size: 9px; }
+  .day { font-size: 18px; letter-spacing: normal; }
+  .name { font-size: 14px; letter-spacing: normal; }
+  .meta { font-size: 12px; }
+  .counts { display: block; font-size: 12px; }
+  .where, .funnel, .chevron { display: none; }
+  .skRow { grid-template-columns: 56px minmax(0, 1fr) 90px; }
+  .skTile.skTile { width: 48px !important; height: 48px !important; }
+  .skFunnel { display: none; }
+}
+
+@container eventslist (max-width: 560px) {
+  .newEvent.newEvent { height: var(--control-h-lg); }
+  .search > div > div { height: var(--control-h-lg); padding: 0 12px; }
+  .search input { font-size: 16px; }
+  .list { gap: 16px; border: 0; border-radius: 0; overflow: visible; }
+  .row {
+    grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "date pill" "text text"; gap: 8px; padding: 14px;
+    border: 1px solid var(--border); border-radius: var(--radius-sm);
+  }
+  .date { grid-area: date; flex-direction: row; justify-content: flex-start; gap: 0.3em; width: auto; height: auto; border-radius: 0; background: none; }
+  .month, .day { font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; color: var(--mid-high); font-feature-settings: "tnum"; }
+  .text { grid-area: text; gap: 8px; }
+  .name { font-size: 15px; }
+  /* The date and venue stay readable to screen readers (the tile is decorative). */
+  .meta { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .counts { font-size: 13px; }
+  .pill { grid-area: pill; justify-self: end; }
+  .skRow { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: none; }
+  .skTile.skTile { display: none; }
+}
+
+/* Phones: the event name link gets a 44px-tall hit area. */
+@media (max-width: 640px) { .name { display: inline-block; padding-block: 12px; margin-block: -12px; } }

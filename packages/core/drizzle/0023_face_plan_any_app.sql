@@ -1,0 +1,2 @@
+ALTER TABLE "verification_ops" DROP CONSTRAINT "verification_ops_face_plan_v2";--> statement-breakpoint
+ALTER TABLE "verification_ops" ADD CONSTRAINT "verification_ops_face_plan_v3" CHECK ("verification_ops"."purpose" not in ('onboarding','face_renewal','re_enrolment') or ("verification_ops"."expected_checks"=array['face']::text[] and "verification_ops"."vendor_data"="verification_ops"."email_at_creation"));

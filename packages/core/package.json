@@ -1,0 +1,43 @@
+{
+  "name": "@didit-events/core",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./db": "./src/db/index.ts",
+    "./db/schema": "./src/db/schema.ts",
+    "./db/migrate": "./src/db/migrate.ts",
+    "./env": "./src/env.ts",
+    "./didit": "./src/didit/index.ts",
+    ".": "./src/index.ts",
+    "./email": "./src/email/index.ts",
+    "./email/fixtures": "./src/email/fixtures.ts",
+    "./domain": "./src/domain/index.ts",
+    "./db/tx": "./src/db/tx.ts",
+    "./http/policy": "./src/http/policy.ts",
+    "./identity": "./src/identity/index.ts",
+    "./notifications": "./src/notifications/index.ts",
+    "./*": "./src/*.ts",
+    "./domain/event-model": "./src/domain/event-model.ts",
+    "./contracts/event-model": "./src/contracts/event-model.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "node --experimental-strip-types src/db/migrate-cli.ts"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "drizzle-orm": "^0.45.3",
+    "markdown-it": "14.3.2",
+    "postgres": "^3.4.9",
+    "sanitize-html": "2.18.0",
+    "sharp": "0.35.5",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "14.2.0",
+    "@types/sanitize-html": "2.16.2",
+    "drizzle-kit": "^0.31.11"
+  }
+}

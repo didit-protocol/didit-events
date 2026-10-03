@@ -1,0 +1,12 @@
+.popup { overflow: hidden; border: 1px solid rgba(157,161,161,.5); border-radius: 12px; box-shadow: var(--shadow-xl); }
+.bar { display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px; background: var(--soft); font: 400 12px/normal var(--font-sans); color: var(--high); }
+.body { display: flex; flex-direction: column; gap: 12px; padding: 18px; }
+.body img { display: block; }
+.h { font: 500 18px/normal var(--font-sans); }
+.sub { margin-top: -12px; font: 400 13px/normal var(--font-sans); color: var(--high); }
+.acct { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid var(--border-subtle); }
+.av { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--soft); color: var(--high); font: 500 11px/normal var(--font-sans); }
+.who { display: flex; flex-direction: column; }
+.n { font: 500 13px/normal var(--font-sans); }
+.e { font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+.legal { font: 400 11px/1.5 var(--font-sans); color: var(--mid-high); }

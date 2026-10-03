@@ -1,0 +1,64 @@
+/* P-03 calendar (04 AI Era Event): the header's column (--header-max-w, 32px gutters; 16px on phones), 32px 0 64px,
+ * gap 28. The footer sits at the bottom of the page. */
+.page { display: flex; flex-direction: column; background: var(--white); color: var(--black); font-family: var(--font-sans); min-height: var(--page-min-h, auto); }
+.main { box-sizing: border-box; flex: 1 0 auto; width: min(var(--header-max-w), calc(100% - 64px)); margin: 0 auto; padding: 32px 0 64px; display: flex; flex-direction: column; gap: 28px; }
+.banner { position: relative; height: 200px; border-radius: var(--radius-lg); background-color: var(--soft); background-position: center; background-size: cover; }
+/* The header owns the space under the banner: the tile hangs 32px below it, the text starts 16px under the tile. */
+.header { display: flex; flex-direction: column; }
+.mark {
+  box-sizing: content-box; position: absolute; left: 28px; bottom: -32px; width: 80px; height: 80px; border-radius: var(--radius-md);
+  z-index: 2; background: var(--white); border: 4px solid var(--white); display: grid; place-items: center; overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+.markImg { width: 44px; height: 44px; object-fit: contain; }
+/* The tile is white: a transparent logo shows on white, like the built-in Didit mark. It sits above the host block. */
+.logoImg { display: block; width: 80px; height: 80px; object-fit: cover; }
+.tagline { font: 500 13px/normal var(--font-sans); color: var(--mid-high); }
+.links { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; margin: 2px 0 0; padding: 0; list-style: none; }
+.link { display: inline-flex; align-items: center; gap: 4px; font: 500 13px/normal var(--font-sans); color: var(--high); text-decoration: none; }
+.link:hover { color: var(--black); text-decoration: underline; }
+.link:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); border-radius: 2px; }
+/* X / LinkedIn: the 20px logo in a 44px touch target; the negative margins keep the row's height and 24px between logos. */
+.brandLink { width: 28px; height: 28px; margin: -6px -6px; }
+/* Subscribe sits beside the name it acts on (centred on the block), not alone at its bottom corner. */
+.host { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding-top: 48px; }
+.hostText { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.name { margin: 0; font: 500 32px/normal var(--font-sans); letter-spacing: -0.03em; }
+.description { margin: 0; font: 400 15px/normal var(--font-sans); color: var(--high); max-width: 520px; }
+.stats { font: 400 13px/normal var(--font-sans); color: var(--mid-high); font-feature-settings: "tnum"; }
+.subscribe.subscribe { height: 40px; min-width: 0; padding: 0 18px; font-size: 14px; }
+.list { display: flex; flex-direction: column; gap: 28px; margin: 0; padding: 0; list-style: none; }
+/* One row per day: the date once, then a card per event. The date column is 140px at the design width and
+ * narrows with the page on tablets (16%), so the cards keep the room. */
+.row { display: grid; grid-template-columns: clamp(88px, 16%, 140px) minmax(0, 1fr); gap: 24px; }
+.cards { display: flex; flex-direction: column; gap: 12px; min-width: 0; margin: 0; padding: 0; list-style: none; }
+.date { display: flex; flex-direction: column; gap: 2px; padding-top: 4px; }
+.day { font: 500 15px/normal var(--font-sans); font-feature-settings: "tnum"; }
+.weekday { font: 400 13px/normal var(--font-sans); color: var(--mid-high); }
+.card {
+  border: 1px solid var(--border); border-radius: 16px; padding: 16px; display: flex; gap: 16px; align-items: center;
+  color: inherit; text-decoration: none; transition: border-color 150ms var(--ease-out);
+}
+.card:hover { border-color: var(--mid); text-decoration: none; color: inherit; }
+.card:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+.cardText { flex: 1; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.time { font: 400 13px/normal var(--font-sans); color: var(--mid-high); font-feature-settings: "tnum"; }
+.title { font: 500 18px/normal var(--font-sans); letter-spacing: -0.015em; }
+.location { font: 400 13px/normal var(--font-sans); color: var(--high); }
+.status { display: flex; gap: 8px; align-items: center; padding-top: 4px; }
+.count { font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+.thumb { box-sizing: border-box; display: block; width: 96px; height: 96px; border-radius: var(--radius-sm); flex: none; border: 1px solid var(--border-subtle); background: var(--soft); object-fit: cover; }
+.empty { padding: 48px 24px; }
+@media (max-width: 767px) {
+  .main { width: calc(100% - 32px); }
+  /* 44px touch targets: the 40px Subscribe pill inside transparent 2px borders, and the profile links. */
+  .subscribe.subscribe { height: 44px; border: solid transparent; border-width: 2px 0; background-clip: padding-box; }
+  .link { min-height: 44px; }
+  .brandLink { width: 32px; height: 32px; margin: 0 -8px; }
+}
+@media (max-width: 640px) {
+  .row { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .date { flex-direction: row; gap: 8px; padding-top: 0; }
+  .host { flex-direction: column; align-items: flex-start; }
+  .thumb { width: 72px; height: 72px; }
+}

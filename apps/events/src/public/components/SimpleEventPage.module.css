@@ -1,0 +1,62 @@
+/* G-01 (design/02 Guest and Emails): 390 mobile, 1440 desktop. --page-min-h lets a frame pin the design height. */
+.root { container-type: inline-size; }
+.page { display: flex; flex-direction: column; min-height: var(--page-min-h, 100dvh); background: var(--white); color: var(--black); font-family: var(--font-sans); }
+.page > .desktopOnly, .desktopInline { display: none; }
+
+/* Mobile: cover 180 (margin 0 20), then a 20px-padded column with gap 20. */
+.layout { display: flex; flex-direction: column; }
+.cover { margin: 0 20px; height: 180px; border-radius: var(--radius-md); background-position: center; background-size: cover; }
+.details { display: flex; flex-direction: column; gap: 8px; padding: 20px 20px 0; }
+.when { font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; color: var(--brand); font-feature-settings: "tnum"; }
+.title { margin: 0; font: 500 30px/1.1 var(--font-sans); letter-spacing: -0.03em; }
+.venue { font: 400 14px/1.5 var(--font-sans); color: var(--high); }
+.venue a { color: var(--brand); text-decoration: none; }
+.venue a:hover { color: var(--brand-deep); text-decoration: underline; }
+.description { margin: 0; font: 400 15px/1.55 var(--font-sans); }
+.formBox { margin: 20px; }
+
+.form { display: flex; flex-direction: column; gap: 14px; padding-top: 20px; border-top: 1px solid var(--border); }
+.formTitle { margin: 0; font: 500 17px/normal var(--font-sans); letter-spacing: -0.01em; }
+.banner.banner { padding: 12px 14px; font: 400 14px/1.45 var(--font-sans); }
+.fields { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+.field { min-width: 0; }
+.busy input { background: var(--ultra-soft); }
+.optional { font-weight: inherit; color: inherit; }
+.note { margin: 0; font: 400 13px/1.5 var(--font-sans); color: var(--high); }
+.submit.submit[aria-busy="true"] { opacity: 0.6; }
+.requestingAs { margin: 0; padding: 12px 14px; border-radius: var(--radius-md); background: var(--ultra-soft); font: 400 14px/1.5 var(--font-sans); color: var(--high); overflow-wrap: anywhere; }
+.requestingEmail { font-weight: 500; color: var(--black); }
+.linkButton { padding: 0; border: 0; background: none; font: inherit; color: var(--brand); cursor: pointer; }
+.linkButton:hover { color: var(--brand-deep); text-decoration: underline; }
+.staffNote { margin: 0; padding: 12px 14px; border-radius: var(--radius-md); background: var(--ultra-soft); font: 400 14px/1.45 var(--font-sans); color: var(--high); }
+
+.secured { margin-top: 14px; }
+.submitted { padding: 20px; border-radius: var(--radius-md); background: var(--ultra-soft); display: flex; flex-direction: column; gap: 10px; }
+.thanks { margin: 0; font: 500 20px/normal var(--font-sans); letter-spacing: -0.02em; }
+.thanksBody { margin: 0; font: 400 15px/1.5 var(--font-sans); color: var(--high); }
+
+@container (min-width: 768px) {
+  .page > .mobileOnly, .mobileInline { display: none; }
+  .page > .desktopOnly { display: flex; }
+  .desktopInline { display: inline; }
+  .layout {
+    flex: 1; box-sizing: border-box; width: 100%; max-width: 1312px; margin: 0 auto; padding: 48px 64px;
+    display: grid; grid-template-columns: 1.2fr 1fr; grid-template-rows: auto 1fr; column-gap: 64px; row-gap: 28px;
+  }
+  .cover { grid-column: 1; margin: 0; height: 340px; border-radius: var(--radius-lg); }
+  .details { grid-column: 1; gap: 12px; padding: 0; }
+  .when { font-size: 13px; }
+  .title { font-size: 48px; line-height: 1.05; letter-spacing: -0.035em; }
+  .venue { font-size: 16px; }
+  .description { font-size: 17px; max-width: 560px; }
+  .formBox {
+    grid-column: 2; grid-row: 1 / span 2; align-self: start; margin: 0; padding: 32px;
+    border: 1px solid var(--border); border-radius: var(--radius-lg);
+  }
+  .formBox.statusBox { padding: 0; border: 0; }
+  .form { gap: 16px; padding-top: 0; border-top: 0; }
+  .formTitle { font-size: 22px; letter-spacing: -0.02em; }
+  .fields { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px 12px; }
+  .wide { grid-column: 1 / -1; }
+  .optional { font-weight: 400; color: var(--mid-high); }
+}

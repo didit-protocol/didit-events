@@ -1,0 +1,5 @@
+/* X / LinkedIn: the 16px official mark in a 44px touch target. */
+.list { display: flex; align-items: center; margin: 0; padding: 0; list-style: none; }
+.link { display: grid; place-items: center; width: var(--tap-target); height: var(--tap-target); border-radius: 50%; color: var(--high); }
+.link:hover { color: var(--black); }
+.link:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: -6px; }

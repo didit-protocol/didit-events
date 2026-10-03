@@ -1,0 +1,19 @@
+/* The Didit mark's ring (a 22:28 pill outline) in the text colour: faint all round, with a bright stretch that
+ * travels (the conic mask turns; one lap in 1.1s, like MarkLoader). */
+@property --mark-turn { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.spinner {
+  display: inline-block;
+  flex: none;
+  box-sizing: border-box;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  -webkit-mask: conic-gradient(from var(--mark-turn), #000 0 32%, rgba(0, 0, 0, 0.22) 0);
+  mask: conic-gradient(from var(--mark-turn), #000 0 32%, rgba(0, 0, 0, 0.22) 0);
+  animation: turn 1100ms linear infinite;
+}
+@keyframes turn { to { --mark-turn: 360deg; } }
+@keyframes pulse { 50% { opacity: 0.45; } }
+/* Reduced motion: the whole ring, breathing (opacity only). */
+@media (prefers-reduced-motion: reduce) {
+  .spinner { -webkit-mask: none; mask: none; animation: pulse 1600ms ease-in-out infinite; }
+}

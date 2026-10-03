@@ -1,0 +1,48 @@
+/* Desktop sign-in modal (05 DA-01…DA-05): 1440 × 900 page, schematic event page behind a 32% scrim, 440px card. */
+.page { position: relative; box-sizing: border-box; width: 100%; min-height: var(--page-min-h, 100dvh); overflow: hidden; background: var(--white); font-family: var(--font-sans); color: var(--black); }
+.behind { position: absolute; inset: 0; display: grid; grid-template-columns: 330px 1fr; gap: 48px; padding: 40px 220px; opacity: 0.9; }
+.behindCover { height: 330px; border-radius: 20px; background-position: center; background-size: cover; }
+.behindCol { display: flex; flex-direction: column; gap: 16px; }
+.bar { height: 40px; border-radius: 6px; background: var(--soft); }
+.bar1 { width: 80%; }
+.bar2 { width: 55%; }
+.card0 { height: 220px; margin-top: 12px; border: 1px solid var(--border); border-radius: 20px; }
+.scrim { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; background: var(--overlay); }
+.modal {
+  box-sizing: border-box; display: flex; flex-direction: column; gap: 16px; width: 440px; max-width: 100%; padding: 28px;
+  border-radius: 24px; background: var(--white); box-shadow: var(--shadow-2xl);
+  animation: modalIn var(--duration-base) var(--ease-emphasized);
+}
+/* The sign-in card fades and scales in like every modal (opacity only under reduced motion). */
+@keyframes modalIn { from { opacity: 0; transform: scale(0.96); } }
+@keyframes modalFade { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .modal { animation: modalFade var(--duration-base) linear; }
+  .close { transition: none; }
+}
+/* The 56px box of a flow status icon, for the loader of "Signing you in". */
+.mark { display: grid; place-items: center; flex: none; width: 56px; height: 56px; }
+.top { display: flex; align-items: center; justify-content: space-between; }
+.top img { display: block; }
+.close {
+  display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--chip); color: var(--high);
+  font: 400 16px/1 var(--font-sans); text-decoration: none;
+}
+.close { transition: background-color var(--duration-fast) var(--ease-standard); }
+.close:hover { background: var(--chip-2); text-decoration: none; }
+.close:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+.title { margin: 0; font: 500 24px/1.15 var(--font-sans); letter-spacing: -0.025em; }
+.body { margin: 0; font: 400 14px/1.55 var(--font-sans); color: var(--high); }
+.foot { margin: 0; min-height: 0; font: 400 12px/1.5 var(--font-sans); color: var(--mid-high); }
+.form { display: flex; flex-direction: column; gap: 16px; }
+/* DA email field: 44px, label 500 13px, 400 14px, error 12px. */
+.field input { height: 44px; }
+.cta.cta { height: 44px; font-size: 15px; }
+
+/* Layout switch for /login: the sheet below 768px, the modal above. */
+.mobileOnly { display: block; }
+.desktopOnly { display: none; }
+@media (min-width: 768px) {
+  .mobileOnly { display: none; }
+  .desktopOnly { display: block; }
+}

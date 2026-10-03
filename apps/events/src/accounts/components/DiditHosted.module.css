@@ -1,0 +1,17 @@
+/* 04 R-11…R-18: the Didit hosted flow, for flow context in the gallery (Didit renders the real one). */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 0; padding: 0; list-style: none; }
+.step { display: flex; flex-direction: column; gap: 6px; }
+.bar { height: 4px; border-radius: var(--radius-full); background: var(--soft); }
+.barDone { background: var(--brand); }
+.barNow { background: rgba(37,103,255,0.35); }
+.label { font: 500 11px/normal var(--font-sans); color: var(--mid); }
+.labelOn { color: var(--black); }
+.cam { position: relative; flex: none; height: 420px; overflow: hidden; border-radius: 24px; background: radial-gradient(ellipse 60% 50% at 20% 30%, rgba(90,95,110,.6), transparent 70%), linear-gradient(180deg, #2a2a2e, #18181a); }
+.face { position: absolute; left: 50%; top: 48%; width: 210px; height: 270px; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(ellipse at 50% 40%, rgba(190,165,145,.8), rgba(120,98,85,.55) 60%, transparent 72%); }
+.oval { position: absolute; left: 50%; top: 48%; box-sizing: border-box; width: 230px; height: 300px; transform: translate(-50%, -50%); border-radius: 50%; border: 3px solid rgba(254,254,254,.9); box-shadow: 0 0 0 999px rgba(13,13,13,.45); }
+.ovalHold { border: 5px solid var(--brand); box-shadow: 0 0 40px rgba(37,103,255,.5), 0 0 0 999px rgba(13,13,13,.45); }
+.hint { position: absolute; left: 0; right: 0; bottom: 20px; display: flex; justify-content: center; }
+.hint span { padding: 10px 18px; border-radius: var(--radius-full); background: rgba(254,254,254,.14); color: var(--white); font: 500 16px/normal var(--font-sans); }
+.processing { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; }
+.processingTitle { margin: 0; font: 500 17px/normal var(--font-sans); }
+.processingHint { margin: 0; font: 400 14px/normal var(--font-sans); color: var(--high); }

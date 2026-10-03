@@ -1,0 +1,72 @@
+/* Breadcrumbs */
+.crumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin: 0; padding: 0; list-style: none; font: 400 13px/normal var(--font-sans); color: var(--mid-high); }
+.crumbs li { display: inline-flex; align-items: center; gap: 4px; }
+.crumbs a { color: inherit; }
+.crumbs a:hover { color: var(--black); text-decoration: none; }
+.crumbs [aria-current="page"] { color: var(--black); }
+.sep { color: var(--mid); }
+
+/* Avatar */
+.avatar {
+  display: inline-grid; place-items: center; flex: none; border-radius: 50%; overflow: hidden;
+  font: 500 12px/1 var(--font-sans); letter-spacing: normal; user-select: none;
+}
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.avNeutral { background: var(--soft); color: var(--high); }
+.avBrand { background: var(--brand-soft); color: var(--brand-deep); }
+.avDark { background: var(--black); color: var(--white); }
+
+/* Stat tile */
+.stat { display: flex; flex-direction: column; gap: 6px; padding: 16px; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.eyebrow { font: var(--type-eyebrow); letter-spacing: var(--type-eyebrow-ls); text-transform: uppercase; color: var(--mid-high); }
+.metric { font: var(--type-metric); letter-spacing: var(--type-metric-ls); font-feature-settings: "tnum"; color: var(--black); }
+.delta { font: 500 12px/normal var(--font-sans); color: var(--high); }
+.deltaPositive { color: var(--success-fg); }
+.deltaNegative { color: var(--danger-fg); }
+.deltaWarning { color: var(--warning-fg); }
+
+/* Progress */
+.progress { height: 6px; border-radius: var(--radius-full); background: var(--soft); overflow: hidden; }
+.progressFill { height: 100%; border-radius: var(--radius-full); background: var(--brand); transition: width var(--duration-slow) var(--ease-standard); }
+
+/* Banner */
+.banner { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: var(--radius-sm); font: 400 13px/normal var(--font-sans); }
+.bannerBody { flex: 1; min-width: 0; }
+.info { background: var(--brand-soft); color: var(--brand-deep); }
+.success { background: var(--success-bg); color: var(--success-fg); }
+.warning { background: var(--warning-bg); color: var(--warning-fg); }
+.danger { background: var(--danger-bg); color: var(--danger-fg); }
+.neutral { background: var(--soft); color: var(--black); }
+
+/* Tooltip (CSS only: hover / focus-within) */
+.tipWrap { position: relative; display: inline-flex; }
+.tip {
+  position: absolute; left: 50%; bottom: calc(100% + 6px); z-index: 50; transform: translateX(-50%);
+  padding: 8px 10px; border-radius: var(--radius-8); background: rgba(254,254,254,0.8);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: var(--shadow-tooltip);
+  color: var(--black); font: 400 12px/normal var(--font-sans); letter-spacing: -0.04em; white-space: nowrap;
+  pointer-events: none; opacity: 0; visibility: hidden; transition: opacity var(--duration-fast) var(--ease-standard);
+}
+.tipBottom { bottom: auto; top: calc(100% + 6px); }
+.tipWrap:hover .tip, .tipWrap:focus-within .tip, .tipStatic { opacity: 1; visibility: visible; }
+.tipStatic { position: static; transform: none; display: inline-block; }
+
+/* Empty state */
+.empty { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 24px; border: 1px dashed var(--border-dashed); border-radius: var(--radius-sm); text-align: center; }
+.emptyIcon { color: var(--mid-high); }
+.emptyTitle { font: 500 15px/normal var(--font-sans); color: var(--black); margin: 0; letter-spacing: normal; }
+.emptyBody { font: 400 13px/normal var(--font-sans); color: var(--high); margin: 0; }
+.emptyAction { margin-top: 4px; }
+
+/* Skeleton */
+.skeleton { display: block; border-radius: var(--radius-2xs); background: var(--skeleton); }
+.shimmer {
+  background: linear-gradient(90deg, var(--skeleton), var(--skeleton-hi), var(--skeleton)); background-size: 800px 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+.skPill { border-radius: var(--radius-full); }
+@keyframes shimmer { 0% { background-position: -400px 0; } 100% { background-position: 400px 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .shimmer { animation: none; }
+  .tip, .progressFill { transition: none; }
+}

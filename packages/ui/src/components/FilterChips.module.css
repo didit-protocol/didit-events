@@ -1,0 +1,17 @@
+/* Filter chips (01 Admin A-02 / A-05): 32px, 0 12px, radius full, 500 13px, gap 6 between chips, 4 inside. */
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 4px; box-sizing: border-box; height: 32px; padding: 0 12px;
+  border-radius: var(--radius-full); background: var(--chip); color: var(--black);
+  font: 500 13px/normal var(--font-sans); white-space: nowrap; text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+.chip:hover { background: var(--chip-2); color: var(--black); text-decoration: none; }
+.chip:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+.chip[aria-current="true"] { background: var(--black); color: var(--white); }
+.count { color: var(--mid-high); font-feature-settings: "tnum"; }
+.chip[aria-current="true"] .count { color: rgba(254,254,254,0.6); }
+/* Phones: a 44px touch target around the same 32px chip (transparent border, fill clipped to the padding box). */
+@media (max-width: 767px) {
+  .chip { height: 44px; border: solid transparent; border-width: 6px 0; background-clip: padding-box; }
+}

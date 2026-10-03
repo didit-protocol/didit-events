@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`host request emails (pglite) > renders the request for the host with the review URL and no biometric data 1`] = `
+"HOSTS · NEW REQUEST
+
+Ana Gómez wants to join
+
+Ana Gómez requested a place at AI Era. Review the profile and accept or decline.
+
+Ana Gómez
+Verified by Didit
+Builder of things
+Founder, Acme
+
+Email: <guest>
+Company: Acme
+Role: Founder
+LinkedIn: https://www.linkedin.com/in/ana
+Website: https://ana.example
+Verified: Email, Human check
+Requested: <now>
+
+ANSWERS
+
+What are you building?
+Event software
+
+Pending: 1 request
+Places left: 10 of 10
+
+Review request: https://events.example.test/admin/<id>/applicants?<id>
+All requests: https://events.example.test/admin/<id>/applicants
+
+--
+You host or created this event on Didit Events, so you get its new requests.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+All requests: https://events.example.test/admin/<id>/applicants
+"
+`;

@@ -1,0 +1,40 @@
+/*
+ * The one container width system for guest pages. Below 768px every guest screen is the full-width 390 flow
+ * (CTAs pinned to the bottom of the viewport). From 768px the same content becomes a centred card with inline CTAs
+ * on a white canvas (like the event page), never a phone layout stretched across a desktop window:
+ *   modal 480 · sign-in, request to join, cancel/withdraw, confirmations
+ *   card  560 · status screens, onboarding, profile, messages, invitations
+ *   list  720 · My events and other lists of cards
+ *   page 1000 · the public event page grid (EventPage.module.css keeps its own two-column layout)
+ * Selectors are doubled so they win over each screen's mobile rules regardless of stylesheet order.
+ */
+.root {
+  container-type: inline-size;
+  --guest-modal-w: 480px; --guest-card-w: 560px; --guest-list-w: 720px; --guest-page-w: 1000px; --guest-gutter: 32px;
+  --guest-w: var(--guest-card-w);
+}
+.wModal { --guest-w: var(--guest-modal-w); }
+.wCard { --guest-w: var(--guest-card-w); }
+.wList { --guest-w: var(--guest-list-w); }
+
+/* Header pairs: the 390 header below 768px, the desktop header (a flex row) from 768px. */
+.desktopFlex.desktopFlex { display: none; }
+
+@container (min-width: 768px) {
+  .canvas.canvas { max-width: none; background: var(--white); }
+  .card.card {
+    box-sizing: border-box; flex: none; width: min(var(--guest-w), 100% - 2 * var(--guest-gutter)); margin: 40px auto 64px; padding: 32px;
+    border: 1px solid var(--border); border-radius: 24px; background: var(--white);
+  }
+  .modal.modal {
+    box-sizing: border-box; flex: none; width: min(var(--guest-w), 100% - 48px); max-height: calc(100% - 64px); margin: auto; padding: 28px;
+    overflow-y: auto; border-radius: 24px; background: var(--white); box-shadow: var(--shadow-2xl, 0 24px 64px rgba(0, 0, 0, 0.18));
+    /* The sheet's actions footer (Screen.module.css .sheetFoot) follows the modal's 28px padding. */
+    --foot-bleed-x: 28px; --foot-bleed-b: 28px; --foot-pad-b: 28px;
+  }
+  /* Flow spacers push the CTA to the bottom of a phone; on a desktop card the CTA follows the content. */
+  .inline.inline { display: none; }
+  .inlineBottom.inlineBottom { margin-top: 8px; }
+  .mobileOnly.mobileOnly { display: none; }
+  .desktopFlex.desktopFlex { display: flex; }
+}

@@ -1,0 +1,4 @@
+ALTER TABLE "otp_challenges" DROP CONSTRAINT "otp_purpose";--> statement-breakpoint
+ALTER TABLE "sessions" DROP CONSTRAINT "sessions_principal_binding";--> statement-breakpoint
+ALTER TABLE "otp_challenges" ADD CONSTRAINT "otp_purpose" CHECK ("otp_challenges"."purpose" in ('login','staff_login'));--> statement-breakpoint
+ALTER TABLE "sessions" ADD CONSTRAINT "sessions_principal_binding" CHECK (("sessions"."principal" = 'guest' and "sessions"."account_id" is not null and "sessions"."staff_email" is null) or ("sessions"."principal" = 'staff' and "sessions"."staff_email" is not null and "sessions"."account_id" is null and "sessions"."auth_method" in ('oidc_google','email_otp')));

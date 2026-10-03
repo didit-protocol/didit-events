@@ -1,0 +1,65 @@
+[
+  {
+    "file": "johnson.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Katherine_Johnson_1983.jpg",
+    "sourceSha256": "e34b7cdb3bf305fc2e4681a86d48338908c3e19d00c930faa51e1c75c9c8dbd5",
+    "credit": "NASA / Katherine Johnson portrait, 1983",
+    "license": "Public domain (US federal government work)",
+    "licenseUrl": "https://commons.wikimedia.org/wiki/File:Katherine_Johnson_1983.jpg",
+    "sha256": "980071c4d75e8c1f87c7c088e95ce771dc903eaf603f474b46d75c111f0dc758",
+    "bytes": 27566,
+    "width": 384,
+    "height": 480
+  },
+  {
+    "file": "tesla.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/7/79/Tesla_circa_1890.jpeg",
+    "sourceSha256": "d828b62b90f6d6a2645cfd9ce71f93bcc5d361cef8cf84efb983a6930d5304b3",
+    "credit": "Napoleon Sarony / Nikola Tesla portrait, circa 1890",
+    "license": "Public domain (published before 1900, author died in 1896)",
+    "licenseUrl": "https://commons.wikimedia.org/wiki/File:Tesla_circa_1890.jpeg",
+    "sha256": "23ca5ef6a081dd9dc8eed938424918c8ea32511f27fe566e27e75d9029b9b0d5",
+    "bytes": 34757,
+    "width": 358,
+    "height": 480
+  },
+  {
+    "file": "astronaut.jpg",
+    "source": "https://raw.githubusercontent.com/scikit-image/scikit-image/v0.24.0/skimage/data/astronaut.png",
+    "sourceSha256": "88431cd9653ccd539741b555fb0a46b61558b301d4110412b5bc28b5e3ea6cb5",
+    "credit": "NASA / Eileen Collins portrait",
+    "license": "Public domain (US federal government work)",
+    "licenseUrl": "https://scikit-image.org/docs/stable/api/skimage.data.html#skimage.data.astronaut",
+    "sha256": "ffe80d7b5b1d94b473a595ee875dc8f21f790fa1c8293c79560d8bda5e1175a0",
+    "bytes": 46270,
+    "width": 480,
+    "height": 480
+  },
+  {
+    "file": "hopper.jpg",
+    "source": "https://raw.githubusercontent.com/matplotlib/matplotlib/v3.10.7/lib/matplotlib/mpl-data/sample_data/grace_hopper.jpg",
+    "sourceSha256": "a8ca6d734765703b09728ab47fe59f473d93ae3967fc24c7c0288c3c7adb7130",
+    "credit": "James S. Davis / US Navy",
+    "license": "Public domain (US federal government work)",
+    "licenseUrl": "https://commons.wikimedia.org/wiki/File:Grace_Hopper.jpg",
+    "sha256": "fde13b603432b4f0ef5712b156776fb9cae6f9e8ca8e21fdad283f4905e05e62",
+    "bytes": 46732,
+    "width": 410,
+    "height": 480
+  },
+  {
+    "file": "multiple.jpg",
+    "derivedFrom": [
+      "johnson.jpg",
+      "tesla.jpg"
+    ],
+    "sha256": "d3c86dd74b8ec5108993f1b1d3d1547e872d26386d30074a3f2664c691de5b9a",
+    "bytes": 43392
+  },
+  {
+    "file": "no-face.jpg",
+    "derivedFrom": [],
+    "sha256": "0dc87b9f1a4d8b074d2a14e8218548b0b15310d1fcf30b27dd87e98a77f6d188",
+    "bytes": 1826
+  }
+]

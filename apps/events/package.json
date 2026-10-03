@@ -1,0 +1,37 @@
+{
+  "name": "@didit-events/events",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "NEXT_MANUAL_SIG_HANDLE=1 next dev --port 3000",
+    "build": "next build",
+    "start": "NEXT_MANUAL_SIG_HANDLE=1 next start --port 3000",
+    "typecheck": "next typegen && tsc --noEmit",
+    "provision": "node scripts/provision.mjs",
+    "mcp:token": "node --experimental-transform-types src/mcp/token-cli.ts",
+    "mediapipe:copy": "node scripts/copy-mediapipe.mjs"
+  },
+  "dependencies": {
+    "@didit-events/core": "workspace:*",
+    "@didit-events/ui": "workspace:*",
+    "@didit-protocol/sdk-web": "0.4.0",
+    "@electric-sql/pglite": "^0.5.8",
+    "@mediapipe/tasks-vision": "^1.0.1",
+    "@sentry/browser": "11.2.0",
+    "@sentry/nextjs": "11.2.0",
+    "drizzle-orm": "^0.45.3",
+    "jose": "^6.2.12",
+    "next": "16.3.7",
+    "postgres": "^3.4.9",
+    "qrcode-generator": "^2.0.4",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "sharp": "0.35.5",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0"
+  }
+}

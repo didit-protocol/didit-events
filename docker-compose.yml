@@ -1,0 +1,40 @@
+# Local run: Postgres and the app. Copy .env.example to .env and fill in the required values first, including
+# STAFF_EMAIL_DOMAIN and SEED_OWNER_EMAIL: compose stops with a message when the staff domain is missing.
+#   docker compose up --build        → http://localhost:3000
+# The container runs a production build: DEV_AUTH is ignored there. To sign in you also need DIDIT_OTP_API_KEY from a
+# production Didit application (a sandbox never confirms an email code), or DIDIT_OIDC_CLIENT_ID and
+# DIDIT_OIDC_CLIENT_SECRET for Google sign-in. A DIDIT_API_KEY of a production application needs neither.
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: events
+      POSTGRES_PASSWORD: events
+      POSTGRES_DB: didit_events
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U events -d didit_events"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build:
+      context: .
+      args:
+        # Read from .env, like the runtime values below: the pages get these two at build time.
+        CONTACT_EMAIL: ${CONTACT_EMAIL:-events@example.com}
+        STAFF_EMAIL_DOMAIN: ${STAFF_EMAIL_DOMAIN:?Set STAFF_EMAIL_DOMAIN (your team's email domain) in .env}
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://events:events@db:5432/didit_events
+      APP_URL: ${APP_URL:-http://localhost:3000}
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db-data:

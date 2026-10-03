@@ -1,0 +1,214 @@
+/*
+ * The 390 guest flow screen (design/04 R-* and design/05 U-*): the site header (SiteHeader.module.css), body
+ * 8px 16px 28px (the header's gutter, so the logo and the content share an edge) with a 16px gap; sheets take the
+ * join sheet's design (Join.module.css): logo + close top row, 24px sides, 16px gap, 44px buttons.
+ */
+.page {
+  position: relative; box-sizing: border-box; display: flex; flex-direction: column; width: 100%; max-width: 480px;
+  margin: 0 auto; min-height: var(--page-min-h, 100dvh); overflow: hidden; background: var(--white); color: var(--black);
+  font-family: var(--font-sans);
+}
+/* Body */
+.body { position: relative; z-index: 1; flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 16px; padding: 8px 16px 28px; }
+
+/* Sheets (sign-in, cancel/withdraw, account confirmations): one design with the join sheet (Join.module.css) — the
+ * top row (24px logo, the event's name, the 32px close chip in a 44px target), 24px sides, 16px gap, a 24px title,
+ * 14px lead and 44px buttons. Below 768px: a full-screen step, no backdrop. From 768px: a centred modal
+ * (GuestLayout .modal) over the dimmed event. */
+.pageSheet { max-width: none; }
+.sheetBackdrop { display: none; }
+.backdrop { position: absolute; inset: 0; background: var(--soft); }
+.backdropCover { position: absolute; left: 16px; right: 16px; top: 64px; height: 260px; border-radius: 20px; background-position: center; background-size: cover; }
+.backdropCoverFlow { height: 220px; opacity: 0.9; }
+.scrim { position: absolute; inset: 0; background: rgba(26,26,26,0.24); }
+.sheet {
+  --cta-h: 44px; --cta-pad: 20px; --cta-font: 15px;
+  /* The footer (.sheetFoot) bleeds through this padding; on a phone it keeps max(16px, safe area) under the button. */
+  --foot-position: sticky; --foot-bleed-x: 24px; --foot-bleed-b: calc(24px + env(safe-area-inset-bottom, 0px)); --foot-pad-b: max(16px, env(safe-area-inset-bottom, 0px));
+  position: relative; z-index: 2; box-sizing: border-box; flex: 1; display: flex; flex-direction: column; gap: 16px;
+  width: 100%; max-width: 480px; margin: 0 auto; padding: 0 24px calc(24px + env(safe-area-inset-bottom, 0px)); background: var(--white);
+}
+.sheet .title { font-size: 24px; line-height: 1.15; letter-spacing: -0.025em; }
+.sheet .lead { font-size: 14px; }
+.sheetTop { display: flex; flex: none; align-items: center; gap: 12px; padding-top: 16px; }
+.sheetTop img { display: block; width: auto; height: var(--header-logo-h); }
+.sheetName { flex: 1; min-width: 0; overflow: hidden; font: 500 13px/1.3 var(--font-sans); color: var(--mid-high); white-space: nowrap; text-overflow: ellipsis; }
+/* The 32px chip in a 44px touch target: the button is the 44px target (no border, no fill) and ::before draws
+ * the chip 6px inside it; the margin pulls the target back so the top row keeps its rhythm. */
+.sheetClose {
+  position: relative; isolation: isolate; box-sizing: border-box; display: grid; place-items: center; flex: none;
+  width: 44px; height: 44px; margin: -6px; padding: 0; border: 0; border-radius: 50%; background: none; color: var(--high);
+  font: 400 18px/1 var(--font-sans); text-decoration: none;
+}
+.sheetClose::before { content: ""; position: absolute; z-index: -1; inset: 6px; border-radius: 50%; background: var(--chip); }
+.sheetClose:hover { text-decoration: none; }
+.sheetClose:hover::before { background: var(--chip-2); }
+.sheetClose:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: calc(var(--focus-ring-offset) - 6px); }
+@container (min-width: 768px) {
+  .pageSheet { justify-content: center; }
+  .sheetBackdrop { display: block; }
+  .backdropCover { left: 50%; right: auto; top: 40px; width: min(1000px, 100% - 64px); height: 330px; transform: translateX(-50%); }
+  .sheetTop { padding-top: 0; }
+}
+
+/* Event chip: 10px, radius 12, #F8F8F8; 44px thumb radius 10. */
+.chip { display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: var(--radius-sm); background: var(--ultra-soft); color: inherit; text-decoration: none; }
+.chip:hover { text-decoration: none; }
+.chipThumb { box-sizing: border-box; flex: none; width: 44px; height: 44px; border-radius: 10px; background-position: center; background-size: cover; }
+.chipThumbFlow { border: 1px solid var(--border); }
+.chipText { display: flex; flex-direction: column; min-width: 0; }
+.chipName { overflow: hidden; font: 500 14px/normal var(--font-sans); white-space: nowrap; text-overflow: ellipsis; }
+.chipMeta { font: 400 12px/normal var(--font-sans); color: var(--high); font-feature-settings: "tnum"; }
+
+/* Type */
+.eyebrow { margin: 0; font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; color: var(--mid-high); }
+.title { margin: 0; font: 500 var(--title-size, 28px)/1.12 var(--font-sans); letter-spacing: -0.03em; color: var(--black); }
+.lead { margin: 0; font: 400 15px/1.55 var(--font-sans); color: var(--high); }
+.foot { margin: 0; font: 400 12px/1.5 var(--font-sans); color: var(--mid-high); text-align: center; }
+.foot a, .footLink { color: inherit; text-decoration: none; }
+.foot a:hover { text-decoration: underline; }
+.caption { margin: 0; display: flex; align-items: center; justify-content: center; gap: 6px; font: 400 12px/1.5 var(--font-sans); color: var(--mid-high); }
+.spacer { flex: 1; }
+
+/* Actions footer (SheetFooter): pinned to the bottom edge of its sheet or modal, 12px over the buttons and an 8px gap
+ * like the Drawer footer, every button full width. The frame says how far it bleeds and whether it sticks
+ * (--foot-*: .sheet here, GuestLayout .modal, the join modal's .dialog); with none set it is a plain block at the end
+ * of the content. `.fill`: the column (a form, a step's body) that takes the height left over it. */
+.fill { display: flex; flex-direction: column; gap: inherit; flex: 1 0 auto; min-width: 0; }
+.fillCenter { justify-content: center; }
+.sheetFoot {
+  position: var(--foot-position, static); bottom: 0; z-index: 1; display: flex; flex-direction: column; gap: 8px;
+  margin: auto calc(-1 * var(--foot-bleed-x, 0px)) calc(-1 * var(--foot-bleed-b, 0px));
+  padding: 12px var(--foot-bleed-x, 0px) var(--foot-pad-b, 0px); background: var(--white);
+}
+/* Its top rule shows only while the content scrolls under it (gone at the end, and when nothing scrolls). */
+@supports (animation-timeline: scroll()) {
+  .sheetFoot { animation: sheetFootRule linear both; animation-timeline: scroll(nearest block); animation-range: calc(100% - 12px) 100%; }
+}
+@keyframes sheetFootRule { from { box-shadow: inset 0 1px 0 var(--border); } to { box-shadow: inset 0 1px 0 transparent; } }
+
+/* Callout: 12px 14px, radius 12, 400 14px/1.45. */
+.callout { padding: 12px 14px; border-radius: var(--radius-sm); font: 400 14px/1.45 var(--font-sans); white-space: pre-line; }
+.danger { background: var(--danger-bg); color: var(--danger-fg); }
+.info { background: var(--brand-soft); color: var(--brand-deep); }
+.warning { background: var(--warning-bg); color: var(--warning-fg); }
+.neutral { background: var(--ultra-soft); color: var(--black); }
+.success { background: var(--success-bg); color: var(--success-fg); }
+
+/* Buttons: primary and secondary are one size, so a stacked pair reads as one family: 52px / 500 16px on the flow
+ * screens (Button xl), 44px / 500 15px in a sheet (--cta-*). */
+.cta2.cta2 { height: var(--cta-h, 52px); font-size: var(--cta-font, 16px); }
+.form { display: flex; flex-direction: column; gap: 16px; }
+.sheet .form { gap: 14px; }
+.actionForm { display: flex; flex-direction: column; }
+.textButton { align-self: center; padding: 0; border: 0; background: none; font: 400 12px/1.5 var(--font-sans); color: var(--mid-high); cursor: pointer; }
+.textButton:hover { color: var(--black); }
+.textButton:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); border-radius: 4px; }
+
+/* Summary: bordered list, rows 12px 14px, 400 14px, value 500. */
+.box { display: flex; flex-direction: column; overflow: hidden; margin: 0; padding: 0; border: 1px solid var(--border); border-radius: 16px; list-style: none; }
+.summaryRow { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid var(--border-subtle); font: 400 14px/normal var(--font-sans); }
+.summaryKey { color: var(--mid-high); }
+.summaryValue { font-weight: 500; text-align: right; }
+
+/* Row groups (settings, requirements, reasons): title 500 11px, gap 6; rows 12px 14px, gap 10. */
+.group { display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; border: 0; min-width: 0; }
+.groupTitle { padding: 0; font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; color: var(--mid-high); }
+.row { position: relative; display: flex; align-items: center; gap: 10px; min-height: 24px; padding: 12px 14px; border-bottom: 1px solid var(--border-subtle); color: inherit; text-decoration: none; }
+a.row:hover, label.row:hover { background: var(--ultra-soft); text-decoration: none; }
+.rowText { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.rowLabel { font: 500 15px/normal var(--font-sans); color: var(--black); }
+.rowLabelSuccess { color: var(--success-fg); }
+.rowLabelDanger { color: var(--danger-fg); }
+.rowLabelRegular { font-weight: 400; }
+.rowDetail { font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+.rowAction { flex: none; padding: 0; border: 0; background: none; font: 500 14px/normal var(--font-sans); color: var(--brand); text-decoration: none; cursor: pointer; }
+.rowAction:hover { text-decoration: underline; }
+.rowAction:focus-visible, .row:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: -2px; }
+.rowActionMuted { color: var(--high); }
+.rowActionOn { color: var(--success-fg); }
+.rowGlyph { display: grid; place-items: center; flex: none; width: 18px; height: 18px; }
+.rowGlyphMet { color: var(--success-fg); }
+.rowGlyphMissing { color: var(--warning-fg); }
+.rowIcon { display: block; flex: none; }
+
+/* Radio rows: a drawn 20px ring (#C4C7C7), a brand ring with a white centre when checked, over a native radio.
+ * (A "○" text glyph rendered about 8px wide in Inter.) */
+.radioInput { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+.radioGlyph { flex: none; box-sizing: border-box; width: 20px; height: 20px; border: 1.5px solid var(--mid-soft); border-radius: 50%; background: var(--white); }
+.radioInput:checked ~ .radioGlyph { border: 6px solid var(--brand); }
+.radioInput:checked ~ .rowText .rowLabel { font-weight: 500; }
+.radioInput:focus-visible ~ .radioGlyph { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: 2px; border-radius: 50%; }
+label.row { cursor: pointer; }
+
+/* Numbered steps (R-10 / R-14): 36px dots. */
+.stepRow { display: flex; align-items: center; gap: 12px; padding: 14px; border-bottom: 1px solid var(--border-subtle); }
+.stepDot { display: grid; place-items: center; flex: none; width: 36px; height: 36px; border-radius: 50%; font: 500 14px/normal var(--font-sans); }
+.stepDotDark { background: var(--black); color: var(--white); }
+.stepDotSoft { background: var(--soft); color: var(--black); }
+.stepText { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.stepTitle { font: 500 15px/normal var(--font-sans); }
+.stepHint { font: 400 13px/normal var(--font-sans); color: var(--high); }
+
+/* Consent: 20px box, 400 13px/1.5 high. */
+.consent { display: flex; align-items: flex-start; gap: 10px; font: 400 13px/1.5 var(--font-sans); color: var(--high); }
+.consent a { color: var(--brand); text-decoration: none; }
+.consent a:hover { color: var(--brand-deep); text-decoration: underline; }
+.disclosureNote { margin: 0; font: 400 12px/1.5 var(--font-sans); color: var(--mid-high); }
+.disclosureNote a { color: var(--high); text-decoration: underline; text-underline-offset: 2px; }
+.consentError { margin: -8px 0 0 30px; font: 400 13px/normal var(--font-sans); color: var(--danger-fg); }
+
+/* Auth choices: Google, "or" rule, email. */
+.auth { display: flex; flex-direction: column; gap: 10px; }
+.or { display: flex; align-items: center; gap: 12px; font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+.or::before, .or::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+/* Code entry */
+.codeError { margin: 0; font: 400 13px/normal var(--font-sans); color: var(--danger-fg); }
+.resend { margin: 0; font: 400 14px/normal var(--font-sans); color: var(--mid-high); }
+.resendCenter { text-align: center; }
+.resendButton { align-self: flex-start; padding: 0; border: 0; background: none; font: 500 14px/normal var(--font-sans); color: var(--brand); cursor: pointer; }
+.resendButton:hover { color: var(--brand-deep); text-decoration: underline; }
+.resendButton:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: 2px; border-radius: 4px; }
+
+/* Locked input (U-14: From Google) */
+.lockWrap { position: relative; }
+.lockWrap input { background: var(--ultra-soft); color: var(--high); padding-right: 110px; }
+.lockNote { position: absolute; right: 12px; bottom: 16px; display: flex; align-items: center; gap: 4px; font: 400 12px/normal var(--font-sans); color: var(--mid-high); pointer-events: none; }
+
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* "Continue with email": 52px secondary pill, 500 16px, 18px mail icon (05 U-01). */
+.emailButton {
+  display: flex; align-items: center; justify-content: center; gap: 10px; box-sizing: border-box; width: 100%; height: var(--cta-h, 52px); padding: 0 var(--cta-pad, 24px);
+  border: 0; border-radius: var(--radius-full); background: var(--btn-secondary); color: var(--black); font: 500 var(--cta-font, 16px)/normal var(--font-sans); cursor: pointer;
+}
+.emailButton:hover { background: var(--btn-secondary-hover); }
+.emailButton:active { background: var(--btn-secondary-pressed); }
+.emailButton:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+.rowLabelButton { padding: 0; border: 0; background: none; font: 500 15px/normal var(--font-sans); color: var(--black); cursor: pointer; text-align: left; }
+.rowLabelButton:hover { text-decoration: underline; }
+.rowLabelButton:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: 2px; border-radius: 4px; }
+
+/* Signed-in account pages: the site header (full width) over the narrow content column. The header stacks above
+ * the content (its own z-index) so the avatar menu is never covered. */
+.shell { container-type: inline-size; display: flex; flex-direction: column; min-height: var(--page-min-h, 100dvh); background: var(--white); color: var(--black); font-family: var(--font-sans); }
+.pageInShell { flex: 1; min-height: 0; overflow: visible; }
+.pageInShell > .body { z-index: auto; }
+
+/* Withdraw request / Cancel my place under the CTAs: 500 14px danger text, 44px tap target, centred. */
+.quietAction {
+  align-self: center; display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: var(--radius-full);
+  font: 500 14px/normal var(--font-sans); color: var(--danger-fg); text-decoration: none;
+}
+.quietAction:hover { background: var(--danger-bg); text-decoration: none; }
+.quietAction:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+
+/* Phones: text-only controls get a 44px touch target; the negative margins keep each row's height and rhythm. */
+@media (max-width: 767px) {
+  .rowAction { display: inline-flex; align-items: center; justify-content: flex-end; min-width: 44px; min-height: 44px; padding: 0 4px; margin: -12px -4px; }
+  .rowLabelButton { min-height: 44px; margin: -12px 0; }
+  .rowDetail { font-size: 13px; line-height: 1.4; }
+  .textButton { min-height: 44px; padding: 0 12px; }
+  .resendButton { min-height: 44px; }
+}

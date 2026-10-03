@@ -1,0 +1,449 @@
+/* ============================================================================
+   Didit Brand v5 tokens + type classes for Didit Events.
+   Generated from /colors_and_type.css (the :root tokens, base typography, the
+   canonical .t-* type scale and the primitive text helpers). Fonts are loaded
+   by next/font/local (packages/ui/src/fonts.ts), which sets --font-inter.
+   Regenerate by copying lines 37-308 of colors_and_type.css; keep the
+   --font-sans / --font-mono override below.
+   ========================================================================== */
+
+:root {
+  /* ── Neutral scale (white → black, 8 steps) ──────────────────── */
+  --white:      #FEFEFE;   /* page background                            */
+  --ultra-soft: #F8F8F8;   /* lightest tint — soft card / zebra row      */
+  --soft:       #F4F4F6;   /* card / fill workhorse surface              */
+  --mid-soft:   #C4C7C7;   /* raised / secondary surface, strong fill    */
+  --mid:        #9DA1A1;   /* borders, separators, dividers              */
+  --mid-high:   #6E6E73;   /* tertiary text, icons, placeholders         */
+  --high:       #4B5058;   /* secondary text                             */
+  --black:      #1A1A1A;   /* body text, primary CTA background          */
+
+  /* ── Brand colors ────────────────────────────────────────────── */
+  --brand:       #2567FF;             /* primary — one accent word per headline, CTAs, links */
+  --brand-light: #4D94FF;             /* lighter tint — secondary accents, hover-on-dark      */
+  --brand-deep:  #07479E;             /* hover / focus / pressed                              */
+  --brand-soft:  rgba(37,103,255,0.12);/* pill tint, info alert, selected fill (12%)          */
+  --brand-lime:  #ECF86E;             /* secondary brand pop — sparing highlight / chart key  */
+  --brand-tint:  #F7F9FF;             /* very soft section background                         */
+
+  /* ── Feature accent (SURGICAL — specific features only, never brand-wide) ──
+     Purple. Used for select features (purple badge, "awaiting user" verdict).
+     A deliberate second accent — never competes with Brand blue in the same view. */
+  --feature:      #9B26FF;            /* feature accent — purple badge, awaiting-user verdict */
+  --feature-deep: #6600BD;            /* dark — text/icons on tint, hover/pressed             */
+  --feature-soft: rgba(155,38,255,0.10);/* 10% tint fill                                      */
+
+  /* ── Semantic (SURGICAL — alerts + verdict states ONLY) ──────── */
+  --success:    #41D97F;  --success-bg: #E7FAF0;  --success-fg: #0E7A3D;
+  --warning:    #FF7426;  --warning-bg: #FFEEDF;  --warning-fg: #B3490D;
+  --danger:     #FF4141;  --danger-bg:  #FFE6E6;  --danger-fg:  #C42121;
+  /* Verdict-specific off-palette accents (declined=red, review=amber,
+     awaiting=violet). These intentionally break the monochrome rule because
+     they carry real operational risk. Never use them decoratively. */
+  --verdict-violet-bg: #F0ECFF; --verdict-violet-fg: #5B3BC4; --verdict-violet-dot: #8B5CF6;
+
+  /* ── Interactive chip fills ──────────────────────────────────── */
+  --chip:   rgba(0,0,0,0.04);  /* workhorse chip / secondary button     */
+  --chip-2: rgba(0,0,0,0.10);  /* hover                                  */
+  --chip-3: rgba(0,0,0,0.12);  /* pressed / strong chip                  */
+
+  /* ── Translucent neutral fills (#787880 — layer over any surface) ─
+     The system-gray base at descending opacity. Use for subtle fills,
+     hover washes, skeleton blocks, and quiet separators that must read on
+     both light and tinted backgrounds. */
+  --fill-primary:    rgba(120,120,128,0.30);  /* strongest — selected / active fill  */
+  --fill-secondary:  rgba(120,120,128,0.20);  /* hover / resting control fill        */
+  --fill-tertiary:   rgba(120,120,128,0.10);  /* zebra rows, quiet dividers          */
+  --fill-quaternary: rgba(120,120,128,0.05);  /* faintest — large surface tints      */
+
+  /* ── Corner radius (t-shirt scale) ───────────────────────────── */
+  --radius-none: 0;        /* flush — tables, full-bleed, inline rules    */
+  --radius-xs:   6px;      /* controls, inputs, badges, tags, small cards */
+  --radius-sm:   12px;     /* cards, menus, callouts, banners             */
+  --radius-md:   20px;     /* large cards, editorial / hero surfaces      */
+  --radius-lg:   24px;     /* modals, sheets, big feature panels          */
+  --radius-xl:   32px;     /* marketing hero surfaces                     */
+  --radius-2xl:  40px;     /* oversized display blocks                    */
+  --radius-full: 999px;    /* pill — buttons, status chips, avatars       */
+
+  /* ── Spacing scale (4px base grid) ───────────────────────────── */
+  --space-3xs:  4px;       /* hairline gaps, icon-to-label                */
+  --space-2xs:  6px;       /* tight chip / badge padding                  */
+  --space-xs:   8px;       /* compact control padding, small gaps         */
+  --space-sm:   12px;      /* default control gap                         */
+  --space-md:   16px;      /* card padding, standard block gap            */
+  --space-lg:   24px;      /* group separation, comfortable card padding  */
+  --space-xl:   32px;      /* section sub-blocks                          */
+  --space-2xl:  40px;      /* section padding                             */
+  --space-3xl:  48px;      /* major section rhythm                        */
+
+  /* ── Shadows — Didit's 7-step elevation scale ───────────────────
+     Token colors resolve as: Fills/Primary rgba(120,120,128,.30),
+     Fills/Secondary .20, Fills/Quaternary .05. xs & lg layers are pure
+     black at low alpha. 2xl/3xl use the neutral surface tint (.20). */
+  --shadow-xs:  0 4px 16px 0 rgba(0,0,0,0.05);
+  --shadow-sm:  0 1px 3px 0 rgba(120,120,128,0.05), 0 1px 2px 0 rgba(120,120,128,0.05);
+  --shadow-md:  0 4px 12px 0 rgba(120,120,128,0.20);
+  --shadow-lg:  0 0 2px 0 rgba(0,0,0,0.10), 0 0 22px 0 rgba(0,0,0,0.16);
+  --shadow-xl:  0 12px 28px 0 rgba(120,120,128,0.30);
+  --shadow-2xl: 0 24px 48px -12px rgba(120,120,128,0.20);
+  --shadow-3xl: 0 32px 64px -12px rgba(120,120,128,0.20);
+  --shadow-editorial: var(--shadow-3xl);   /* alias — back-compat       */
+  --shadow-ring:        0 0 0 3px rgba(37,103,255,0.2);   /* focus ring  */
+  --shadow-ring-danger: 0 0 0 3px rgba(182,58,46,0.15);
+
+  /* ── Motion (transform/opacity only — never animate w/h) ─────── */
+  --motion-fast: 120ms; /* @kind other */
+  --motion-base: 200ms; /* @kind other */
+  --motion-slow: 400ms; /* @kind other */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --ease-in:  cubic-bezier(0.7, 0, 0.84, 0); /* @kind other */
+
+  /* ── Fonts ───────────────────────────────────────────────────── */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  /* "mono" is now Inter too — kept as a token so eyebrow/metadata/code call
+     sites stay intact. The .mono/.eyebrow/code rules add tabular numerals. */
+  --font-mono: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* ── GradientCard backdrops (soft OpenAI-style hazy mesh) ─────── */
+  /* Used on marketing product cards + navbar mega-menu tiles. */
+  --api-gradient-soft:
+    radial-gradient(80% 60% at 18% 18%, #FFC7D8 0%, transparent 55%),
+    radial-gradient(80% 60% at 85% 25%, #FFD9A8 0%, transparent 60%),
+    radial-gradient(100% 90% at 55% 95%, #C8B8FF 0%, transparent 60%),
+    linear-gradient(180deg, #FFF1F4 0%, #EFEAFF 100%); /* @kind color */
+  --api-gradient-cool:
+    radial-gradient(85% 65% at 18% 20%, #BFD4FF 0%, transparent 58%),
+    radial-gradient(80% 60% at 88% 28%, #FFD2B8 0%, transparent 60%),
+    linear-gradient(180deg, #EEF4FF 0%, #F4F0FF 100%); /* @kind color */
+  --api-gradient-aurora:
+    radial-gradient(80% 60% at 20% 20%, #F8B36A 0%, transparent 55%),
+    radial-gradient(80% 60% at 80% 30%, #F289C6 0%, transparent 60%),
+    radial-gradient(100% 90% at 50% 95%, #8EB8FF 0%, transparent 60%),
+    linear-gradient(180deg, #FFF1DC 0%, #E8DAFF 100%); /* @kind color */
+  --api-gradient-blue:
+    radial-gradient(90% 80% at 18% 20%, rgba(37,103,255,0.55) 0%, transparent 60%),
+    radial-gradient(90% 80% at 85% 85%, rgba(37,103,255,0.25) 0%, transparent 60%),
+    linear-gradient(180deg, #EAF0FF 0%, #F5F7FF 100%); /* @kind color */
+  --api-gradient-ink:
+    radial-gradient(90% 80% at 22% 18%, rgba(37,103,255,0.45) 0%, transparent 60%),
+    radial-gradient(90% 80% at 85% 90%, rgba(37,103,255,0.20) 0%, transparent 60%),
+    linear-gradient(180deg, #0B0B0C 0%, #14213D 100%); /* @kind color */
+}
+
+/* ============================================================================
+   BASE TYPOGRAPHY
+   Inter 500 display with tight tracking is the v5 signature. Headings never
+   go heavier than 500. JetBrains Mono is reserved for eyebrows, metadata,
+   timestamps, prices, ids, and code — NEVER for body copy.
+   ========================================================================== */
+
+html, body {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none;
+  font-feature-settings: "ss01", "cv11";
+  line-height: 1.55;
+}
+
+/* Display + headings: Inter 500, tight tracking. */
+h1, h2, h3, h4 { font-weight: 500; letter-spacing: -0.025em; color: var(--black); margin: 0; }
+
+.display-xl { font-size: 6rem;    line-height: 1;    letter-spacing: -0.035em; font-weight: 500; }
+.display    { font-size: 4rem;    line-height: 1;    letter-spacing: -0.03em;  font-weight: 500; }
+h1, .h1     { font-size: 3rem;    line-height: 1.05; letter-spacing: -0.035em; }
+h2, .h2     { font-size: 2rem;    line-height: 1.15; letter-spacing: -0.025em; }
+h3, .h3     { font-size: 1.375rem; line-height: 1.3;  letter-spacing: -0.015em; }
+h4, .h4     { font-size: 1.0625rem; line-height: 1.4; letter-spacing: -0.01em; }
+
+/* Body scale */
+.body-lg { font-size: 1.1875rem; line-height: 1.55; font-weight: 400; }
+.body    { font-size: 1.0625rem; line-height: 1.55; font-weight: 400; }
+p        { font-size: 1.0625rem; line-height: 1.55; font-weight: 400; margin: 0; }
+.small   { font-size: 0.875rem;  line-height: 1.45; font-weight: 400; }
+
+/* ============================================================================
+   CANONICAL TYPE SCALE  (Figma xP8TUqhVKaww7J3eb1RqaS · node 2110:2530)
+   The .t-* classes ARE the spec. The BASE values are APP (the in-product
+   default). Switch surface by setting data-type-mode on any wrapper (or <body>):
+     • (none)            → App      — in-product, compact, mostly 400/500
+     • data-type-mode="desktop"   → Web Desktop — site UI, 600 display
+     • data-type-mode="mobile"    → Web Mobile  — responsive site
+     • data-type-mode="marketing" → Marketing  — Didit-designed hero scale
+   Inter only · 400 Regular · 500 Medium · 600 Semi Bold. Line-height &
+   letter-spacing are absolute px. Scopes cascade, so nest freely.
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* ── APP — default ──────────────────────────────────────────────────────── */
+.t-display-lg   { font-weight:500; font-size:52px; line-height:62px;   letter-spacing:-3.65px; }
+.t-display-mid  { font-weight:500; font-size:42px; line-height:50px;   letter-spacing:-2.88px; }
+.t-display-sm   { font-weight:400; font-size:32px; line-height:38px;   letter-spacing:-2.24px; }
+.t-headline-lg  { font-weight:500; font-size:24px; line-height:28px;   letter-spacing:-1.20px; }
+.t-headline-mid { font-weight:600; font-size:15px; line-height:18px;   letter-spacing:-0.60px; }
+.t-headline-sm  { font-weight:500; font-size:14px; line-height:18px;   letter-spacing:-0.56px; }
+.t-paragraph-lg { font-weight:400; font-size:15px; line-height:18px;   letter-spacing:-0.90px; }
+.t-paragraph-mid{ font-weight:400; font-size:13px; line-height:18.2px; letter-spacing:-0.78px; }
+.t-paragraph-sm { font-weight:500; font-size:12px; line-height:18px;   letter-spacing:-0.48px; }
+.t-label-lg     { font-weight:400; font-size:13px; line-height:16px;   letter-spacing:-0.30px; }
+.t-label-mid    { font-weight:400; font-size:12px; line-height:16px;   letter-spacing:-0.24px; }
+.t-label-sm     { font-weight:400; font-size:11px; line-height:15.4px; letter-spacing:-0.33px; }
+.t-label-xs     { font-weight:400; font-size:10px; line-height:14px;   letter-spacing:-0.30px; }
+.t-label-bold   { font-weight:500; font-size:16px; line-height:14.4px; letter-spacing:-0.32px; }
+.t-label-input  { font-weight:500; font-size:9px;  line-height:11.3px; letter-spacing:0.18px; }
+.t-label-styled { font-weight:500; font-size:8px;  line-height:10px;   letter-spacing:1.60px; text-transform:uppercase; }
+.t-link         { font-weight:500; font-size:14px; line-height:17px;   letter-spacing:-0.84px; }
+.t-link-mid     { font-weight:500; font-size:14px; line-height:12.6px; letter-spacing:-0.42px; }
+
+/* ── WEB DESKTOP ────────────────────────────────────────────────────────── */
+[data-type-mode="desktop"] .t-display-lg   { font-weight:600; font-size:80px; line-height:84px;   letter-spacing:-3.70px; }
+[data-type-mode="desktop"] .t-display-mid  { font-weight:600; font-size:62px; line-height:62px;   letter-spacing:-3.10px; }
+[data-type-mode="desktop"] .t-display-sm   { font-weight:600; font-size:48px; line-height:50px;   letter-spacing:-2.88px; }
+[data-type-mode="desktop"] .t-headline-lg  { font-weight:600; font-size:40px; line-height:44px;   letter-spacing:-2.80px; }
+[data-type-mode="desktop"] .t-headline-mid { font-weight:600; font-size:30px; line-height:36px;   letter-spacing:-1.80px; }
+[data-type-mode="desktop"] .t-headline-sm  { font-weight:600; font-size:24px; line-height:28.8px; letter-spacing:-1.27px; }
+[data-type-mode="desktop"] .t-paragraph-lg { font-weight:500; font-size:18px; line-height:22px;   letter-spacing:-0.90px; }
+[data-type-mode="desktop"] .t-paragraph-mid{ font-weight:500; font-size:16px; line-height:22.4px; letter-spacing:-0.80px; }
+[data-type-mode="desktop"] .t-paragraph-sm { font-weight:500; font-size:14px; line-height:18.3px; letter-spacing:-1.12px; }
+[data-type-mode="desktop"] .t-label-lg     { font-weight:500; font-size:20px; line-height:26.8px; letter-spacing:-1.00px; }
+[data-type-mode="desktop"] .t-label-mid    { font-weight:500; font-size:17px; line-height:22px;   letter-spacing:-1.00px; }
+[data-type-mode="desktop"] .t-label-sm     { font-weight:500; font-size:15px; line-height:18px;   letter-spacing:-0.90px; }
+[data-type-mode="desktop"] .t-label-xs     { font-weight:500; font-size:10px; line-height:14px;   letter-spacing:-0.50px; }
+[data-type-mode="desktop"] .t-label-styled { font-weight:500; font-size:11px; line-height:13.8px; letter-spacing:1.74px; }
+[data-type-mode="desktop"] .t-link         { font-weight:500; font-size:14px; line-height:18px;   letter-spacing:-0.84px; }
+
+/* ── WEB MOBILE ─────────────────────────────────────────────────────────── */
+[data-type-mode="mobile"] .t-display-lg   { font-weight:600; font-size:34px; line-height:35px;   letter-spacing:-2.38px; }
+[data-type-mode="mobile"] .t-display-mid  { font-weight:600; font-size:40px; line-height:40px;   letter-spacing:-2.00px; }
+[data-type-mode="mobile"] .t-display-sm   { font-weight:600; font-size:32px; line-height:33.6px; letter-spacing:-2.24px; }
+[data-type-mode="mobile"] .t-headline-lg  { font-weight:600; font-size:38px; line-height:42px;   letter-spacing:-2.80px; }
+[data-type-mode="mobile"] .t-headline-mid { font-weight:600; font-size:28px; line-height:33.6px; letter-spacing:-1.68px; }
+[data-type-mode="mobile"] .t-headline-sm  { font-weight:600; font-size:19px; line-height:22.8px; letter-spacing:-1.14px; }
+[data-type-mode="mobile"] .t-paragraph-lg { font-weight:500; font-size:18px; line-height:22px;   letter-spacing:-0.90px; }
+[data-type-mode="mobile"] .t-paragraph-mid{ font-weight:500; font-size:16px; line-height:22.4px; letter-spacing:-0.80px; }
+[data-type-mode="mobile"] .t-paragraph-sm { font-weight:500; font-size:14px; line-height:18.3px; letter-spacing:-1.12px; }
+[data-type-mode="mobile"] .t-label-lg     { font-weight:500; font-size:20px; line-height:26.8px; letter-spacing:-1.00px; }
+[data-type-mode="mobile"] .t-label-mid    { font-weight:500; font-size:12px; line-height:20px;   letter-spacing:-0.50px; }
+[data-type-mode="mobile"] .t-label-sm     { font-weight:600; font-size:15px; line-height:18px;   letter-spacing:-0.90px; }
+[data-type-mode="mobile"] .t-label-xs     { font-weight:600; font-size:10px; line-height:14px;   letter-spacing:-0.50px; }
+[data-type-mode="mobile"] .t-label-styled { font-weight:600; font-size:11px; line-height:13.8px; letter-spacing:1.74px; }
+[data-type-mode="mobile"] .t-link         { font-weight:500; font-size:14px; line-height:18px;   letter-spacing:-0.84px; }
+
+/* ── MARKETING — Didit-designed hero scale (bigger, airier paragraphs) ───── */
+[data-type-mode="marketing"] .t-display-lg   { font-weight:600; font-size:112px; line-height:104px; letter-spacing:-5.04px; }
+[data-type-mode="marketing"] .t-display-mid  { font-weight:600; font-size:88px;  line-height:88px;  letter-spacing:-3.96px; }
+[data-type-mode="marketing"] .t-display-sm   { font-weight:600; font-size:64px;  line-height:66px;  letter-spacing:-3.20px; }
+[data-type-mode="marketing"] .t-headline-lg  { font-weight:600; font-size:48px;  line-height:52px;  letter-spacing:-2.40px; }
+[data-type-mode="marketing"] .t-headline-mid { font-weight:600; font-size:36px;  line-height:42px;  letter-spacing:-1.80px; }
+[data-type-mode="marketing"] .t-headline-sm  { font-weight:600; font-size:28px;  line-height:34px;  letter-spacing:-1.40px; }
+[data-type-mode="marketing"] .t-paragraph-lg { font-weight:400; font-size:22px;  line-height:33px;  letter-spacing:-0.44px; }
+[data-type-mode="marketing"] .t-paragraph-mid{ font-weight:400; font-size:18px;  line-height:28px;  letter-spacing:-0.36px; }
+[data-type-mode="marketing"] .t-paragraph-sm { font-weight:400; font-size:16px;  line-height:25px;  letter-spacing:-0.32px; }
+[data-type-mode="marketing"] .t-label-lg     { font-weight:500; font-size:20px;  line-height:26.8px;letter-spacing:-1.00px; }
+[data-type-mode="marketing"] .t-label-mid    { font-weight:500; font-size:17px;  line-height:22px;  letter-spacing:-1.00px; }
+[data-type-mode="marketing"] .t-label-sm     { font-weight:500; font-size:15px;  line-height:18px;  letter-spacing:-0.90px; }
+[data-type-mode="marketing"] .t-label-xs     { font-weight:500; font-size:12px;  line-height:16px;  letter-spacing:-0.40px; }
+[data-type-mode="marketing"] .t-label-styled { font-weight:600; font-size:13px;  line-height:16px;  letter-spacing:2.00px; }
+[data-type-mode="marketing"] .t-link         { font-weight:500; font-size:16px;  line-height:20px;  letter-spacing:-0.50px; }
+
+/* Label Bold, Label Inputs & Link Mid are constant across all modes
+   (only .t-label-bold / .t-label-input / .t-link-mid base rules apply). */
+
+/* One-word accent helper — wrap exactly ONE word/phrase per headline. */
+.accent { color: var(--brand); }
+
+/* Eyebrow === Label Styled (uppercase, positive tracking). Follows the active
+   data-type-mode just like .t-label-styled. Brand-blue; .eyebrow-muted = grey.
+   Defaults to APP (8px). Tabular numerals on. */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 500; font-size: 8px; line-height: 10px; letter-spacing: 1.60px;
+  text-transform: uppercase; color: var(--brand); font-feature-settings: "tnum";
+}
+[data-type-mode="desktop"]   .eyebrow { font-size: 11px; line-height: 13.8px; letter-spacing: 1.74px; }
+[data-type-mode="mobile"]    .eyebrow { font-weight: 600; font-size: 11px; line-height: 13.8px; letter-spacing: 1.74px; }
+[data-type-mode="marketing"] .eyebrow { font-weight: 600; font-size: 13px; line-height: 16px;   letter-spacing: 2.00px; }
+/* Muted eyebrow variant (section labels that aren't CTAs) */
+.eyebrow-muted { color: var(--high); }
+
+/* Inline code / metadata — Inter with tabular numerals for alignment */
+code, .mono {
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+  font-feature-settings: "tnum";
+}
+
+/* Links default to Blue with underline-on-hover */
+a { color: var(--brand); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+
+/* ============================================================================
+   DIDIT EVENTS PRODUCT TOKENS
+   Reconciled with design/00 Foundations.dc.html (T-00 / C-00), the admin
+   sidebar, the cover art and the kiosk pages. Everything above stays the
+   Didit Brand v5 source of truth; these name the values the product design
+   uses on top of it. Components read only custom properties.
+   ========================================================================== */
+:root {
+  /* ── Surfaces ─────────────────────────────────────────────────── */
+  --canvas:        #E9E9EB;              /* design canvas behind frames (gallery)  */
+  --kiosk-bg:      #0D0D0D;              /* kiosk canvas                           */
+  --overlay:       rgba(26,26,26,0.32);  /* modal / drawer scrim                   */
+  --hover-row:     var(--ultra-soft);    /* table row hover                        */
+  --skeleton:      var(--soft);
+  --skeleton-hi:   #ECECEE;              /* shimmer highlight                      */
+
+  /* ── Lines ────────────────────────────────────────────────────── */
+  --border:        rgba(157,161,161,0.40);  /* 1px #9DA1A1 @ 40% — cards, inputs  */
+  --border-subtle: rgba(157,161,161,0.25);  /* table row separators              */
+  --border-dashed: rgba(157,161,161,0.60);  /* empty states                      */
+  --border-control:#C4C7C7;                 /* checkbox / radio outline          */
+
+  /* ── Chips / nav fills ────────────────────────────────────────── */
+  --nav-active:    rgba(0,0,0,0.06);
+  --on-dark-chip:  rgba(255,255,255,0.12);  /* bulk-bar actions                   */
+  --neutral-pill:  rgba(120,120,128,0.12);
+
+  /* ── Buttons (C-00: default / hover / pressed) ────────────────── */
+  --btn-primary:          var(--black);
+  --btn-primary-hover:    #333333;
+  --btn-primary-pressed:  #000000;
+  --btn-danger:           var(--danger);
+  --btn-danger-hover:     #E03232;
+  --btn-danger-pressed:   var(--danger-fg);
+  --btn-secondary:        var(--chip);
+  --btn-secondary-hover:  var(--chip-2);
+  --btn-secondary-pressed:var(--chip-3);
+  --btn-ghost-hover:      var(--chip);
+  --btn-ghost-pressed:    var(--chip-2);
+  --disabled-opacity:     0.4;
+
+  /* ── Controls ─────────────────────────────────────────────────── */
+  --control-h-sm: 30px;
+  --control-h:    36px;
+  --control-h-lg: 44px;
+  --radius-2xs:   4px;   /* checkbox, skeleton bars, segmented inner */
+  --radius-8:     8px;   /* segmented outer, tooltip                 */
+  --toggle-off:   var(--fill-primary);
+
+  /* ── Site header (one bar on every page) ──────────────────────── */
+  --header-h:       64px;    /* from 768px                               */
+  --header-h-phone: 56px;
+  --header-max-w:   1000px;  /* the bar's content column on wide windows */
+  --header-logo-h:  24px;
+  --header-avatar:  32px;
+  --tap-target:     44px;    /* minimum hit area                         */
+
+  /* ── Focus ────────────────────────────────────────────────────── */
+  --focus-ring-color:  var(--brand);
+  --focus-ring-width:  2px;
+  --focus-ring-offset: 2px;
+
+  /* ── Elevation (named by use) ─────────────────────────────────── */
+  --shadow-raised:  var(--shadow-md);                       /* menus, toasts, raised cards */
+  --shadow-modal:   var(--shadow-2xl);                      /* modals, drawers            */
+  --shadow-tooltip: 0 1px 9px -2px rgba(120,120,128,0.40);
+  --shadow-thumb:   0 1px 3px rgba(0,0,0,0.15);             /* toggle thumb               */
+  --shadow-segment: 0 1px 3px rgba(0,0,0,0.08);             /* segmented selected / frame */
+
+  /* ── Motion (T-00: UI 150–250ms, kiosk results 400–700ms) ─────── */
+  --motion-ui:     var(--duration-base);
+  --motion-kiosk:  560ms;
+  --ease-enter:    var(--ease-emphasized);
+  --ease-leave:    var(--ease-exit);
+
+  /* ── Motion system (v9): subtle, fast, purposeful ─────────────────
+     fast = press, hover, leaving; base = entering, menus, toasts, route fades; slow = sheets, drawers, staggered lists.
+     standard = moving or resizing something on screen; emphasized = entering; exit = leaving.
+     Height is animated in exactly one place (the join modal's body, 240ms standard); everything else is
+     transform / opacity. Every animation has a reduced-motion variant next to it (opacity only, or none). */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 280ms;
+  --duration-resize: 240ms;
+  --ease-standard:   cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-exit:       cubic-bezier(0.4, 0, 1, 1);
+  --press-scale:   0.98;   /* buttons while pressed          */
+  --stagger-step:  40ms;   /* delay between list items       */
+
+  /* ── Product type scale (T-00, Inter only) ────────────────────── */
+  --type-kiosk-hero:     500 140px/1 var(--font-sans);     --type-kiosk-hero-ls:     -0.035em;
+  --type-kiosk-headline: 500 96px/1.05 var(--font-sans);   --type-kiosk-headline-ls: -0.03em;
+  --type-kiosk-sub:      400 40px/1.3 var(--font-sans);    --type-kiosk-sub-ls:      -0.01em;
+  --type-display:        500 48px/1.05 var(--font-sans);   --type-display-ls:        -0.035em;
+  --type-headline:       500 28px/1.2 var(--font-sans);    --type-headline-ls:       -0.02em;
+  --type-title:          500 17px/1.3 var(--font-sans);    --type-title-ls:          -0.01em;
+  --type-body:           400 14px/1.5 var(--font-sans);
+  --type-small:          400 13px/1.45 var(--font-sans);
+  --type-eyebrow:        500 11px/normal var(--font-sans); --type-eyebrow-ls:        0.08em;
+  --type-metric:         500 36px/normal var(--font-sans); --type-metric-ls:         -0.03em;
+
+  /* ── Kiosk (dark) palette — 03 Kiosk ──────────────────────────── */
+  --kiosk-fg:        #FEFEFE;
+  --kiosk-fg-2:      rgba(254,254,254,0.70);
+  --kiosk-fg-3:      rgba(254,254,254,0.60);
+  --kiosk-fg-muted:  rgba(254,254,254,0.45);
+  --kiosk-line:      rgba(254,254,254,0.12);
+  --kiosk-surface:   rgba(254,254,254,0.06);
+  --kiosk-surface-2: rgba(254,254,254,0.12);
+  --kiosk-scan:      var(--brand-light);
+  --kiosk-scan-glow: rgba(77,148,255,0.55);
+  --kiosk-ring:      rgba(37,103,255,0.45);
+  --kiosk-success:   var(--success);
+  --kiosk-success-glow: rgba(65,217,127,0.45);
+  --kiosk-warning:   var(--warning);
+  --kiosk-overlay:   rgba(26,26,26,0.88);
+}
+
+/* next/font/local override: resolve "Inter" through the self-hosted woff2 files. */
+:root {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; }
+
+/* ============================================================================
+   MOTION SYSTEM (v9)
+   Tokens: --duration-fast / -base / -slow, --ease-standard / -emphasized / -exit (above). Components animate with
+   those; the rules here are the app-wide pieces: route changes, first-paint staggers and the shared keyframes.
+   ========================================================================== */
+
+/* Route changes: in-app navigations fade through React <ViewTransition> in app/template.tsx (class "page").
+   No cross-document `@view-transition`: a full load that redirects (sign-in gates, 307s) aborts it and the browser
+   throws "Transition was aborted because of invalid state" (measured 2026-10-02). Full reloads swap at once. */
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: var(--duration-base); animation-timing-function: var(--ease-standard); }
+::view-transition-old(.page) { animation: var(--duration-fast) var(--ease-exit) both motion-fade-out; }
+::view-transition-new(.page) { animation: var(--duration-base) var(--ease-standard) both motion-fade-in; }
+/* The transition overlay must not swallow a tap made while a page fades. */
+::view-transition { pointer-events: none; }
+
+/* First paint of a list or a card grid: children rise in one after the other (CSS only; `backwards` so nothing
+   stays transformed once it has played). Mark the container with data-stagger. */
+[data-stagger] > * { animation: motion-rise var(--duration-slow) var(--ease-emphasized) backwards; }
+[data-stagger] > :nth-child(2) { animation-delay: calc(var(--stagger-step) * 1); }
+[data-stagger] > :nth-child(3) { animation-delay: calc(var(--stagger-step) * 2); }
+[data-stagger] > :nth-child(4) { animation-delay: calc(var(--stagger-step) * 3); }
+[data-stagger] > :nth-child(5) { animation-delay: calc(var(--stagger-step) * 4); }
+[data-stagger] > :nth-child(6) { animation-delay: calc(var(--stagger-step) * 5); }
+[data-stagger] > :nth-child(n + 7) { animation-delay: calc(var(--stagger-step) * 6); }
+
+@keyframes motion-fade-in { from { opacity: 0; } }
+@keyframes motion-fade-out { to { opacity: 0; } }
+@keyframes motion-rise { from { opacity: 0; transform: translateY(8px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*), ::view-transition-new(*), ::view-transition-group(*) { animation-duration: 0s !important; animation-delay: 0s !important; }
+  [data-stagger] > * { animation: none; }
+}
+
+/* iOS Safari zooms into any focused field under 16px: on phones and on any touch screen (iPad, a phone in landscape)
+   every form control is at least 16px. */
+@media (max-width: 767px), (pointer: coarse) {
+  input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="file"]), select, textarea { font-size: max(16px, 1em) !important; }
+}

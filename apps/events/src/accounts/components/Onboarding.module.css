@@ -1,0 +1,80 @@
+/* /onboarding (event model v2): 4-step bar, profile form, face check, calm waiting state. */
+
+/* Progress: four 4px bars with labels (the Didit hosted style), done = black, current = brand. */
+.progress { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin: 0 0 4px; padding: 0; list-style: none; }
+.progressStep { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.bar { height: 4px; border-radius: var(--radius-full); background: var(--soft); }
+.barDone { background: var(--black); }
+.barNow { background: var(--brand); }
+.progressLabel { overflow: hidden; font: 500 11px/normal var(--font-sans); color: var(--mid); white-space: nowrap; text-overflow: ellipsis; }
+.progressLabelOn { color: var(--black); }
+
+/* "Signed in as maria@… ✓ verified" (email is proven; never editable here). */
+.signedIn { margin: 0; padding: 12px 14px; border-radius: var(--radius-sm); background: var(--ultra-soft); font: 400 14px/1.45 var(--font-sans); color: var(--high); overflow-wrap: anywhere; }
+.signedIn strong { font-weight: 500; color: var(--black); }
+.signedInLabel { color: var(--mid-high); }
+.verified { color: var(--success-fg); font-weight: 500; white-space: nowrap; }
+
+.pair { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.counter { font-feature-settings: "tnum"; }
+.counterOver { color: var(--danger-fg); }
+.links { display: flex; flex-direction: column; gap: 12px; min-width: 0; margin: 0; padding: 0; border: 0; }
+.legend { margin-bottom: 8px; padding: 0; font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid-high); }
+
+/* Photo: encouraged, optional. A 48px avatar row linking to the photo editor. */
+.photoRow { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px dashed var(--border-dashed, var(--border)); border-radius: 16px; color: inherit; text-decoration: none; }
+.photoRow:hover { background: var(--ultra-soft); text-decoration: none; }
+.photoRow:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+.photoImg { display: block; flex: none; width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+.photoText { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.photoTitle { font: 500 15px/normal var(--font-sans); }
+.photoHint { font: 400 12px/1.4 var(--font-sans); color: var(--mid-high); }
+.chev { color: var(--mid); font: 400 16px/normal var(--font-sans); }
+.disclosure { margin: 0; font: 400 12px/1.5 var(--font-sans); color: var(--mid-high); }
+/* v5 re-join: the event's rule in one line, under the lead. */
+.rule { margin: 0; padding: 10px 14px; border-radius: 12px; background: var(--soft); font: 500 13px/1.45 var(--font-sans); color: var(--high); }
+
+/* "Camera blocked?" help. */
+.help { border: 1px solid var(--border); border-radius: var(--radius-sm); font: 400 13px/1.5 var(--font-sans); color: var(--high); }
+.help summary { padding: 10px 14px; font-weight: 500; color: var(--black); cursor: pointer; }
+.help summary:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: -2px; border-radius: var(--radius-sm); }
+.help ul { margin: 0; padding: 0 14px 12px 32px; display: flex; flex-direction: column; gap: 6px; }
+
+/* Calm waiting: the … glyph with a slow halo, the live status text, the elapsed-time line. */
+.waitIcon { position: relative; width: 56px; height: 56px; }
+.pulse { position: absolute; inset: -6px; border-radius: 50%; background: var(--brand-soft); animation: breathe 2.4s ease-in-out infinite; }
+.waitIcon > :last-child { position: relative; }
+@keyframes breathe { 0%, 100% { transform: scale(0.85); opacity: 0.35; } 50% { transform: scale(1); opacity: 0.8; } }
+@media (prefers-reduced-motion: reduce) { .pulse { animation: none; opacity: 0.5; } }
+.waitText { display: flex; flex-direction: column; gap: 8px; }
+.waitLine { margin: 0; font: 400 13px/1.5 var(--font-sans); color: var(--mid-high); }
+
+.doneList { display: flex; flex-direction: column; margin: 0; padding: 0; border: 1px solid var(--border); border-radius: 16px; list-style: none; overflow: hidden; }
+.doneList li { display: flex; gap: 10px; padding: 12px 14px; border-bottom: 1px solid var(--border-subtle); font: 400 14px/1.4 var(--font-sans); overflow-wrap: anywhere; }
+.doneList li:last-child { border-bottom: 0; }
+.doneList span { color: var(--success-fg); font-weight: 500; }
+
+@container (min-width: 768px) {
+  .pair { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+}
+
+/* Event questions: the legend reads as a field label (500 14px, sentence case), not a small-caps group title. */
+.legend.questionLegend { margin-bottom: 6px; font: 500 14px/1.4 var(--font-sans); letter-spacing: normal; text-transform: none; color: var(--black); }
+
+/* Flow v3: the final state inside the join modal (its actions are the footer under it). */
+.result { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+
+/* "Is this you?" LinkedIn / X chips under a link field: one reserved row (no jump), scrolls sideways when full. */
+.suggest { display: flex; gap: 8px; min-height: 32px; margin-top: -8px; overflow-x: auto; scrollbar-width: none; }
+.suggest::-webkit-scrollbar { display: none; }
+/* Nothing to suggest on the account editor: no reserved row, and no second 16px form gap. */
+.suggestEmpty.suggestEmpty { min-height: 0; margin-top: -16px; }
+.chip { display: inline-flex; flex: none; align-items: center; gap: 4px; max-width: 100%; height: 32px; padding: 0 12px; border: 0; border-radius: var(--radius-full); background: var(--brand-soft); font: 400 13px/1 var(--font-sans); color: var(--brand-deep); cursor: pointer; transition: background-color 150ms ease; }
+.chip:hover { background: rgba(37, 103, 255, 0.18); }
+.chip:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.chip:disabled { opacity: 0.5; cursor: default; }
+.chipAsk { color: var(--mid-high); }
+.chipUrl { overflow: hidden; font-weight: 500; white-space: nowrap; text-overflow: ellipsis; }
+.suggestPending { width: 168px; height: 32px; border-radius: var(--radius-full); background: var(--soft); animation: suggestPulse 1.2s ease-in-out infinite alternate; }
+@keyframes suggestPulse { from { opacity: 0.5; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .suggestPending { animation: none; } }

@@ -1,0 +1,34 @@
+/* A-06 Guest drawer (design/01b Admin): 480px, header 20px 24px, body 8px 24px 24px, footer 16px 24px. */
+.drawer { overflow: hidden; }
+.drawer > div:nth-child(2) { padding: 8px 24px 24px; }
+.drawer > div:last-child:not(:nth-child(2)) { justify-content: space-between; padding: 16px 24px max(16px, env(safe-area-inset-bottom)); }
+.frame { height: 100%; }
+.frame > div { height: 100%; }
+.callout { margin-top: 16px; padding: 12px 14px; border-radius: var(--radius-sm); font: 400 13px/1.45 var(--font-sans); }
+.callout b { font-weight: 500; }
+.declined { background: var(--danger-bg); color: var(--danger-fg); }
+.retry { padding: 0; border: 0; background: none; color: inherit; font: 500 13px/normal var(--font-sans); text-decoration: underline; cursor: pointer; }
+.review { background: rgba(155, 38, 255, 0.1); color: #6600BD; }
+.section { padding: 18px 0; border-bottom: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: 10px; }
+.section h3 { margin: 0; font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid-high); }
+.sent { margin: 0; font: 400 13px/1.45 var(--font-sans); color: var(--high); }
+.copyRow { display: flex; gap: 8px; }
+.copyRow > :first-child { flex: 1; min-width: 0; }
+.skHead { display: flex; flex-direction: column; gap: 10px; }
+.skSection { padding: 20px 0; border-bottom: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: 10px; }
+
+/* A-16 email mismatch. */
+.mismatch { margin-top: 16px; padding: 14px; border-radius: var(--radius-sm); background: rgba(155, 38, 255, 0.1); display: flex; flex-direction: column; gap: 12px; }
+.mismatch p { margin: 0; font: 400 13px/1.45 var(--font-sans); color: #6600BD; }
+.mismatch p b { font-weight: 500; }
+.emails { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.emailBox { padding: 10px 12px; border-radius: var(--radius-xs); background: var(--white); display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.emailBox span { font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid-high); }
+.emailBox b { font: 500 13px/normal var(--font-sans); color: var(--black); overflow-wrap: anywhere; }
+.mismatchActions { display: flex; gap: 8px; }
+
+.note textarea { min-height: 72px; }
+.dialogError { color: var(--danger-fg); }
+.frameToast { position: absolute; left: 50%; bottom: 32px; transform: translateX(-50%); z-index: 6; white-space: nowrap; }
+.dialogFrame { position: absolute; inset: 0; z-index: 5; display: grid; place-items: center; background: rgba(26, 26, 26, 0.24); }
+.dialogFrame > * { width: 400px; }

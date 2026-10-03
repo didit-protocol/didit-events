@@ -1,0 +1,47 @@
+# Dependabot version updates. Security updates are switched on in the repository settings.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      # One pull request for the compatible updates.
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+    ignore:
+      # Major versions are upgraded by hand (they need code changes and a full run of the test suites).
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
+    commit-message:
+      prefix: deps
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    groups:
+      actions:
+        patterns:
+          - "*"
+    commit-message:
+      prefix: ci
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    ignore:
+      # The Node major follows .nvmrc and engines; upgrade it by hand.
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
+    commit-message:
+      prefix: docker

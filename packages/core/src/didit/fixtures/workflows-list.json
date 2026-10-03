@@ -1,0 +1,14 @@
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "uuid": "44444444-4444-4444-8444-444444444444",
+      "workflow_label": "Didit Events \u00b7 Selfie renewal",
+      "features": "LIVENESS",
+      "min_price": 0.1,
+      "max_price": 0.1
+    }
+  ]
+}

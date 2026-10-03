@@ -1,0 +1,24 @@
+/* What the tap on Request to join shows at once, while the server answers and the modal's code downloads: the
+ * modal's own frame (Join.module.css: a centred 480px card from 768px, a bottom sheet below it) with the loader, so
+ * the modal then takes its place without moving. This file ships with the event page; the modal's styles do not. */
+.scrim {
+  position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 24px;
+  background: var(--overlay); animation: fade var(--duration-base) var(--ease-standard);
+}
+.dialog {
+  box-sizing: border-box; display: grid; place-items: center; width: 480px; max-width: 100%;
+  /* The modal's top row (52px) and the minimum height of its body. */
+  height: calc(52px + min(360px, 100dvh - 140px));
+  border-radius: 24px; background: var(--white); box-shadow: var(--shadow-2xl);
+  animation: rise var(--duration-base) var(--ease-emphasized);
+}
+@keyframes fade { from { opacity: 0; } }
+@keyframes rise { from { opacity: 0; transform: scale(0.96); } }
+@keyframes sheet { from { transform: translateY(100%); } }
+@media (max-width: 767px) {
+  .scrim { place-items: end stretch; padding: 0; }
+  .dialog { width: 100%; height: calc(48px + min(320px, 100dvh - 120px)); border-radius: 24px 24px 0 0; animation: sheet var(--duration-slow) var(--ease-emphasized); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scrim, .dialog { animation: fade var(--duration-base) linear; }
+}

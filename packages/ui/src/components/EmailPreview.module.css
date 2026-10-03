@@ -1,0 +1,13 @@
+/* Inbox-style email preview (design/04, /05 M-* and /02 E-* frames): a soft panel with the sender, subject and
+   preheader above the rendered email. Desktop = 680 panel around a 600 email; mobile = 390 edge to edge. */
+.panel {
+  box-sizing: border-box; background: var(--soft); border-radius: 4px; box-shadow: var(--shadow-segment);
+  font-family: var(--font-sans); color: var(--black);
+}
+.desktop { width: 680px; padding: 24px 40px 40px; }
+.mobile { width: 390px; padding: 16px 0 0; }
+.head { display: flex; flex-direction: column; gap: 2px; padding: 0 4px 12px; font: 400 13px var(--font-sans); color: var(--high); }
+.from { color: var(--black); font-weight: 500; }
+.trigger, .preheader { color: var(--mid-high); }
+.subject { color: var(--black); font-weight: 500; }
+.frame { display: block; width: 100%; border: 0; background: var(--soft); }

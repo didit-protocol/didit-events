@@ -1,0 +1,21 @@
+/* C-00 toast: #1A1A1A, 10px 14px, radius 12, 400 13px, 8px tone dot. */
+.toast {
+  display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: var(--radius-sm);
+  background: var(--black); color: var(--white); font: 400 13px/normal var(--font-sans); box-shadow: var(--shadow-raised);
+}
+.dot { flex: none; width: 8px; height: 8px; border-radius: 50%; }
+.success { background: var(--success); }
+.danger { background: var(--danger); }
+.info { background: var(--brand-light); }
+.spin { flex: none; color: var(--white); }
+.action { padding: 0; border: 0; background: none; color: var(--brand-light); font: inherit; cursor: pointer; }
+.action:focus-visible, .close:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); border-radius: 2px; }
+.close { margin-left: 4px; padding: 0 2px; border: 0; background: none; color: inherit; opacity: 0.6; font: inherit; cursor: pointer; }
+.region {
+  position: fixed; left: 50%; bottom: 24px; z-index: 1000; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px; margin: 0; padding: 0; list-style: none; pointer-events: none;
+}
+.region > li { pointer-events: auto; animation: enter var(--duration-base) var(--ease-emphasized); }
+@keyframes enter { from { opacity: 0; transform: translateY(8px) scale(0.98); } }
+@keyframes enterFade { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .region > li { animation-name: enterFade; } }

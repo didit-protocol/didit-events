@@ -1,0 +1,49 @@
+/* P-02 card: radius 20, 1px border, band 10px 20px on --ultra-soft, body 20px / gap 14. */
+.card { box-sizing: border-box; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+.band {
+  display: flex; justify-content: space-between; align-items: center; padding: 10px 20px;
+  background: var(--ultra-soft); border-bottom: 1px solid var(--border-subtle);
+}
+.bandTitle { margin: 0; font: 500 13px/normal var(--font-sans); letter-spacing: normal; color: var(--high); }
+.body { display: flex; flex-direction: column; gap: 14px; padding: 20px; }
+.title { margin: 0; font: 500 20px/1.25 var(--font-sans); letter-spacing: -0.02em; color: var(--black); }
+.text { margin: 0; font: 400 14px/1.55 var(--font-sans); color: var(--high); }
+
+/* Didit progress: 3 columns, gap 6; 4px bar; 500 11px label. */
+.progress { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 0; padding: 0; list-style: none; }
+.step { display: flex; flex-direction: column; gap: 6px; }
+.bar { height: 4px; border-radius: var(--radius-full); background: var(--soft); }
+.step[data-bar="done"] .bar { background: var(--brand); }
+.step[data-bar="current"] .bar { background: rgba(37, 103, 255, 0.35); }
+.stepLabel { font: 500 11px/normal var(--font-sans); color: var(--mid); }
+.step[data-reached] .stepLabel { color: var(--black); }
+
+.actions { display: flex; gap: 8px; }
+.ctaForm { display: flex; flex: 1; }
+/* Primary: flex 1, 44px, 500 15px. Secondary: 44px, 0 18px. */
+.cta.cta { flex: 1; min-width: 0; }
+.cta2.cta2 { padding: 0 18px; min-width: 0; }
+.foot { margin: 0; font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+.footLink { color: inherit; text-decoration: none; }
+.footLink:hover { color: var(--black); text-decoration: underline; }
+.footLink:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); border-radius: 2px; }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* P-01 inline request card: band 10px 18px, body 18px / gap 16. */
+.request { border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
+.requestBand {
+  margin: 0; padding: 10px 18px; background: var(--ultra-soft); border-bottom: 1px solid var(--border-subtle);
+  font: 500 13px/normal var(--font-sans); letter-spacing: normal; color: var(--high);
+}
+.requestBody { display: flex; flex-direction: column; gap: 16px; padding: 18px; }
+.feature { display: flex; gap: 12px; align-items: flex-start; }
+.featureText { display: flex; flex-direction: column; gap: 2px; }
+.featureTitle { font: 500 15px/normal var(--font-sans); color: var(--black); }
+.featureBody { font: 400 13px/normal var(--font-sans); color: var(--high); }
+.rule { height: 1px; margin: 0; border: 0; background: var(--border-subtle); }
+.welcome { margin: 0; font: 400 14px/normal var(--font-sans); color: var(--black); }
+.who { display: flex; align-items: center; gap: 10px; }
+.whoText { display: flex; flex-direction: column; }
+.whoName { font: 500 14px/normal var(--font-sans); color: var(--black); }
+.whoEmail { font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+.requestCta.requestCta { width: 100%; }

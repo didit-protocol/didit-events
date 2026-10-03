@@ -1,0 +1,82 @@
+/* Shared person drawer body (Guests + Requests) and the table name cell. */
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.muted { margin: 0; font: 400 12px/1.45 var(--font-sans); color: var(--mid-high); }
+
+/* Table cell: 32px photo, name + badge, second line. */
+.cell { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.cellText { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.cellName { display: flex; align-items: center; gap: 4px; min-width: 0; }
+.cellName b, .cellName a { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 500 14px/normal var(--font-sans); color: var(--black); }
+.cellName [data-unnamed] { font-weight: 400; color: var(--mid-high); }
+.cellName a { text-decoration: none; }
+.cellName a:hover { text-decoration: underline; }
+.cellSub { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+
+/* Header. */
+.avatar { font: 500 18px/normal var(--font-sans); color: var(--high); }
+.title { display: inline-flex; align-items: center; gap: 6px; min-width: 0; }
+.sub { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.work { font: 500 13px/1.4 var(--font-sans); color: var(--black); }
+.email { display: inline-flex; align-items: center; gap: 5px; font: 400 13px/1.4 var(--font-sans); color: var(--high); overflow-wrap: anywhere; }
+.emailOk { display: inline-flex; color: var(--success-fg); }
+.emailNo { color: var(--mid-high); font-size: 12px; }
+.headLinks { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 2px; font: 500 12px/normal var(--font-sans); }
+.headLinks a { color: var(--brand); text-decoration: none; }
+.headLinks a:hover { text-decoration: underline; }
+
+/* Sections. */
+.section { padding: 16px 0; border-bottom: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: 10px; }
+.section:last-child { border-bottom: 0; }
+.section h3 { margin: 0; font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid-high); }
+.kv { display: flex; flex-direction: column; gap: 9px; margin: 0; font: 400 13px/1.45 var(--font-sans); }
+.kvRow { display: grid; grid-template-columns: 128px minmax(0, 1fr); gap: 12px; }
+.kv dt { color: var(--mid-high); }
+.kv dd { margin: 0; color: var(--black); min-width: 0; overflow-wrap: anywhere; }
+.kv dd[data-tone="ok"] { color: var(--success-fg); font-weight: 500; }
+.kv dd[data-tone="warn"] { color: var(--warning-fg); font-weight: 500; }
+.kv dd[data-tone="danger"] { color: var(--danger-fg); font-weight: 500; }
+.kv dd[data-tone="review"] { color: #6600BD; font-weight: 500; }
+.kv dd[data-tone="muted"] { color: var(--mid); }
+.bio { white-space: pre-line; }
+.links { display: flex; flex-direction: column; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.links li { display: flex; gap: 8px; min-width: 0; }
+.linkKind { flex: none; width: 64px; color: var(--mid-high); }
+.links a { color: var(--brand); font-weight: 500; overflow-wrap: anywhere; }
+.linkHost { font-weight: 400; color: var(--mid-high); }
+.note { margin: 0; padding: 8px 10px; border-radius: var(--radius-xs); background: var(--soft); font: 400 12px/1.45 var(--font-sans); color: var(--high); }
+.answers { display: flex; flex-direction: column; gap: 12px; margin: 0; font: 400 13px/1.5 var(--font-sans); }
+.answers dt { color: var(--mid-high); }
+.answers dd { margin: 2px 0 0; color: var(--black); white-space: pre-line; overflow-wrap: anywhere; }
+.answers dd[data-empty] { color: var(--mid); }
+.subhead { margin: 4px 0 0; font: 500 12px/normal var(--font-sans); color: var(--high); }
+.ready { display: flex; }
+.session { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.session code { font: 400 12px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--high); overflow-wrap: anywhere; }
+.session a { color: var(--brand); font-weight: 500; white-space: nowrap; }
+
+/* Selfie (staff only, on demand). */
+.selfieRow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.selfie { display: flex; align-items: flex-end; gap: 10px; }
+.selfie img { width: 160px; height: 200px; object-fit: cover; border-radius: var(--radius-xs); background: var(--soft); border: 1px solid var(--border); }
+.selfie img[data-state="loading"] { opacity: 0.4; }
+
+/* Timeline. */
+.timeline { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; }
+.timeline li { display: grid; grid-template-columns: 16px minmax(0, 1fr) auto; gap: 10px; align-items: start; padding-bottom: 12px; }
+.timeline li:last-child { padding-bottom: 0; }
+.dot { width: 10px; height: 10px; margin-top: 4px; border-radius: 50%; box-sizing: border-box; background: var(--black); }
+.timeline li[data-state="pending"] .dot { background: transparent; border: 1.5px solid var(--mid-soft); }
+.timeline li[data-tone="review"] .dot { background: #9B26FF; }
+.timeline li[data-tone="danger"] .dot { background: var(--danger); }
+.stepText { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.stepText b { font: 500 13px/normal var(--font-sans); color: var(--black); }
+.timeline li[data-state="pending"] .stepText b { color: var(--mid); }
+.timeline li[data-tone="danger"] .stepText b { color: var(--danger-fg); }
+.stepText span, .stepAt { font: 400 12px/normal var(--font-sans); color: var(--mid-high); overflow-wrap: anywhere; }
+.stepAt { font-feature-settings: "tnum"; white-space: nowrap; }
+.reason { color: var(--high); }
+
+/* The drawer is portalled outside the admin container: a viewport query. */
+@media (max-width: 600px) {
+  .kvRow { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+}

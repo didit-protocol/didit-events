@@ -1,0 +1,22 @@
+.wrap { position: relative; display: inline-flex; }
+/* C-00 menu: 240 wide, radius 12, 6px padding, raised shadow, 400 14px; items 8px 10px radius 6. */
+.menu {
+  display: flex; flex-direction: column; box-sizing: border-box; width: 240px; margin: 0; padding: 6px;
+  border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--white);
+  box-shadow: var(--shadow-raised); font: 400 14px/normal var(--font-sans); list-style: none; outline: none;
+}
+/* Portalled to <body>; top/left|right come from the trigger's rect (menuPlacement). */
+.floating { position: fixed; z-index: 800; max-height: calc(100vh - 16px); overflow-y: auto; transform-origin: top; animation: pop var(--duration-fast) var(--ease-emphasized); }
+.item {
+  display: flex; align-items: center; gap: 8px; width: 100%; padding: 8px 10px; border: 0; border-radius: var(--radius-xs);
+  background: none; color: var(--black); font: inherit; letter-spacing: normal; text-align: left; text-decoration: none; cursor: pointer;
+}
+.item:hover { text-decoration: none; }
+.item[data-highlighted] { background: var(--soft); }
+.item:focus-visible { outline: none; background: var(--soft); }
+.item[aria-disabled="true"] { opacity: var(--disabled-opacity); cursor: not-allowed; }
+.danger { color: var(--danger-fg); }
+.separator { height: 1px; margin: 4px 0; background: var(--border); }
+@keyframes pop { from { opacity: 0; transform: translateY(-4px) scale(0.98); } }
+@keyframes popFade { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .floating { animation-name: popFade; } }

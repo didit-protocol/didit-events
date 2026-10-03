@@ -1,0 +1,115 @@
+/* People (owner-only): the Guests tab's toolbar, table and phone list, plus the profile drawer. */
+/* The page box is a size container: the table / compact table / phone list follow the content column's width. */
+.page { gap: 20px; container: people / inline-size; }
+.toolbar { display: flex; align-items: center; gap: 12px; }
+.search { flex: none; width: 280px; }
+.chips { flex: 1; min-width: 0; flex-wrap: wrap; }
+.filterMenu, .phoneChips, .compact, .phoneList, .pager { display: none; }
+
+/* Desktop table. */
+.table [role="rowgroup"] + [role="rowgroup"] [role="row"] { height: auto; min-height: 53px; }
+.table [role="row"] { column-gap: 12px; }
+.table [role="row"]:has([aria-colspan]) { grid-template-columns: 1fr !important; }
+.table [aria-colspan] { padding: 0; }
+.email { display: flex; align-items: center; gap: 6px; min-width: 0; font: 400 13px/normal var(--font-sans); color: var(--high); white-space: nowrap; }
+.email svg { flex: none; }
+.ellipsis { overflow: hidden; text-overflow: ellipsis; }
+.work { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 400 13px/normal var(--font-sans); color: var(--high); }
+.num { font: 500 13px/normal var(--font-sans); font-feature-settings: "tnum"; color: var(--black); }
+.when { font: 400 13px/normal var(--font-sans); font-feature-settings: "tnum"; color: var(--high); white-space: nowrap; }
+.muted { font: 400 13px/normal var(--font-sans); color: var(--mid); }
+.empty.empty { border: 0; border-radius: 0; padding: 96px 24px; gap: 10px; }
+.empty h3 { font-size: 17px; }
+.empty p { font-size: 14px; }
+.empty > :first-child { display: flex; }
+.empty.empty > :last-child { margin-top: 6px; }
+
+.nameLine { display: inline-flex; align-items: center; gap: 4px; min-width: 0; }
+.nameLine b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 500 14px/normal var(--font-sans); color: var(--black); }
+
+/* 1024: person, verification, events, last active. */
+.compactTable { border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+.cRow { display: grid; grid-template-columns: minmax(0, 2fr) minmax(104px, 1fr) minmax(72px, 0.7fr) minmax(88px, 0.8fr); gap: 12px; padding: 0 14px; min-height: 57px; align-items: center; border-bottom: 1px solid var(--border-subtle); box-sizing: border-box; }
+.cRow:last-child { border-bottom-color: transparent; }
+.cHead { min-height: 37px; background: #F8F8F8; border-bottom-color: var(--border); font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid-high); }
+.cHead > * { white-space: nowrap; }
+.cName { display: flex; align-items: center; gap: 10px; min-width: 0; text-decoration: none; color: var(--black); }
+.cName:focus-visible, .pRow:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: -2px; border-radius: var(--radius-xs); }
+.cText { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.cText > span + span { font: 400 12px/normal var(--font-sans); color: var(--mid-high); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* 390: avatar list. */
+.pList { margin: 0; padding: 0; list-style: none; }
+.pRow { display: flex; align-items: center; gap: 12px; padding: 10px 0; min-height: 44px; border-bottom: 1px solid var(--border-subtle); text-decoration: none; color: var(--black); }
+.pText { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.pText > span:last-child { font: 400 13px/normal var(--font-sans); color: var(--high); font-feature-settings: "tnum"; }
+
+.pager { align-items: center; justify-content: space-between; gap: 12px; font: 500 13px/normal var(--font-sans); color: var(--high); }
+.pager a { display: inline-flex; align-items: center; min-height: 44px; color: var(--black); text-decoration: none; }
+
+@container people (max-width: 820px) {
+  .toolbar { gap: 8px; }
+  .search { flex: 1; width: auto; }
+  /* Doubled class: the chip nav's own `display: flex` (ui FilterChips) has the same weight and may load later. */
+  .chips.chips, .desktop { display: none; }
+  .filterMenu { display: block; position: relative; }
+  .compact { display: block; }
+  .pager { display: flex; }
+}
+/* Under ~600px the four-column table truncates every name: the avatar list and the chip row take over. */
+@container people (max-width: 600px) {
+  .search { --control-h: 44px; }
+  .search input { font-size: 16px; }
+  .filterMenu, .compact { display: none; }
+  /* One scrolling line; the right edge fades to show there is more, and the end padding lets the last chip clear it.
+     The 6px block padding leaves room for the chips' 44px hit areas. */
+  .phoneChips {
+    display: flex; overflow-x: auto; flex-wrap: nowrap; margin: -6px 0; padding: 6px 0; scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
+  }
+  .phoneChips::-webkit-scrollbar { display: none; }
+  .phoneChips nav { flex-wrap: nowrap; padding-right: 28px; }
+  .phoneChips a { position: relative; flex: none; }
+  .phoneChips a::after { content: ""; position: absolute; inset: -6px 0; }
+  .phoneList { display: block; }
+  .pRow { min-height: 56px; }
+}
+
+.filterMenu > summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; height: var(--control-h, 36px); padding: 0 14px; border-radius: var(--radius-full); background: var(--btn-secondary); font: 500 14px/normal var(--font-sans); white-space: nowrap; }
+.filterMenu > summary::-webkit-details-marker { display: none; }
+.filterMenu > summary:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+.filterPanel { position: absolute; right: 0; top: 42px; z-index: 5; box-sizing: border-box; width: min(340px, 100cqi); padding: 12px; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow-md, 0 4px 12px rgba(120,120,128,.2)); }
+.filterPanel nav { flex-wrap: wrap; }
+
+/* Drawer (the shared stacked drawer, 560px): body 8px 24px 24px like the Guests drawer. */
+.drawer { overflow: hidden; }
+.drawer > div:nth-child(2) { padding: 8px 24px 24px; }
+.skSection { padding: 20px 0; border-bottom: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: 10px; }
+.callout { margin-top: 16px; padding: 12px 14px; border-radius: var(--radius-sm); background: var(--danger-bg); color: var(--danger-fg); font: 400 13px/1.45 var(--font-sans); }
+.callout b { font-weight: 500; }
+.retry { padding: 0; border: 0; background: none; color: inherit; font: 500 13px/normal var(--font-sans); text-decoration: underline; cursor: pointer; }
+.events { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; }
+.eventRow { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border-subtle); }
+.eventRow:last-child { border-bottom: 0; padding-bottom: 0; }
+.eventRow:first-child { padding-top: 0; }
+.eventMain { display: flex; flex-direction: column; gap: 2px; min-width: 0; font: 400 12px/1.4 var(--font-sans); color: var(--mid-high); }
+.eventMain a { font: 500 14px/1.4 var(--font-sans); color: var(--black); text-decoration: none; overflow-wrap: anywhere; }
+.eventMain a:hover { text-decoration: underline; }
+.eventIn { color: var(--success-fg); font-weight: 500; }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 0; }
+.stats div { padding: 10px 12px; border-radius: var(--radius-xs); background: var(--soft); display: flex; flex-direction: column; gap: 2px; }
+.stats dt { font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid-high); }
+.stats dd { margin: 0; font: 500 20px/normal var(--font-sans); font-feature-settings: "tnum"; color: var(--black); }
+.members { display: flex; flex-direction: column; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.members a { color: var(--brand); font-weight: 500; }
+
+/* 390: the drawer is a bottom sheet (portalled outside the admin container: a viewport query). */
+@media (max-width: 600px) {
+  .drawer.drawer { align-self: end; width: 100vw; height: 92dvh; border-radius: 16px 16px 0 0; }
+  .drawer > div:nth-child(2) { padding: 8px 16px 24px; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) and (prefers-reduced-motion: no-preference) {
+  .drawer.drawer { animation: sheet var(--motion-ui) var(--ease-enter); }
+}
+@keyframes sheet { from { transform: translateY(24px); opacity: 0; } }

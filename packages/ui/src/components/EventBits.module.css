@@ -1,0 +1,57 @@
+/* Date badge (04 P-01): 44px, radius 12, 1px border; month bar 15px on --soft, 500 9px +.08em; day 500 17px tnum. */
+.date {
+  box-sizing: border-box; display: flex; flex-direction: column; flex: none; overflow: hidden;
+  width: 44px; height: 44px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+}
+.dateMonth {
+  height: 15px; background: var(--soft); color: var(--mid-high); text-align: center; text-transform: uppercase;
+  font: 500 9px/15px var(--font-sans); letter-spacing: 0.08em;
+}
+.dateDay { flex: 1; display: grid; place-items: center; font: 500 17px/normal var(--font-sans); font-feature-settings: "tnum"; color: var(--black); }
+.dateMd { width: 40px; height: 40px; border-radius: 10px; }
+.dateMd .dateMonth { height: 14px; font-size: 8px; line-height: 14px; }
+.dateMd .dateDay { font-size: 15px; font-feature-settings: normal; }
+
+/* Icon tile: outline 44/r12 (desktop) or 40/r10 (mobile); soft 36/r10 on --soft. */
+.tile { box-sizing: border-box; display: grid; place-items: center; flex: none; color: var(--black); }
+.tileLg { width: 44px; height: 44px; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.tileMd { width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 10px; }
+.tileSoft { width: 36px; height: 36px; border-radius: 10px; background: var(--soft); }
+
+/* Tone icon: 44 (500 20px glyph), 48 (500 20px, DA modal), 56 (500 22px, 04 R-* / 05 U-*), 64 (500 28px), 88. */
+.tone { display: grid; place-items: center; flex: none; border-radius: 50%; background: var(--tone-bg); color: var(--tone-fg); }
+.tone44 { width: 44px; height: 44px; font: 500 20px/normal var(--font-sans); }
+.tone48 { width: 48px; height: 48px; font: 500 20px/normal var(--font-sans); }
+.tone56 { width: 56px; height: 56px; font: 500 22px/normal var(--font-sans); }
+.tone64 { width: 64px; height: 64px; font: 500 28px/normal var(--font-sans); }
+.tone88 { width: 88px; height: 88px; font: 500 28px/normal var(--font-sans); }
+.success     { --tone-bg: var(--success);      --tone-fg: var(--white); }
+.successSoft { --tone-bg: var(--success-bg);   --tone-fg: var(--success-fg); }
+.warning     { --tone-bg: var(--warning-bg);   --tone-fg: var(--warning-fg); }
+.danger      { --tone-bg: var(--danger-bg);    --tone-fg: var(--danger-fg); }
+.feature     { --tone-bg: var(--feature-soft); --tone-fg: var(--feature-deep); }
+.brand       { --tone-bg: var(--brand-soft);   --tone-fg: var(--brand-deep); }
+.neutral     { --tone-bg: var(--soft);         --tone-fg: var(--high); }
+
+/* Avatar stack: 28px, 2px white ring, -8px overlap, 500 10px. */
+.stack { display: flex; }
+.stackItem {
+  box-sizing: border-box; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
+  border: 2px solid var(--white); color: var(--high); font: 500 10px/normal var(--font-sans);
+}
+.stackItem + .stackItem { margin-left: -8px; }
+.stackSoft { background: var(--soft); }
+.stackBrand { background: var(--brand-soft); }
+.stackSuccess { background: var(--success-bg); }
+
+/* Segmented nav (P-03): 3px well on --soft, radius 8, 500 14px; items 8px 18px, radius 6. */
+.segNav { display: flex; align-self: flex-start; padding: 3px; background: var(--soft); border-radius: var(--radius-8); font: 500 14px/normal var(--font-sans); }
+/* gap: a label and its count ("Pending 3") stay spaced where the item is a flex row (flex drops the text space). */
+.segItem { gap: 6px; padding: 8px 18px; border-radius: var(--radius-xs); color: var(--high); text-decoration: none; }
+.segItem:hover { color: var(--black); text-decoration: none; }
+.segItem[aria-current="page"] { background: var(--white); color: var(--black); box-shadow: var(--shadow-segment); }
+.segItem:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+/* Phones: 44px touch targets (the well grows with them). */
+@media (max-width: 767px) {
+  .segItem { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; }
+}

@@ -1,0 +1,14 @@
+/* Result tag (01b Admin A-09 RES): 22px, 0 8px, radius full, 500 10px +.08em uppercase, no dot. */
+.tag {
+  display: inline-flex; align-items: center; box-sizing: border-box; width: max-content; height: 22px; padding: 0 8px;
+  border-radius: var(--radius-full); background: var(--tag-bg); color: var(--tag-fg);
+  font: 500 10px/normal var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
+}
+.success { --tag-bg: var(--success-bg);   --tag-fg: var(--success-fg); }
+.soft    { --tag-bg: var(--soft);         --tag-fg: var(--high); }
+.neutral { --tag-bg: var(--neutral-pill); --tag-fg: var(--high); }
+.dark    { --tag-bg: var(--black);        --tag-fg: var(--white); }
+.warning { --tag-bg: var(--warning-bg);   --tag-fg: var(--warning-fg); }
+.feature { --tag-bg: var(--feature-soft); --tag-fg: var(--feature-deep); }
+.danger  { --tag-bg: var(--danger-bg);    --tag-fg: var(--danger-fg); }
+.brand   { --tag-bg: var(--brand-soft);   --tag-fg: var(--brand-deep); }

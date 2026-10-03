@@ -1,0 +1,16 @@
+/* The Didit mark as a loader: a faint ring and a bright stretch travelling round it (one lap in 1.1s).
+ * --mark-len is the ring's length in its own units (set inline: 72.95 for the mark's 2.6 stroke). */
+.loader { display: inline-block; flex: none; line-height: 0; }
+.loader svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.track { opacity: 0.22; }
+.run {
+  stroke-dasharray: calc(var(--mark-len) * 0.32) calc(var(--mark-len) * 0.68);
+  animation: travel 1100ms linear infinite;
+}
+@keyframes travel { to { stroke-dashoffset: calc(var(--mark-len) * -1); } }
+@keyframes pulse { 50% { opacity: 0.45; } }
+/* Reduced motion: nothing travels; the whole mark breathes (opacity only). */
+@media (prefers-reduced-motion: reduce) {
+  .run { stroke-dasharray: none; animation: none; }
+  .loader { animation: pulse 1600ms ease-in-out infinite; }
+}

@@ -1,0 +1,237 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1790679045291,
+      "tag": "0000_init",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1790681534923,
+      "tag": "0001_greedy_lady_deathstrike",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790682659570,
+      "tag": "0002_lowly_wendigo",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1790683118470,
+      "tag": "0003_sparkling_venus",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1790684010197,
+      "tag": "0004_checkin_watermark_and_owner",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1790684866631,
+      "tag": "0005_outbox_dispatch_leases",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1790687976820,
+      "tag": "0006_soft_human_fly",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1790690573701,
+      "tag": "0007_handy_monster_badoon",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1790694681736,
+      "tag": "0008_b5_notifications",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1790694681737,
+      "tag": "0009_verification_lifecycle",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1790695443976,
+      "tag": "0010_verification_retention",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1790697332545,
+      "tag": "0011_verification_retries",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1790697332546,
+      "tag": "0012_b2_identity",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1790699997121,
+      "tag": "0013_b2_deletion_email_reuse",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1790704410169,
+      "tag": "0014_b2_synthetic_otp",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "7",
+      "when": 1790704410170,
+      "tag": "0015_b4_admission",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1790715059702,
+      "tag": "0016_email_mismatch_acceptance",
+      "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1790755295462,
+      "tag": "0017_staff_email_otp",
+      "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1790770992979,
+      "tag": "0018_calendar_profile",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1790775709050,
+      "tag": "0019_account_sessions",
+      "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1790779513030,
+      "tag": "0020_api_tokens",
+      "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "7",
+      "when": 1790788871767,
+      "tag": "0021_event_model_v2",
+      "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "7",
+      "when": 1790799545321,
+      "tag": "0022_flow_v3_optional_bio",
+      "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "7",
+      "when": 1790802797976,
+      "tag": "0023_face_plan_any_app",
+      "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "7",
+      "when": 1790849725561,
+      "tag": "0024_door_in_events",
+      "breakpoints": true
+    },
+    {
+      "idx": 25,
+      "version": "7",
+      "when": 1790859202552,
+      "tag": "0025_event_cover_wide",
+      "breakpoints": true
+    },
+    {
+      "idx": 26,
+      "version": "7",
+      "when": 1790871592113,
+      "tag": "0026_door_threshold_50",
+      "breakpoints": true
+    },
+    {
+      "idx": 27,
+      "version": "7",
+      "when": 1790879355867,
+      "tag": "0027_deletion_grace",
+      "breakpoints": true
+    },
+    {
+      "idx": 28,
+      "version": "7",
+      "when": 1790879356960,
+      "tag": "0028_rejoin_after_rejection",
+      "breakpoints": true
+    },
+    {
+      "idx": 29,
+      "version": "7",
+      "when": 1790885864147,
+      "tag": "0029_calendar_invites",
+      "breakpoints": true
+    },
+    {
+      "idx": 30,
+      "version": "7",
+      "when": 1790887568953,
+      "tag": "0030_invite_revoked_reason",
+      "breakpoints": true
+    },
+    {
+      "idx": 31,
+      "version": "7",
+      "when": 1790894739440,
+      "tag": "0031_consent_blank",
+      "breakpoints": true
+    },
+    {
+      "idx": 32,
+      "version": "7",
+      "when": 1790927860329,
+      "tag": "0032_social_suggestions",
+      "breakpoints": true
+    }
+  ]
+}

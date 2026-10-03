@@ -1,0 +1,1 @@
+ALTER TABLE "otp_challenges" ADD COLUMN "synthetic" boolean DEFAULT false NOT NULL;

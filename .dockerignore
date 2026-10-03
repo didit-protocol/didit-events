@@ -1,0 +1,8 @@
+.git
+docs/media
+**/node_modules
+**/.next
+**/.data
+.vitest-tmp
+**/.env*
+!**/.env.example

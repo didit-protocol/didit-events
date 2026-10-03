@@ -1,0 +1,26 @@
+{
+  "uuid": "44444444-4444-4444-8444-444444444444",
+  "workflow_label": "Didit Events \u00b7 Selfie renewal",
+  "is_desktop_allowed": true,
+  "features": "LIVENESS",
+  "min_price": 0.1,
+  "max_price": 0.1,
+  "workflow_graph": {
+    "start_node": "liveness",
+    "nodes": {
+      "liveness": {
+        "node_type": "feature",
+        "feature": "LIVENESS",
+        "config": {
+          "face_liveness_method": "PASSIVE",
+          "face_liveness_possible_duplicated_face_action": "NO_ACTION"
+        },
+        "next": "determine_status"
+      },
+      "determine_status": {
+        "node_type": "status",
+        "session_status": "Determine"
+      }
+    }
+  }
+}
