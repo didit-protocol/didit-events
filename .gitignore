@@ -11,6 +11,10 @@ next-env.d.ts
 .DS_Store
 .pnpm-store/
 
+# Didit agent skills installed by ClawHub (docs/didit-setup-prompt.md)
+/skills/
+/.clawhub/
+
 # Alternate Next dist dirs (NEXT_DIST_DIR), e.g. local browser gates
 .next-*/
 

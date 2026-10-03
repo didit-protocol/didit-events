@@ -23,6 +23,7 @@ ID checks and face search.
 - [How it works](#how-it-works)
 - [Tech stack](#tech-stack)
 - [Quick start](#quick-start)
+  - [Set up Didit with an AI agent](#set-up-didit-with-an-ai-agent)
 - [Didit setup](#didit-setup)
 - [Configuration](#configuration)
 - [Scripts](#scripts)
@@ -134,6 +135,65 @@ Prerequisites: Node 22 (22.7 or newer; `.nvmrc` is included) and pnpm 11 through
 Postgres container of both paths below; path 2 also works without Docker, on the embedded database
 ([Without Docker](#without-docker-the-embedded-database)).
 
+### Set up Didit with an AI agent
+
+A coding agent (Claude Code, Cursor, Codex and others) can do the whole Didit part for you: create the account, get the
+API key, create the liveness workflow, fill `apps/events/.env.local`, start the app and check that it works. You give
+it an email address and the code Didit sends there.
+
+First install the [Didit agent skills](https://github.com/didit-protocol/skills) from the root of the clone, so the
+agent has Didit's API reference at hand. ClawHub installs one skill per command:
+
+```sh
+npx clawhub@latest install didit-verification-management
+npx clawhub@latest install didit-liveness-detection
+npx clawhub@latest install didit-face-search
+```
+
+ClawHub writes them to `skills/` and `.clawhub/` in the repository root; both are git-ignored. If ClawHub is not
+available, copy the same three folders from <https://github.com/didit-protocol/skills>.
+
+Then open the agent in a fresh clone of this repository and paste this prompt:
+
+```text
+Set up Didit for this repository (Didit Events) and prove that it works. Follow docs/didit-setup-prompt.md step by
+step: read it fully before you start, and read README.md ("Quick start", "Didit setup") and .env.example.
+
+1. Install the Didit agent skills, one per command (they land in skills/ and .clawhub/, both git-ignored):
+   npx clawhub@latest install didit-verification-management
+   npx clawhub@latest install didit-liveness-detection
+   npx clawhub@latest install didit-face-search
+   (fallback: copy the three folders from https://github.com/didit-protocol/skills)
+2. Ask me for five things and wait: a real email address for the Didit account, my staff email domain, my own
+   address on that domain, whether I have a public https URL for this app, and the database: Docker, or a Postgres
+   URL of mine where you create an empty database.
+   Then run: corepack enable && pnpm install
+3. Get DIDIT_API_KEY. If I already have one, I add it to apps/events/.env.local myself where step 1 of the file
+   says. Otherwise register with
+   POST https://apx.didit.me/auth/v2/programmatic/register/ (email, password), ask me for the 6-character code from
+   the email, and send it to POST https://apx.didit.me/auth/v2/programmatic/verify-email/ (email, code). The key is
+   application.api_key in the response.
+4. Create one published liveness-only workflow with POST https://verification.didit.me/v3/workflows/ (header
+   x-api-key), unless the application already has it (read every page of GET /v3/workflows/), and put its
+   workflow_id in DIDIT_FACE_WORKFLOW_ID, DIDIT_RENEWAL_WORKFLOW_ID and DIDIT_WORKFLOW_ID.
+5. Write apps/events/.env.local with exactly the variables and the order that file gives (its steps 1 to 3 write
+   it), then run pnpm db:migrate, the provisioning script (apps/events/scripts/provision.mjs 18) and pnpm seed.
+6. Register the webhook with apps/events/scripts/webhook.mjs only if I give you a public https URL. On localhost,
+   skip it.
+7. Run pnpm smoke:local before pnpm dev (the two cannot run together), then start pnpm dev.
+8. Validate: the provisioning script prints 6 workflows, the webhook tests pass, pnpm smoke:local printed only PASS
+   lines, pnpm e2e:journey --provider sandbox passes, and I confirm the browser checklist at the end of the file
+   (I take the selfie myself, on a device with a camera).
+
+Rules: never print, log or commit a key, a secret, a password or a token. Secrets go only into
+apps/events/.env.local, which is git-ignored. Use a sandbox application for testing. Stop and ask me whenever you
+need a code, a decision or my consent. Report each validation command with its result.
+```
+
+The full version, with every command, the expected output of each check and the browser checklist, is in
+[docs/didit-setup-prompt.md](docs/didit-setup-prompt.md). To do the same by hand, follow path 2 below and
+[Didit setup](#didit-setup).
+
 ### 1. See it run with a fake Didit (no account needed)
 
 ```sh
@@ -155,7 +215,8 @@ interface, use a sandbox application (path 2). It is free and nothing in it is b
 ### 2. Run it yourself with a Didit sandbox application
 
 You need two values from a free Didit account, which take a few minutes to get: the API key of a sandbox application
-and the id of a liveness workflow (steps 1 and 2 of [Didit setup](#didit-setup)).
+and the id of a liveness workflow (steps 1 and 2 of [Didit setup](#didit-setup)). A coding agent can get both for you:
+[Set up Didit with an AI agent](#set-up-didit-with-an-ai-agent).
 
 Then, in the repository you cloned and installed above, replace the placeholder values in the middle block and paste
 everything into bash or zsh:
@@ -165,11 +226,13 @@ everything into bash or zsh:
 docker run -d --name didit-events-db -p 127.0.0.1:5432:5432 -e POSTGRES_PASSWORD=pg postgres:17
 until docker exec didit-events-db pg_isready -U postgres >/dev/null 2>&1; do sleep 1; done
 
-# The configuration: your API key, your workflow id (three times), your domain and your own address on it
+# The configuration: your domain and your own address on it, your API key and your workflow id (three times)
 cat > apps/events/.env.local <<EOF
+DATABASE_URL=postgres://postgres:pg@127.0.0.1:5432/postgres
 APP_URL=http://localhost:3000
 SESSION_SECRET=$(openssl rand -base64 32)
-DATABASE_URL=postgres://postgres:pg@127.0.0.1:5432/postgres
+STAFF_EMAIL_DOMAIN=yourcompany.com
+SEED_OWNER_EMAIL=you@yourcompany.com
 DIDIT_API_KEY=your-sandbox-api-key
 DIDIT_FACE_WORKFLOW_ID=your-liveness-workflow-id
 DIDIT_RENEWAL_WORKFLOW_ID=your-liveness-workflow-id
@@ -177,8 +240,6 @@ DIDIT_WORKFLOW_ID=your-liveness-workflow-id
 DIDIT_SPEND_CAP_USD=100
 DIDIT_APP_DAILY_CAP_USD=25
 DIDIT_EVENT_DAILY_CAP_USD=10
-STAFF_EMAIL_DOMAIN=yourcompany.com
-SEED_OWNER_EMAIL=you@yourcompany.com
 CONTACT_EMAIL=you@yourcompany.com
 DEV_AUTH=1
 EOF
@@ -232,6 +293,8 @@ runs on it. Take the block of path 2 and leave out the two `docker` lines and th
 cat > apps/events/.env.local <<EOF
 APP_URL=http://localhost:3000
 SESSION_SECRET=$(openssl rand -base64 32)
+STAFF_EMAIL_DOMAIN=yourcompany.com
+SEED_OWNER_EMAIL=you@yourcompany.com
 DIDIT_API_KEY=your-sandbox-api-key
 DIDIT_FACE_WORKFLOW_ID=your-liveness-workflow-id
 DIDIT_RENEWAL_WORKFLOW_ID=your-liveness-workflow-id
@@ -239,8 +302,6 @@ DIDIT_WORKFLOW_ID=your-liveness-workflow-id
 DIDIT_SPEND_CAP_USD=100
 DIDIT_APP_DAILY_CAP_USD=25
 DIDIT_EVENT_DAILY_CAP_USD=10
-STAFF_EMAIL_DOMAIN=yourcompany.com
-SEED_OWNER_EMAIL=you@yourcompany.com
 CONTACT_EMAIL=you@yourcompany.com
 DEV_AUTH=1
 EOF
@@ -327,6 +388,18 @@ Neither setting has a default. For your own instance:
 
 ## Didit setup
 
+If a coding agent helps you with these steps, give it Didit's API reference first by installing the
+[Didit agent skills](https://github.com/didit-protocol/skills), one per command:
+
+```sh
+npx clawhub@latest install didit-verification-management
+npx clawhub@latest install didit-liveness-detection
+npx clawhub@latest install didit-face-search
+```
+
+The prompt in [docs/didit-setup-prompt.md](docs/didit-setup-prompt.md) makes the agent do steps 1 to 4 through
+Didit's API and check the result. By hand:
+
 1. **Create an application** in the [Didit Business Console](https://business.didit.me) and copy its API key into `DIDIT_API_KEY`. A sandbox application is fine for development. API reference: [docs.didit.me](https://docs.didit.me).
 2. **Create the liveness workflow.** In the console, add a workflow with a single feature, passive liveness, and publish it. Put its id in `DIDIT_FACE_WORKFLOW_ID`, `DIDIT_RENEWAL_WORKFLOW_ID` and `DIDIT_WORKFLOW_ID`. There is no built-in workflow: the migration and the server stop with a message while `DIDIT_FACE_WORKFLOW_ID` is unset. This is all the first selfie check needs: the app reads the workflow and its maximum price from Didit the first time a guest starts the check, and refuses to send it if the workflow is not liveness only. The same workflow holds the duplicate-face setting described under [Why](#why).
 3. **Provision the extra checks (only if you use them).** Phone, document, name and age checks run on workflows the provisioning script creates in your application. It also verifies the liveness workflow (it never changes it). It stores each workflow's configuration hash and maximum price in the database, so it needs a Postgres `DATABASE_URL`; PGlite is not supported. Pass the minimum ages you plan to use as arguments, for example `18`. A check with no stored price is never sent, and the event editor offers a check only while its workflow was verified in the last seven days. Run the script once per Didit application and database, and again if the editor stops offering the checks:
@@ -364,56 +437,50 @@ Everything is read from the environment: `apps/events/.env.local` in development
 host's secret store in production.
 
 There is one reference, [`.env.example`](.env.example): every variable with its purpose, default, an example and
-where to get the value. The table below is the short form of the same list. This repository has no command that
-builds one from the other: a change to a variable is made by hand in both places.
+where to get the value. The table below is the short form of the same list, in the same order: what a local run
+needs first, then Didit in the order you obtain the values, sign-in, email, the optional integrations, monitoring,
+runtime settings and, last, what only development and tests use. This repository has no command that builds one
+from the other: a change to a variable is made by hand in both places, at the same position.
 
-Eight values are needed to start: `APP_URL`, `SESSION_SECRET`, `DIDIT_API_KEY`, the three workflow ids
-(`DIDIT_FACE_WORKFLOW_ID`, `DIDIT_RENEWAL_WORKFLOW_ID`, `DIDIT_WORKFLOW_ID`), `STAFF_EMAIL_DOMAIN` and
-`SEED_OWNER_EMAIL` (see [Admin accounts](#admin-accounts)). Set `CONTACT_EMAIL` and the three spend ceilings as
+Eight values are needed to start: `APP_URL`, `SESSION_SECRET`, `STAFF_EMAIL_DOMAIN` and `SEED_OWNER_EMAIL` (see
+[Admin accounts](#admin-accounts)), `DIDIT_API_KEY` and the three workflow ids (`DIDIT_FACE_WORKFLOW_ID`,
+`DIDIT_RENEWAL_WORKFLOW_ID`, `DIDIT_WORKFLOW_ID`). Set `CONTACT_EMAIL` and the three spend ceilings as
 well. `EMAIL_FROM` and `EMAIL_FOOTER` become required as soon as you add a Resend key. "Build time" means the value is read by
 `pnpm build` or passed as a Docker build argument; "build time and runtime" means the build and the running server
 both need it, with the same value.
 
-<!-- CONFIG:START (the short form of .env.example: keep the two in step) -->
+<!-- CONFIG:START (generated from the same list as .env.example, in the same order) -->
 | Variable | Group | Required | Default | What it does |
 | --- | --- | --- | --- | --- |
-| `APP_URL` | Core | yes | none | Public origin of the app. Used in links, emails, cookies and same-origin checks. |
-| `SESSION_SECRET` | Core | yes | none | Signs session and CSRF cookies. At least 32 characters. Use a different one per environment. |
-| `TRUSTED_PROXY_HOPS` | Core | no | 1 | Number of reverse proxies in front of the app. Decides which `X-Forwarded-For` entry is the client address (rate limits). |
-| `PORT` | Core | no | 3000 | Port of the standalone server (the Docker image). `pnpm dev` always uses 3000; the quick start shows how to pick another one. |
-| `WORKERS` | Core | no | on | `0` turns off every in-process worker (webhook inbox, email outbox, jobs). |
-| `VERIFICATION_WORKERS` | Core | no | on | `0` turns off only the verification workers. `WORKERS=0` takes precedence. |
-| `NEXT_MANUAL_SIG_HANDLE` | Core | no | none | `1` lets the workers drain on SIGTERM or SIGINT before the process exits. |
-| `GIT_SHA` | Core | no, build time | none | Build id. The door kiosk compares it with the server's and offers a reload after a deploy. Also the default Sentry release. |
-| `NEXT_PUBLIC_BUILD_ID` | Core | no, build time | `GIT_SHA`, else a timestamp | Overrides the build id when you do not want to use the commit. |
-| `STAFF_EMAIL_DOMAIN` | Your organization | yes, build time and runtime | none | Email domains whose addresses may be global staff (owner, admin, staff), comma-separated. Membership still needs an invite. Event teams are not limited by it. |
-| `SEED_OWNER_EMAIL` | Your organization | yes | none | The first owner, created by the first migration. Must be an address in `STAFF_EMAIL_DOMAIN`. |
-| `CONTACT_EMAIL` | Your organization | recommended, build time and runtime | events@example.com | The address people are told to write to: "Questions?" links, error screens, the Reply-To of every email and the calendar organizer. |
-| `DATABASE_URL` | Database | production | PGlite | Postgres connection string. `sslmode=require` in the URL turns TLS on. |
-| `PGLITE_DIR` | Database | no | `apps/events/.data/pglite` | Folder where PGlite keeps its files when `DATABASE_URL` is empty. |
+| `DATABASE_URL` | Required to run locally | production | PGlite | Postgres connection string. `sslmode=require` in the URL turns TLS on. |
+| `APP_URL` | Required to run locally | yes | none | Public origin of the app. Used in links, emails, cookies and same-origin checks. |
+| `SESSION_SECRET` | Required to run locally | yes | none | Signs session and CSRF cookies. At least 32 characters. Use a different one per environment. |
+| `STAFF_EMAIL_DOMAIN` | Required to run locally | yes, build time and runtime | none | Email domains whose addresses may be global staff (owner, admin, staff), comma-separated. Membership still needs an invite. Event teams are not limited by it. |
+| `SEED_OWNER_EMAIL` | Required to run locally | yes | none | The first owner, created by the first migration. Must be an address in `STAFF_EMAIL_DOMAIN`. |
 | `DIDIT_API_KEY` | Didit | yes | none | Server-side key for the Didit API: sessions, decisions, face search, sign-in codes. |
+| `DIDIT_WEBHOOK_SECRET` | Didit | for webhooks | none | Verifies the HMAC signature of Didit webhooks at `/api/webhooks/didit`. Without it the route answers 503 and results arrive by polling: within seconds while the guest keeps the page open, otherwise through the reconciler, which asks again every five minutes during the first hour of a check and every hour after that. |
 | `DIDIT_FACE_WORKFLOW_ID` | Didit | yes | none | The liveness-only workflow every account takes once. It enrolls the face used at the door. On the first selfie check the app reads this workflow from Didit, checks that it is liveness only and stores its maximum price. There is no built-in workflow: `pnpm db:migrate`, `pnpm seed`, the Docker image and the server stop with a message until it is set. |
 | `DIDIT_RENEWAL_WORKFLOW_ID` | Didit | yes | none | The workflow used when a guest renews an expired face check. It is also the one the provisioning script verifies. Set it to the same id as `DIDIT_FACE_WORKFLOW_ID`. Left out, the app still starts and new checks use `DIDIT_FACE_WORKFLOW_ID`, but renewals fail, so treat it as required. Set but empty, it is rejected as a configuration error. |
 | `DIDIT_WORKFLOW_ID` | Didit | yes | none | Workflow id that sessions created by older versions refer to. The server refuses to start without it. |
-| `DIDIT_WEBHOOK_SECRET` | Didit | for webhooks | none | Verifies the HMAC signature of Didit webhooks at `/api/webhooks/didit`. Without it the route answers 503 and results arrive by polling: within seconds while the guest keeps the page open, otherwise through the reconciler, which asks again every five minutes during the first hour of a check and every hour after that. |
+| `DIDIT_AGE_WORKFLOW_ID` | Didit | no | none | Age-estimation workflow from an older version, kept so its existing sessions still resolve. New installs do not need it. |
+| `DIDIT_AGE_WORKFLOW_MAX_PRICE_USD` | Didit | no | none | Maximum price of one session of `DIDIT_AGE_WORKFLOW_ID`, reserved in the spend ledger. |
 | `DIDIT_ENV` | Didit | no | guessed from the webhook URL | Environment label: `development`, `staging` or `production`. Names the webhook destination (`didit-events-<label>`) and is the default Sentry environment. |
 | `DIDIT_SPEND_CAP_USD` | Didit | recommended | 1000 | Total ceiling for Didit spend, in USD. `0` blocks every billable call. When it is reached, calls are refused, not queued. |
 | `DIDIT_APP_DAILY_CAP_USD` | Didit | recommended | 300 | Daily ceiling for the whole app, in USD. |
 | `DIDIT_EVENT_DAILY_CAP_USD` | Didit | recommended | 150 | Daily ceiling for one event, in USD. |
-| `DIDIT_AGE_WORKFLOW_ID` | Didit | no | none | Age-estimation workflow from an older version, kept so its existing sessions still resolve. New installs do not need it. |
-| `DIDIT_AGE_WORKFLOW_MAX_PRICE_USD` | Didit | no | none | Maximum price of one session of `DIDIT_AGE_WORKFLOW_ID`, reserved in the spend ledger. |
-| `RESEND_API_KEY` | Email | for email | none | Sends email. Without it messages stay pending in the outbox and nothing is sent; the email preview in the event editor still works. Setting it makes `EMAIL_FROM` and `EMAIL_FOOTER` required. |
-| `EMAIL_FROM` | Email | with `RESEND_API_KEY` | none | Sender address of every email. Required as soon as `RESEND_API_KEY` is set: migrations and the server stop with a message without it. A display name is used too: `Events <events@example.com>` sends as "Events". A bare address sends as "Didit Events". |
-| `EMAIL_FOOTER` | Email | with `RESEND_API_KEY` | none | The line under every email: who sends it and the postal address (one line, up to 300 characters). Required as soon as `RESEND_API_KEY` is set: migrations and the server stop with a message without it, so no email leaves with another organization's name. Without a key, the email preview shows Didit's line as a placeholder. |
-| `RESEND_WEBHOOK_SECRET` | Email | no | none | Verifies Resend delivery events (delivered, bounced) at `/api/webhooks/resend`. Without it the route answers 404. |
-| `EMAIL_ASSETS_URL` | Email | no | `APP_URL` when it is public https, else https://events.didit.me | Public https origin that serves `/email` and `/email-icons` (images inside emails). A public https `APP_URL` serves them itself. On localhost the emails cannot load images from your machine, so their logo and icons point at Didit's deployment unless you set this: a mail client that opens such an email makes a request to events.didit.me. |
-| `DIDIT_OIDC_CLIENT_SECRET` | Sign-in | for Google sign-in | none | Secret of the Didit OIDC client behind "Continue with Google". Without it Google sign-in is unavailable and email codes still work. |
-| `DIDIT_OIDC_CLIENT_ID` | Sign-in | for Google sign-in | none | Id of the Didit OIDC client behind "Continue with Google". There is no built-in client: while it is unset, the app starts no Google sign-in. |
 | `DIDIT_OTP_API_KEY` | Sign-in | no | `DIDIT_API_KEY` | Key of a second application that sends and checks the sign-in codes. Needed for email-code sign-in when `DIDIT_API_KEY` belongs to a sandbox application: the sandbox never confirms a code. |
+| `DIDIT_OIDC_CLIENT_ID` | Sign-in | for Google sign-in | none | Id of the Didit OIDC client behind "Continue with Google". There is no built-in client: while it is unset, the app starts no Google sign-in. |
+| `DIDIT_OIDC_CLIENT_SECRET` | Sign-in | for Google sign-in | none | Secret of the Didit OIDC client behind "Continue with Google". Without it Google sign-in is unavailable and email codes still work. |
 | `DIDIT_OIDC_ISSUER` | Sign-in | no | https://auth.didit.me/ | OIDC issuer the id token must name. |
 | `DIDIT_OIDC_AUTHORIZE_URL` | Sign-in | no | https://apx.didit.me/auth/oidc/authorize | OIDC authorization endpoint. |
 | `DIDIT_OIDC_TOKEN_URL` | Sign-in | no | https://apx.didit.me/auth/oidc/token | OIDC token endpoint. |
 | `DIDIT_OIDC_JWKS_URL` | Sign-in | no | https://apx.didit.me/auth/config/jwks | Keys that verify the id token. |
+| `RESEND_API_KEY` | Email | for email | none | Sends email. Without it messages stay pending in the outbox and nothing is sent; the email preview in the event editor still works. Setting it makes `EMAIL_FROM` and `EMAIL_FOOTER` required. |
+| `EMAIL_FROM` | Email | with `RESEND_API_KEY` | none | Sender address of every email. Required as soon as `RESEND_API_KEY` is set: migrations and the server stop with a message without it. A display name is used too: `Events <events@example.com>` sends as "Events". A bare address sends as "Didit Events". |
+| `EMAIL_FOOTER` | Email | with `RESEND_API_KEY` | none | The line under every email: who sends it and the postal address (one line, up to 300 characters). Required as soon as `RESEND_API_KEY` is set: migrations and the server stop with a message without it, so no email leaves with another organization's name. Without a key, the email preview shows Didit's line as a placeholder. |
+| `CONTACT_EMAIL` | Email | recommended, build time and runtime | events@example.com | The address people are told to write to: "Questions?" links, error screens, the Reply-To of every email and the calendar organizer. |
+| `EMAIL_ASSETS_URL` | Email | no | `APP_URL` when it is public https, else https://events.didit.me | Public https origin that serves `/email` and `/email-icons` (images inside emails). A public https `APP_URL` serves them itself. On localhost the emails cannot load images from your machine, so their logo and icons point at Didit's deployment unless you set this: a mail client that opens such an email makes a request to events.didit.me. |
+| `RESEND_WEBHOOK_SECRET` | Email | no | none | Verifies Resend delivery events (delivered, bounced) at `/api/webhooks/resend`. Without it the route answers 404. |
 | `GOOGLE_MAPS_API_KEY` | Optional integrations | no | none | Location search in the event form (Places API, called from the server only). Without it hosts type the address by hand. |
 | `FIRECRAWL_API_KEY` | Optional integrations | no | none | Suggests the guest's LinkedIn and X profiles on the profile step (a web search by name and company). |
 | `SENTRY_DSN` | Monitoring | no | none | Error reporting for the server. |
@@ -425,21 +492,29 @@ both need it, with the same value.
 | `SENTRY_AUTH_TOKEN` | Monitoring | no, build time | none | Uploads source maps during `pnpm build`. Without it the build is the plain Next.js build. |
 | `SENTRY_ORG` | Monitoring | with the token, build time | none | Sentry organization slug for the source map upload. |
 | `SENTRY_PROJECT` | Monitoring | with the token, build time | none | Sentry project slug for the source map upload. |
-| `DEV_AUTH` | Development only | no | off | `1` enables `/api/auth/dev`, a sign-in without codes that marks the address as verified (on PGlite and on Postgres). It works only when `APP_URL` is localhost and is ignored when `NODE_ENV=production`. |
-| `TEST_DATABASE_URL` | Development only | CI | none | A disposable Postgres where tests may create and drop databases. Adds the locking and migration suites to `pnpm test` (they are skipped without it, and mandatory when `CI` is set); used by `pnpm smoke:local` and `pnpm e2e:journey`. |
-| `DIDIT_SANDBOX_API_KEY` | Development only | no | none | Read only by `pnpm e2e:journey --provider sandbox`, the one opt-in run that makes real calls to a sandbox application. Nothing else in the tests reads a real key. |
-| `DIDIT_API_URL` | Development only | no | https://verification.didit.me/v3/ | Points the Didit client at a fake server. Only loopback http is accepted, and never in production. |
-| `RESEND_API_URL` | Development only | no | https://api.resend.com | Points email delivery at a fake server. |
-| `SEED_ALLOW` | Development only | no | off | `1` allows `pnpm seed` when `NODE_ENV=production`. |
-| `FRAMES` | Development only | no | off in production | `1` serves the component gallery at `/_frames` in a production build. Always on in development. |
-| `EMAIL_AUDIT_OFFLINE` | Development only | no | off | `1` makes `pnpm email:audit` skip the network check of image URLs. |
-| `NEXT_DIST_DIR` | Development only | no | .next | Build folder of Next.js. The journey script uses its own so it does not clash with `pnpm dev`. |
-| `OG_OUT` | Development only | no | none | File prefix where the Open Graph image tests save their PNGs so you can look at them. |
-<!-- CONFIG:END -->
+| `PORT` | Runtime and tuning | no | 3000 | Port of the standalone server (the Docker image). `pnpm dev` always uses 3000; the quick start shows how to pick another one. |
+| `WORKERS` | Runtime and tuning | no | on | `0` turns off every in-process worker (webhook inbox, email outbox, jobs). |
+| `VERIFICATION_WORKERS` | Runtime and tuning | no | on | `0` turns off only the verification workers. `WORKERS=0` takes precedence. |
+| `TRUSTED_PROXY_HOPS` | Runtime and tuning | no | 1 | Number of reverse proxies in front of the app. Decides which `X-Forwarded-For` entry is the client address (rate limits). |
+| `NEXT_MANUAL_SIG_HANDLE` | Runtime and tuning | no | none | `1` lets the workers drain on SIGTERM or SIGINT before the process exits. |
+| `PGLITE_DIR` | Runtime and tuning | no | `apps/events/.data/pglite` | Folder where PGlite keeps its files when `DATABASE_URL` is empty. |
+| `GIT_SHA` | Runtime and tuning | no, build time | none | Build id. The door kiosk compares it with the server's and offers a reload after a deploy. Also the default Sentry release. |
+| `NEXT_PUBLIC_BUILD_ID` | Runtime and tuning | no, build time | `GIT_SHA`, else a timestamp | Overrides the build id when you do not want to use the commit. |
+| `DEV_AUTH` | Development and tests only | no | off | `1` enables `/api/auth/dev`, a sign-in without codes that marks the address as verified (on PGlite and on Postgres). It works only when `APP_URL` is localhost and is ignored when `NODE_ENV=production`. |
+| `TEST_DATABASE_URL` | Development and tests only | CI | none | A disposable Postgres where tests may create and drop databases. Adds the locking and migration suites to `pnpm test` (they are skipped without it, and mandatory when `CI` is set); used by `pnpm smoke:local` and `pnpm e2e:journey`. |
+| `DIDIT_SANDBOX_API_KEY` | Development and tests only | no | none | Read only by `pnpm e2e:journey --provider sandbox`, the one opt-in run that makes real calls to a sandbox application. Nothing else in the tests reads a real key. |
+| `DIDIT_API_URL` | Development and tests only | no | https://verification.didit.me/v3/ | Points the Didit client at a fake server. Only loopback http is accepted, and never in production. |
+| `RESEND_API_URL` | Development and tests only | no | https://api.resend.com | Points email delivery at a fake server. |
+| `SEED_ALLOW` | Development and tests only | no | off | `1` allows `pnpm seed` when `NODE_ENV=production`. |
+| `FRAMES` | Development and tests only | no | off in production | `1` serves the component gallery at `/_frames` in a production build. Always on in development. |
+| `EMAIL_AUDIT_OFFLINE` | Development and tests only | no | off | `1` makes `pnpm email:audit` skip the network check of image URLs. |
+| `NEXT_DIST_DIR` | Development and tests only | no | .next | Build folder of Next.js. The journey script uses its own so it does not clash with `pnpm dev`. |
+| `OG_OUT` | Development and tests only | no | none | File prefix where the Open Graph image tests save their PNGs so you can look at them. |
 
 The code also reads `NODE_ENV`, `CI`, `NEXT_PHASE`, `NEXT_RUNTIME`, `NEXT_PUBLIC_CONTACT_EMAIL`,
 `NEXT_PUBLIC_STAFF_EMAIL_DOMAIN`, `NEXT_PUBLIC_SENTRY_ENVIRONMENT` and `NEXT_PUBLIC_SENTRY_RELEASE`. Node, Next.js, CI
 or the build set those; do not set them by hand.
+<!-- CONFIG:END -->
 
 ## Scripts
 
@@ -697,7 +772,7 @@ packages/core/src          db, didit, domain, identity, admission, door, email, 
 packages/ui/src            Tokens, components, kiosk surfaces, OG images
 scripts                    smoke-local, e2e journey, size report, standalone check
 docker                     Entrypoint and migration runner for the container image
-docs                       Architecture notes and the demo media
+docs                       Architecture notes, the Didit setup prompt for coding agents and the demo media
 ```
 
 The app imports the two packages as TypeScript source, so there is no separate build step for them.
