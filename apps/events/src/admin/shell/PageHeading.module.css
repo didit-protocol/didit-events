@@ -1,0 +1,18 @@
+/* The action sits on the title line (under the eyebrow), with or without a description below the title. */
+.head { --title-line: 34px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.text { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.eyebrow { font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid-high); }
+.title { margin: 0; font: 500 28px/normal var(--font-sans); letter-spacing: -0.025em; color: var(--black); }
+.description { margin: 0; font: 400 14px/normal var(--font-sans); color: var(--high); }
+.actions { display: flex; align-items: center; gap: 8px; flex: none; min-height: var(--title-line); margin-top: 19px; }
+
+@container admin (max-width: 1100px) {
+  .head { --title-line: 29px; }
+  .title { font-size: 24px; }
+}
+@container admin (max-width: 600px) {
+  .head { align-items: center; }
+  .eyebrow { display: none; }
+  .title { font-size: 24px; }
+  .actions { margin-top: 0; }
+}

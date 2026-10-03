@@ -1,0 +1,82 @@
+/* v5 door: the AR layer over the live camera (stage px, 1920×1080 / 1080×1920 scaled). */
+.live { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.faces { position: absolute; inset: 0; }
+
+/* A subtle rounded box on each tracked face. */
+.box {
+  position: absolute; top: 0; left: 0; width: 0; height: 0; will-change: transform;
+  border: 3px solid rgba(254, 254, 254, 0.55); border-radius: 28px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.18), inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+  transition: border-color 240ms var(--ease-out);
+}
+.box[data-tone="green"] { border-color: var(--kiosk-success); }
+.box[data-tone="amber"] { border-color: var(--kiosk-warning); }
+.box[data-tone="blue"] { border-color: var(--kiosk-scan); }
+
+/* The tag pinned above (or below) a face. */
+.tag {
+  position: absolute; top: 0; left: 0; will-change: transform; max-width: 620px; visibility: hidden;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+  padding: 14px 20px; border-radius: 20px; background: var(--kiosk-overlay); color: var(--kiosk-fg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); backdrop-filter: blur(10px);
+  animation: tagIn 220ms var(--ease-out) both;
+}
+.tag[data-kind="checking"], .tag[data-kind="guidance"], .tag[data-kind="offline"] { padding: 10px 18px; }
+.nameRow { display: flex; align-items: center; gap: 12px; max-width: 100%; min-width: 0; }
+.name { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font: 500 36px/1.15 var(--font-sans); letter-spacing: -0.02em; }
+.badge { flex: none; }
+.chip { display: inline-flex; align-items: center; padding: 6px 14px; border-radius: 999px; font: 500 22px/1.2 var(--font-sans); white-space: nowrap; }
+.chip[data-tone="green"] { background: rgba(65, 217, 127, 0.18); color: #7BEBA8; }
+.chip[data-tone="amber"] { background: rgba(255, 184, 0, 0.18); color: #FFD166; }
+.chip[data-tone="gray"] { background: var(--kiosk-surface-2); color: var(--kiosk-fg-2); }
+.chip[data-tone="blue"] { background: rgba(77, 148, 255, 0.22); color: #A9C8FF; }
+.checking, .guidance { display: inline-flex; align-items: center; gap: 12px; font: 500 24px/1.2 var(--font-sans); white-space: nowrap; color: var(--kiosk-fg-2); }
+.guidance { color: #FFD166; }
+.spinner { width: 22px; height: 22px; border-radius: 50%; border: 3px solid rgba(254, 254, 254, 0.25); border-top-color: var(--kiosk-scan); animation: spin 800ms linear infinite; }
+
+/* Idle prompt and status strip. */
+.idle {
+  position: absolute; left: 50%; bottom: 140px; margin: 0; transform: translateX(-50%);
+  padding: 18px 32px; border-radius: 999px; background: var(--kiosk-overlay); color: var(--kiosk-fg);
+  font: 500 36px/1.2 var(--font-sans); letter-spacing: -0.01em; white-space: nowrap; animation: fadeIn 600ms var(--ease-out) both;
+}
+.banner {
+  position: absolute; left: 50%; top: 132px; margin: 0; transform: translateX(-50%); z-index: 3;
+  padding: 10px 22px; border-radius: 999px; background: var(--warning-bg, #3a2c00); color: var(--warning-fg, #FFD166);
+  font: 500 24px/1.2 var(--font-sans); white-space: nowrap;
+}
+
+/* Arrivals rail: the last 8 people, newest on top; never covers the whole screen. */
+.rail {
+  position: absolute; top: 132px; right: 48px; width: 400px; max-height: calc(100% - 260px); overflow: hidden;
+  padding: 18px; border-radius: 24px; background: rgba(13, 13, 13, 0.62); backdrop-filter: blur(12px);
+}
+.railTitle { margin: 0 0 12px; font: 500 18px/1 var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--kiosk-fg-3); }
+.railList { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.arrival { display: flex; align-items: center; gap: 14px; padding: 8px; border-radius: 16px; animation: arrive 2400ms var(--ease-out) both; }
+.avatar {
+  flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%;
+  background: var(--kiosk-surface-2); color: var(--kiosk-fg); font: 500 18px/1 var(--font-sans);
+}
+.arrival[data-tone="green"] .avatar { background: rgba(65, 217, 127, 0.22); }
+.arrival[data-tone="blue"] .avatar { background: rgba(77, 148, 255, 0.25); }
+.arrivalText { display: grid; gap: 4px; min-width: 0; }
+.arrivalName { display: flex; align-items: center; gap: 8px; min-width: 0; font: 500 22px/1.2 var(--font-sans); color: var(--kiosk-fg); }
+.arrivalNameText { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.arrivalMeta { font: 400 17px/1.2 var(--font-sans); color: var(--kiosk-fg-3); font-feature-settings: "tnum"; }
+
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+@keyframes tagIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+/* A brief, non-blocking highlight for a new arrival. */
+@keyframes arrive {
+  0% { opacity: 0; transform: translateX(24px); background: rgba(65, 217, 127, 0.28); }
+  12% { opacity: 1; transform: none; }
+  100% { background: transparent; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tag, .arrival, .idle { animation: none; }
+  .spinner { animation-duration: 2400ms; }
+}

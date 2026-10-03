@@ -1,0 +1,9 @@
+.tight { display: flex; flex-direction: column; gap: 16px; }
+.col { display: flex; flex-direction: column; gap: 16px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.grid { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 40px; align-items: start; }
+/* Same container and breakpoint as the form it stands in for (EventForm.module.css). */
+.skeleton { container: eventform / inline-size; }
+@container eventform (max-width: 1080px) {
+  .grid { grid-template-columns: minmax(0, 1fr); }
+}

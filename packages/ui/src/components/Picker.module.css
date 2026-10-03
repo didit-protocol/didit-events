@@ -1,0 +1,95 @@
+/* Pickers in the shadcn/ui look over the Didit tokens: outline trigger / input (C-00 36px control), a white
+   popover with a hairline border and a soft shadow, 36px day cells, brand-filled selection. */
+.pickerWrap, .combo { position: relative; display: flex; flex-direction: column; min-width: 0; }
+
+.trigger {
+  box-sizing: border-box; display: flex; align-items: center; gap: 8px; width: 100%; height: var(--control-h); margin: 0; padding: 0 12px;
+  border: 1px solid var(--border); border-radius: var(--radius-xs); background: var(--white); color: var(--black);
+  font: 400 14px/normal var(--font-sans); text-align: left; cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-standard), background-color var(--duration-fast) var(--ease-standard);
+}
+.trigger:hover:not(:disabled) { background: var(--soft); }
+.trigger:focus-visible, .trigger[data-state="focus"], .trigger[aria-expanded="true"] {
+  border-color: var(--brand); outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset);
+}
+.trigger[aria-invalid="true"] { border-color: var(--danger); }
+.trigger:disabled { background: var(--soft); border-color: transparent; color: var(--mid); cursor: not-allowed; }
+.triggerIcon { flex: none; color: var(--mid-high); }
+.triggerText { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-feature-settings: "tnum"; }
+.placeholder .triggerText { color: var(--mid-high); }
+
+.popover {
+  position: absolute; z-index: 40; top: calc(100% + 4px); left: 0; box-sizing: border-box; width: max-content; min-width: 100%; padding: 12px;
+  border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--white); color: var(--black);
+  box-shadow: var(--shadow-md);
+}
+.calHead { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.calTitle { margin: 0; font: 500 14px/normal var(--font-sans); }
+.navBtn {
+  display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 1px solid var(--border); border-radius: var(--radius-xs);
+  background: transparent; color: var(--high); cursor: pointer; opacity: 0.8;
+}
+.navBtn:hover:not(:disabled) { background: var(--soft); opacity: 1; }
+.navBtn:disabled { opacity: 0.35; cursor: not-allowed; }
+.navBtn:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+.grid { border-collapse: collapse; border-spacing: 0; }
+.weekday { width: 36px; height: 28px; padding: 0; font: 400 12px/normal var(--font-sans); color: var(--mid-high); text-align: center; }
+.grid td { padding: 1px 0; text-align: center; }
+.day {
+  width: 36px; height: 36px; padding: 0; border: 0; border-radius: var(--radius-xs); background: transparent; color: var(--black);
+  font: 400 14px/1 var(--font-sans); font-feature-settings: "tnum"; cursor: pointer;
+}
+.day:hover { background: var(--soft); }
+.day:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: 0; }
+.day[data-outside] { color: var(--mid); }
+.day[data-today] { background: var(--soft); font-weight: 500; }
+.day[data-selected], .day[data-selected]:hover { background: var(--brand); color: var(--white); font-weight: 500; }
+.day[aria-disabled="true"] { color: var(--mid); opacity: 0.45; text-decoration: line-through; cursor: not-allowed; background: transparent; }
+
+/* Combobox input: the C-00 control with optional leading icon and trailing text. */
+.inputBox {
+  box-sizing: border-box; display: flex; align-items: center; gap: 8px; height: var(--control-h); padding: 0 12px;
+  border: 1px solid var(--border); border-radius: var(--radius-xs); background: var(--white);
+  transition: border-color var(--duration-fast) var(--ease-standard), background-color var(--duration-fast) var(--ease-standard);
+}
+.inputBox:focus-within, .inputBox[data-state="focus"] { border-color: var(--brand); outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+.inputBox[data-invalid] { border-color: var(--danger); }
+.inputBox[data-disabled] { background: var(--soft); border-color: transparent; }
+.leading { display: flex; flex: none; color: var(--mid-high); }
+.trailing { flex: none; font: 400 12px/normal var(--font-sans); color: var(--mid-high); white-space: nowrap; font-feature-settings: "tnum"; }
+.input {
+  flex: 1; min-width: 0; height: 100%; margin: 0; padding: 0; border: 0; outline: 0; background: transparent; color: var(--black);
+  font: 400 14px/normal var(--font-sans); letter-spacing: normal; font-feature-settings: "tnum"; appearance: none;
+}
+.input::placeholder { color: var(--mid-high); opacity: 1; }
+.listbox {
+  position: absolute; z-index: 40; top: calc(100% + 4px); left: 0; box-sizing: border-box; min-width: 100%; max-height: 264px; overflow-y: auto;
+  margin: 0; padding: 4px; list-style: none; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--white); box-shadow: var(--shadow-md);
+}
+.listbox[hidden] { display: none; }
+.option {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 7px 8px; border-radius: var(--radius-2xs);
+  font: 400 14px/normal var(--font-sans); color: var(--black); cursor: pointer; font-feature-settings: "tnum";
+}
+.option[aria-selected="true"] { background: var(--soft); }
+.option[data-current] .optionLabel { font-weight: 500; }
+.option[aria-disabled="true"] { color: var(--mid); cursor: not-allowed; }
+.optionLabel { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.optionDesc { flex: none; max-width: 60%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+.listNote { padding: 8px; font: 400 13px/normal var(--font-sans); color: var(--mid-high); }
+
+/* Stepper: [−] 1,200 [+] */
+.stepper {
+  box-sizing: border-box; display: flex; align-items: stretch; height: var(--control-h); overflow: hidden;
+  border: 1px solid var(--border); border-radius: var(--radius-xs); background: var(--white);
+}
+.stepper:focus-within { border-color: var(--brand); outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+.stepper[data-invalid] { border-color: var(--danger); }
+.stepper[data-disabled] { background: var(--soft); border-color: transparent; }
+.stepInput { padding: 0 8px; text-align: center; }
+.stepBtn { flex: none; display: grid; place-items: center; width: 32px; padding: 0; border: 0; background: transparent; color: var(--high); cursor: pointer; }
+.stepBtn:hover:not(:disabled) { background: var(--soft); }
+.stepBtn:disabled { color: var(--mid); cursor: not-allowed; }
+
+/* Phones: 44px stepper targets. */
+@media (max-width: 640px) { .stepBtn { width: 44px; } }

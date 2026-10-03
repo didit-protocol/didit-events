@@ -1,0 +1,150 @@
+/* Flow v3 join modal: a 480px card over the event page from 768px (fades and scales in), a bottom sheet below it
+ * (slides up from the bottom edge). Site tokens only. */
+.scrim {
+  position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 24px;
+  background: var(--overlay); animation: fade var(--duration-base) var(--ease-standard);
+}
+.dialog {
+  box-sizing: border-box; display: flex; flex-direction: column; width: 480px; max-width: 100%; max-height: min(860px, calc(100dvh - 48px));
+  border-radius: 24px; background: var(--white); box-shadow: var(--shadow-2xl); outline: none; overflow: hidden;
+  font-family: var(--font-sans); color: var(--black); animation: rise var(--duration-base) var(--ease-emphasized);
+  /* Every CTA in the modal is the 44px button (Button xl reads these), like Google and "Email me a code". */
+  --cta-h: 44px; --cta-pad: 20px; --cta-font: 15px;
+}
+/* In place of the launcher's placeholder (which played the entrance): no second one. */
+.scrim[data-instant]:not([data-leaving]), .scrim[data-instant]:not([data-leaving]) .dialog { animation: none; }
+/* Closing (× / Esc): quicker than opening; JoinShell waits for these before it tells the page. */
+.scrim[data-leaving] { pointer-events: none; animation: fadeOut var(--duration-fast) var(--ease-exit) forwards; }
+.scrim[data-leaving] .dialog { animation: sink var(--duration-fast) var(--ease-exit) forwards; }
+.dialogWide { width: 560px; }
+.top { display: flex; align-items: center; gap: 12px; padding: 20px 24px 0; }
+.top img { display: block; width: auto; height: var(--header-logo-h); }
+.eventName { flex: 1; min-width: 0; overflow: hidden; font: 500 13px/1.3 var(--font-sans); color: var(--mid-high); white-space: nowrap; text-overflow: ellipsis; }
+/* The 32px chip in a 44px touch target: the button is the 44px target (no border, no fill) and ::before draws
+ * the chip 6px inside it; the margin pulls the target back so the top row keeps its rhythm. */
+.close {
+  position: relative; isolation: isolate; box-sizing: border-box; display: grid; place-items: center; flex: none;
+  width: 44px; height: 44px; margin: -6px; padding: 0; border: 0; border-radius: 50%; background: none;
+  color: var(--high); font: 400 18px/1 var(--font-sans); cursor: pointer;
+}
+.close::before { content: ""; position: absolute; z-index: -1; inset: 6px; border-radius: 50%; background: var(--chip); }
+.close:hover::before { background: var(--chip-2); }
+.close:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: calc(var(--focus-ring-offset) - 6px); }
+/* The body scrolls when a step is taller than the screen; its height is set from its content (JoinShell) and
+ * animated, so the modal never jumps between steps. Short steps keep a minimum height. */
+.body { flex: 0 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; transition: height var(--duration-resize) var(--ease-standard); }
+.body[data-resizing] { overflow-y: hidden; }
+.inner { display: flex; flex-direction: column; gap: 16px; min-height: min(360px, calc(100dvh - 140px)); padding: 20px 24px 24px; }
+/* Every step is a body over its actions footer (Screen.module.css .sheetFoot), pinned to the bottom edge of the modal:
+ * it bleeds through the 24px padding and stays there while a long step scrolls under it. Short steps keep the body's
+ * minimum height, so the footer sits in the same place from one step to the next. */
+.dialog { --foot-position: sticky; --foot-bleed-x: 24px; --foot-bleed-b: 24px; --foot-pad-b: 24px; }
+/* While the height follows a new step the body is cut, not scrolled: no rule over the footer. */
+.body[data-resizing] [data-sheet-footer] { animation: none; }
+
+/* Full-page fallback (/onboarding deep links): the same card inside the site's page. */
+.page { display: flex; flex-direction: column; gap: 16px; }
+/* While a lazy step downloads: its space is held, so the page does not jump when it mounts. */
+.stepLoading { display: grid; place-items: center; flex: 1 0 auto; min-height: 240px; }
+
+.title { margin: 0; font: 500 24px/1.15 var(--font-sans); letter-spacing: -0.025em; }
+.lead { margin: 0; font: 400 14px/1.55 var(--font-sans); color: var(--high); }
+.muted { margin: 0; font: 400 12px/1.5 var(--font-sans); color: var(--mid-high); }
+
+/* "Create your account → verify you're human → get recognised at your next event" */
+.path { display: grid; gap: 10px; margin: 0; padding: 14px 16px; list-style: none; border-radius: 16px; background: var(--soft); counter-reset: step; }
+.path li { display: flex; align-items: center; gap: 10px; font: 500 13px/1.35 var(--font-sans); color: var(--high); counter-increment: step; }
+.path li::before {
+  content: counter(step); display: grid; place-items: center; flex: none; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--white); color: var(--black); font: 600 12px/1 var(--font-sans); box-shadow: inset 0 0 0 1px var(--border);
+}
+.path li[data-done]::before { content: "✓"; background: var(--black); color: var(--white); box-shadow: none; }
+.path li[data-next]::before { content: "→"; color: var(--brand); box-shadow: inset 0 0 0 1px var(--brand); }
+
+.form { display: flex; flex-direction: column; gap: 14px; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.pair > * { min-width: 0; }
+.textButton { align-self: center; padding: 4px; border: 0; background: none; color: var(--high); font: 500 13px/1.4 var(--font-sans); cursor: pointer; }
+.textButton:hover { text-decoration: underline; }
+.textButton:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); border-radius: 4px; }
+.error { margin: 0; font: 400 13px/1.4 var(--font-sans); color: var(--danger-fg); }
+
+/* The Didit SDK iframe fills this box (embedded mode needs a resolved height). */
+.sdkWrap { position: relative; }
+.sdk {
+  box-sizing: border-box; width: 100%; height: min(640px, calc(100dvh - 250px)); min-height: 460px; overflow: hidden;
+  border-radius: 16px; background: var(--soft); box-shadow: inset 0 0 0 1px var(--border);
+}
+.sdk iframe { display: block; width: 100%; height: 100%; border: 0; border-radius: 16px; }
+.sdkLoading { position: absolute; inset: 0; display: grid; place-items: center; gap: 12px; align-content: center; pointer-events: none; font: 400 13px/1.4 var(--font-sans); color: var(--mid-high); }
+
+.state { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 12px 0 4px; text-align: center; }
+.state .lead { max-width: 360px; }
+/* A waiting state's loader sits in the 56px box a result's status icon takes, so the title below never moves. */
+.stateMark { display: grid; place-items: center; width: 56px; height: 56px; }
+.help { margin: 0; padding-left: 18px; text-align: left; font: 400 13px/1.55 var(--font-sans); color: var(--high); }
+
+/* One screen at a time (StepPane): the new screen slides and fades in (from the left when going back) while a
+ * picture of the one that leaves fades out over it. A screen with a body and a footer moves only its body
+ * (StepBody); the footer stays where it is. */
+.steps { position: relative; display: flex; flex-direction: column; gap: inherit; flex: 1 0 auto; min-width: 0; }
+.step { display: flex; flex-direction: column; gap: inherit; flex: 1 0 auto; min-width: 0; }
+.stepIn { animation: stepIn var(--duration-base) var(--ease-emphasized) backwards; }
+.stepBack { animation-name: stepBack; }
+.stepIn:has([data-step-body]) { animation: none; }
+.bodyIn { animation: stepIn var(--duration-base) var(--ease-emphasized) backwards; }
+.bodyBack { animation-name: stepBack; }
+/* The picture is laid out like the screen it copies (same height, same gaps), so a centred body leaves from where it was. */
+.ghosts { position: absolute; inset: 0; display: flex; flex-direction: column; gap: inherit; overflow: hidden; pointer-events: none; }
+.ghosts:empty { display: none; }
+.stepOut { animation: stepOut var(--duration-fast) var(--ease-exit) forwards; }
+.stepOutBack { animation-name: stepOutBack; }
+/* A title takes focus when the modal opens or a step changes (so it is announced); it is not a control: no ring. */
+.dialog :is(h1, h2)[tabindex="-1"] { outline: none; }
+.stepBar { display: flex; align-items: center; justify-content: space-between; min-height: 28px; }
+.backButton { padding: 4px 8px 4px 0; border: 0; background: none; color: var(--high); font: 500 13px/1.4 var(--font-sans); cursor: pointer; }
+.backButton:hover { color: var(--black); }
+.backButton:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); border-radius: 6px; }
+.dots { display: flex; align-items: center; gap: 6px; }
+.dots > span { width: 6px; height: 6px; border-radius: 3px; background: var(--border); transition: width var(--duration-base) var(--ease-standard), background-color var(--duration-base) var(--ease-standard); }
+.dots > span[data-done] { background: var(--mid-high); }
+.dots > span[data-current] { width: 18px; background: var(--black); }
+
+@keyframes stepIn { from { opacity: 0; transform: translateX(16px); } }
+@keyframes stepBack { from { opacity: 0; transform: translateX(-16px); } }
+@keyframes stepOut { to { opacity: 0; transform: translateX(-16px); } }
+@keyframes stepOutBack { to { opacity: 0; transform: translateX(16px); } }
+@keyframes stepFade { from { opacity: 0; } }
+@keyframes fade { from { opacity: 0; } }
+@keyframes fadeOut { to { opacity: 0; } }
+@keyframes rise { from { opacity: 0; transform: scale(0.96); } }
+@keyframes sink { to { opacity: 0; transform: scale(0.98); } }
+@keyframes sheet { from { transform: translateY(100%); } }
+@keyframes sheetOut { to { transform: translateY(100%); } }
+
+/* Below 768px: a bottom sheet, full width, sliding up from the bottom edge; content scrolls inside. */
+@media (max-width: 767px) {
+  .scrim { place-items: end stretch; padding: 0; }
+  .dialog, .dialogWide { width: 100%; max-height: calc(100dvh - 24px); border-radius: 24px 24px 0 0; animation: sheet var(--duration-slow) var(--ease-emphasized); }
+  .scrim[data-leaving] .dialog { animation: sheetOut var(--duration-base) var(--ease-exit) forwards; }
+  /* 24px sides: the sheet is roomier than the page behind it (16px gutter), like the desktop modal. */
+  .top { padding: 16px 24px 0; }
+  .inner { min-height: min(320px, calc(100dvh - 120px)); padding: 16px 24px calc(24px + env(safe-area-inset-bottom)); }
+  /* The sheet's footer: max(16px, the home indicator) under the full-width button. */
+  .dialog { --foot-bleed-b: calc(24px + env(safe-area-inset-bottom)); --foot-pad-b: max(16px, env(safe-area-inset-bottom)); }
+  .pair { grid-template-columns: 1fr; }
+  .sdk { height: calc(100dvh - 200px); min-height: 420px; }
+  /* Multi-line legal copy and text buttons: readable, and 44px to tap. */
+  .muted { font-size: 13px; }
+  .textButton { min-height: 44px; padding: 0 12px; }
+  .backButton { min-height: 44px; padding: 0 12px 0 0; }
+  .stepBar { min-height: 44px; }
+}
+/* Reduced motion: opacity only. Nothing slides or scales, and the height follows its content at once. */
+@media (prefers-reduced-motion: reduce) {
+  .scrim, .dialog, .dialogWide { animation: fade var(--duration-base) linear; }
+  .scrim[data-leaving], .scrim[data-leaving] .dialog { animation: fadeOut var(--duration-fast) linear forwards; }
+  .stepIn, .stepBack { animation: stepFade var(--duration-base) linear; }
+  .bodyIn, .bodyBack { animation: stepFade var(--duration-base) linear; }
+  .body, .dots > span { transition: none; }
+}

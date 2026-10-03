@@ -1,0 +1,154 @@
+/* 05 U-20 My events rows: 12px, radius 16; 52px thumb radius 12; name 500 14px, detail 400 12px, pill; › #9DA1A1. */
+.events { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.event { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid var(--border); border-radius: 16px; color: inherit; text-decoration: none; }
+.event:hover { background: var(--ultra-soft); text-decoration: none; }
+.event:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+.thumb { display: block; flex: none; width: 52px; height: 52px; border-radius: 12px; background: var(--soft); object-fit: cover; }
+.eventText { flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.eventName { overflow: hidden; font: 500 14px/normal var(--font-sans); white-space: nowrap; text-overflow: ellipsis; }
+.eventDetail { font: 400 12px/normal var(--font-sans); color: var(--mid-high); overflow-wrap: anywhere; }
+@container (max-width: 767px) { .eventDetail { font-size: 13px; line-height: 1.4; } }
+.chev { color: var(--mid); font: 400 16px/normal var(--font-sans); }
+/* The card's Withdraw request / Cancel my place: a 44px danger text button under the row, aligned with the text. */
+.eventItem { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+.eventItem > .event { border: 0; border-radius: 0; }
+.eventAction {
+  display: flex; align-items: center; min-height: 44px; padding: 0 12px 0 76px; border-top: 1px solid var(--border-subtle);
+  font: 500 14px/normal var(--font-sans); color: var(--danger-fg); text-decoration: none;
+}
+.eventAction:hover { background: var(--danger-bg); text-decoration: none; }
+.eventAction:focus-visible, .eventItem > .event:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: -2px; }
+/* Attended, missed and cancelled events sit under a small "PAST" title, below what is still ahead. */
+.eventGroup { display: flex; flex-direction: column; gap: 6px; }
+.eventGroupTitle { margin: 0; font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; color: var(--mid-high); }
+/* "Find your next event": a dashed row to the calendar under the list. */
+.explore { display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 12px 12px 12px 16px; border: 1px dashed var(--border-dashed); border-radius: 16px; color: inherit; text-decoration: none; }
+.explore:hover { background: var(--ultra-soft); text-decoration: none; }
+.explore:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+/* "Account settings" under the list: quiet 12px text in a 44px tap target. */
+.footLink.footLink { display: inline-flex; align-items: center; min-height: 44px; padding: 0 8px; border-radius: 4px; }
+.footLink:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: -2px; }
+
+/* 05 U-32 profile head: 104px photo (or the initial on brand-soft), name 500 22px, headline 400 14px, badge, bio
+ * 400 14px/1.55, link chips. */
+.profile { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+.photo { position: relative; width: 104px; height: 104px; }
+.photoImg { display: grid; place-items: center; box-sizing: border-box; width: 104px; height: 104px; border-radius: 50%; overflow: hidden; background: var(--soft); color: var(--mid-high); font: 500 13px/normal var(--font-sans); object-fit: cover; }
+.photoInitial { background: var(--brand-soft); color: var(--brand-deep); font-size: 37px; }
+.photoAdd { display: inline-flex; align-items: center; min-height: 44px; margin: -8px 0; padding: 0 12px; border-radius: var(--radius-full); font: 500 14px/normal var(--font-sans); color: var(--brand); text-decoration: none; }
+.photoAdd:hover { text-decoration: underline; }
+.photoAdd:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: -2px; }
+.tick { position: absolute; right: 0; bottom: 2px; display: grid; place-items: center; box-sizing: border-box; width: 28px; height: 28px; border: 3px solid var(--white); border-radius: 50%; background: var(--brand); }
+.names { display: flex; flex-direction: column; gap: 4px; }
+.name { margin: 0; font: 500 22px/normal var(--font-sans); letter-spacing: -0.02em; }
+.headline { margin: 0; font: 400 14px/normal var(--font-sans); color: var(--high); }
+.bio { margin: 0; max-width: 320px; font: 400 14px/1.55 var(--font-sans); color: var(--black); overflow-wrap: anywhere; }
+.links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.linkChip { display: flex; align-items: center; height: 28px; padding: 0 10px; border-radius: var(--radius-full); background: var(--chip); color: var(--black); font: 500 12px/normal var(--font-sans); text-decoration: none; }
+a.linkChip:hover { background: var(--chip-2); text-decoration: none; }
+a.linkChip { position: relative; }
+a.linkChip::after { content: ""; position: absolute; inset: -8px 0; } /* 28px chip, 44px hit area */
+a.linkChip:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+
+/* 05 U-35 crop: 350px square radius 16 on black, centred in the card; 260px circle mask; the zoom slider lines up
+ * with the square (44px tall for touch, the track stays thin). */
+.crop { position: relative; align-self: center; width: 100%; max-width: 350px; aspect-ratio: 1; overflow: hidden; border-radius: 16px; background: var(--black); }
+.cropImg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform-origin: center; }
+.mask { position: absolute; left: 12.857%; top: 12.857%; width: 74.286%; height: 74.286%; box-sizing: border-box; border: 2px solid var(--white); border-radius: 50%; box-shadow: 0 0 0 400px rgba(13,13,13,0.55); pointer-events: none; }
+.zoom { box-sizing: border-box; display: flex; align-items: center; align-self: center; gap: 12px; width: 100%; max-width: 350px; touch-action: pan-y; font: 400 13px/normal var(--font-sans); color: var(--mid-high); }
+.slider { flex: 1; min-width: 0; height: 44px; margin: 0; accent-color: var(--brand); }
+.fileInput { position: absolute; width: 1px; height: 1px; opacity: 0; }
+/* No photo chosen yet: a dashed drop area the size of the crop that opens the file picker. */
+.cropPick {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; box-sizing: border-box; align-self: center; width: 100%; max-width: 350px;
+  min-height: 200px; padding: 24px; border: 1px dashed var(--border-dashed); border-radius: 16px; background: var(--ultra-soft); color: var(--high);
+  font: 500 15px/normal var(--font-sans); text-align: center; cursor: pointer;
+}
+.cropPick:hover { background: var(--soft); color: var(--black); }
+.cropPick:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+.cropPickHint { font: 400 13px/1.4 var(--font-sans); color: var(--mid-high); }
+
+/* 05 U-21 PROFILE card: 48px avatar + name/headline, or the "Add your name and photo" empty state. */
+.cardRow, .cardEmpty { gap: 12px; }
+.cardEmpty { flex-wrap: wrap; }
+.cardEmpty > a { flex: none; }
+
+/* 05 U-34 PHOTO: 80px circle, label + hint, Upload/Change + Remove, inline status. */
+.photoBox.photoBox { padding: 20px; gap: 12px; }
+.photoRow { display: flex; align-items: center; gap: 20px; }
+.photoAvatar { position: relative; display: grid; place-items: center; flex: none; width: 96px; height: 96px; border-radius: 50%; box-shadow: 0 0 0 3px var(--surface, #fff), 0 0 0 4px var(--border, #e5e5e5), 0 4px 14px rgba(0, 0, 0, 0.08); }
+.photoAvatarImg { display: block; width: 96px; height: 96px; border-radius: 50%; object-fit: cover; background: var(--soft); }
+/* The camera badge: the button is the 44px touch target (no border, no fill) and ::before draws the 30px badge 7px inside it. */
+.photoBadge { position: absolute; right: -9px; bottom: -9px; isolation: isolate; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; background: none; color: #fff; cursor: pointer; }
+.photoBadge::before { content: ""; position: absolute; z-index: -1; inset: 7px; box-sizing: border-box; border: 2px solid var(--surface, #fff); border-radius: 50%; background: var(--ink, #1b1b1b); transition: transform 150ms ease; }
+.photoBadge:hover::before { transform: scale(1.06); }
+.photoBadge:disabled { opacity: 0.5; cursor: default; }
+.photoBadge:disabled::before { transform: none; }
+.photoBadge:focus-visible { outline: 2px solid var(--brand, #2567ff); outline-offset: -5px; }
+@media (prefers-reduced-motion: reduce) { .photoBadge::before { transition: none; } }
+.photoAvatar[data-busy] > :first-child { opacity: 0.55; }
+.photoSpinner {
+  position: absolute; inset: 0; box-sizing: border-box; border: 3px solid transparent; border-top-color: var(--brand); border-radius: 50%;
+  animation: photoSpin 0.8s linear infinite;
+}
+@keyframes photoSpin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .photoSpinner { animation-duration: 2.4s; } }
+.photoMeta { flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+/* Phones keep the row with a 72px photo (about 120px tall instead of a 245px stack); it stacks only under 340px. */
+@media (max-width: 480px) {
+  .photoBox.photoBox { padding: 16px; }
+  .photoRow { gap: 14px; }
+  /* !important: the Avatar sets its 96px size and font inline. */
+  .photoAvatar, .photoAvatarImg { width: 72px; height: 72px; }
+  .photoAvatar > [role="img"] { width: 72px !important; height: 72px !important; font-size: 26px !important; }
+  .photoBadge::before { inset: 8px; }
+}
+@media (max-width: 339px) { .photoRow { flex-direction: column; align-items: flex-start; } }
+.photoButtons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+/* Small (30px) buttons grow to a 44px tap target on phones. */
+@media (max-width: 767px) { .tapButton.tapButton { height: 44px; padding: 0 16px; font-size: 14px; } }
+.photoError, .photoOk { margin: 0; padding: 8px 10px; border-radius: 8px; font: 400 13px/1.4 var(--font-sans); }
+.photoError { background: var(--danger-bg); color: var(--danger-fg); }
+.photoOk { background: var(--success-bg); color: var(--success-fg); }
+
+/*
+ * Tap targets and controls for the account screens. The shared rules live in Screen.module.css; these are the
+ * /me overrides (selectors doubled so they win regardless of stylesheet order).
+ */
+/* Row actions (Edit, Disconnect, Manage, On/Off): a 44px box; the negative margin keeps the row height and text edge. */
+.rowTap.rowTap { display: inline-flex; align-items: center; justify-content: flex-end; box-sizing: border-box; min-width: 44px; min-height: 44px; margin: -12px -4px; padding: 0 4px; border-radius: 6px; }
+/* A setting that is on or off: the 36×20 track (off = solid grey, on = brand) in a 44px target at the row's edge. */
+.switch { display: grid; place-items: center; flex: none; width: 44px; height: 44px; margin: -12px -4px; padding: 0; border: 0; border-radius: var(--radius-full); background: none; cursor: pointer; }
+.switchTrack { position: relative; display: block; width: 36px; height: 20px; border-radius: var(--radius-full); background: var(--mid-soft); box-shadow: inset 0 0 0 1px rgba(26, 26, 26, 0.08); transition: background-color var(--duration-fast) var(--ease-standard); }
+.switchThumb { position: absolute; left: 2px; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--white); box-shadow: 0 1px 2px rgba(26, 26, 26, 0.3); transition: transform var(--duration-base) var(--ease-standard); }
+.switch[aria-checked="true"] .switchTrack { background: var(--brand); box-shadow: none; }
+.switch[aria-checked="true"] .switchThumb { transform: translateX(16px); }
+.switch:focus-visible { outline: none; }
+.switch:focus-visible .switchTrack { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .switchTrack, .switchThumb { transition: none; } }
+/* A row whose label is the action (Sign out): the button fills the whole row. */
+.rowFill.rowFill { display: flex; align-items: center; box-sizing: border-box; width: calc(100% + 28px); min-height: 48px; margin: -12px -14px; padding: 12px 14px; border-radius: 0; }
+.rowFill.rowFill:hover { background: var(--ultra-soft); text-decoration: none; }
+.rowFill.rowFill:focus-visible { outline-offset: -2px; }
+
+/* Radio rows: a 20px ring, brand with a 10px dot when checked; the whole 48px row is the tap target. */
+.radioRow.radioRow { min-height: 48px; box-sizing: border-box; }
+.radioDot { box-sizing: border-box; flex: none; width: 20px; height: 20px; border: 1.5px solid var(--mid-soft); border-radius: 50%; background: var(--white); }
+.radioRow:hover .radioDot { border-color: var(--mid-high); }
+.radioRow input:checked ~ .radioDot { border-color: var(--brand); background: var(--brand); box-shadow: inset 0 0 0 3.5px var(--white); }
+.radioRow input:focus-visible ~ .radioDot { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: 2px; }
+
+/* Verified name: "Change" sits inside the locked input's right edge, 44px tall. */
+.lockChange.lockChange { right: 2px; bottom: 2px; min-height: 44px; padding: 0 12px; border-radius: 8px; font: 500 14px/normal var(--font-sans); color: var(--brand); text-decoration: none; pointer-events: auto; }
+.lockChange:hover { text-decoration: underline; }
+.lockChange:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: -2px; }
+
+/* Sheets: the close control is a 44px target around the 32px chip (the wrapper adds no box). */
+.sheetHost { display: contents; }
+@container (max-width: 767px) {
+  .sheetHost a[aria-label="Close"] { width: 44px; height: 44px; margin-right: -6px; background: radial-gradient(circle, var(--chip) 0 16px, transparent 16.5px); }
+  .sheetHost a[aria-label="Close"]:hover { background: radial-gradient(circle, var(--chip-2) 0 16px, transparent 16.5px); }
+}
+
+/* Checks to complete (/me/events/[slug]/checks): the consent row and the inline status line. */
+.checksNote { margin: 0; font: 400 13px/1.5 var(--font-sans); color: var(--high); }

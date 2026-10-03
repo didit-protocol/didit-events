@@ -1,0 +1,247 @@
+/* A-03 New / edit event (design/01 Admin, 1440×1320): page 32px 40px gap 24 (shell .page); grid 1fr + 360px, gap 40.
+   The form is its own size container: every breakpoint below measures the form's content column (the page box minus
+   its padding), not the shell, so the layout is right whether or not a sidebar sits beside it. */
+.form { margin: 0; container: eventform / inline-size; }
+
+.head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+.headText { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.headText nav ol { flex-wrap: nowrap; min-width: 0; }
+.headText nav li:last-child { min-width: 0; }
+.headText nav li:last-child > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.title { margin: 0; font: 500 28px/normal var(--font-sans); letter-spacing: -0.025em; color: var(--black); }
+.actions { display: flex; align-items: center; gap: 8px; flex: none; }
+.actions .btn { min-width: 0; }
+.actions .save[aria-busy="true"] { opacity: 0.7; }
+.saved { font: 500 13px/normal var(--font-sans); color: var(--success-fg); white-space: nowrap; }
+.saved:not(:empty) { margin-right: 8px; }
+/* Save bar: the same actions pinned to the bottom of the viewport. Wide: only while there is something to save
+   (the head's buttons scroll away on this long form); narrow: always, and it replaces the head's buttons. */
+.saveBar { display: none; position: sticky; bottom: 0; z-index: 6; align-items: center; justify-content: flex-end; gap: 8px; padding: 12px 0 calc(12px + env(safe-area-inset-bottom, 0px)); background: var(--white); border-top: 1px solid var(--border); }
+.saveBar[data-dirty] { display: flex; }
+.saveBar .btn { min-width: 0; }
+.saveBar .saved { display: none; }
+
+/* "Fix 3 fields before saving.": 12px 16px, 500 13px. */
+.banner.banner { padding: 12px 16px; font-weight: 500; }
+
+.grid { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 40px; align-items: start; }
+.main { display: flex; flex-direction: column; gap: 32px; min-width: 0; }
+
+.details { display: flex; flex-direction: column; gap: 16px; }
+.eyebrow { margin: 0; font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid-high); }
+/* Date · Start · End · Timezone: each track keeps room for its icon, value and trailing text (duration, UTC offset). */
+.row4 { display: grid; grid-template-columns: minmax(150px, 1.2fr) minmax(96px, 0.8fr) minmax(160px, 1.2fr) minmax(170px, 1.3fr); gap: 16px; }
+.endHint { display: none; margin-top: 6px; font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+.row3 { display: grid; grid-template-columns: 1fr 1.6fr 140px; gap: 16px; }
+.row4 > *, .row3 > * { min-width: 0; }
+.row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.row2 > * { min-width: 0; }
+
+/* Field group head (Cover images, Hosts): the C-00 label with a 12px hint under it, same 6px gap as a field. */
+.fieldHead { display: flex; flex-direction: column; gap: 2px; padding: 0; }
+/* A <legend> brings 2px of inline padding: without it "Hosts" starts on the same edge as the other labels. */
+.fieldHead legend { padding: 0; }
+.hint { font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+
+/* Hosts: avatar · Name · Role · Account email · tools on one grid, every control 36px, 16px gaps; stack ≤ 640px. */
+.hosts { display: flex; flex-direction: column; gap: 12px; min-width: 0; margin: 0; padding: 0; border: 0; }
+.hostList { display: flex; flex-direction: column; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.hostRow {
+  display: grid; grid-template-columns: 36px minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.4fr) auto; gap: 16px; align-items: end;
+}
+.hostRow > * { min-width: 0; }
+.hostAvatar { display: grid; place-items: center; width: 36px; height: var(--control-h, 36px); }
+.hostTools { display: flex; align-items: center; gap: 2px; height: var(--control-h, 36px); }
+.hostEmail label { white-space: nowrap; }
+.iconBtn {
+  display: grid; place-items: center; width: 32px; height: 32px; padding: 0; border: 1px solid transparent; border-radius: var(--radius-xs); background: none;
+  font: 500 15px/1 var(--font-sans); color: var(--high); cursor: pointer;
+}
+.iconBtn:hover:not(:disabled) { border-color: var(--border); color: var(--black); }
+.iconBtn:disabled { color: var(--mid); cursor: default; }
+.iconBtn:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+.addHost.addHost { align-self: flex-start; }
+
+/* Location: Places combobox, the picked-place summary, or the manual address rows. */
+.location { display: flex; flex-direction: column; gap: 12px; }
+.location .row3 { grid-template-columns: 1fr 1.6fr 1fr; }
+.location > div > .link, .location > div + .link { align-self: flex-start; margin-top: 6px; }
+.notice { margin: 0; padding: 8px 12px; border-radius: var(--radius-xs); background: var(--soft); font: 400 13px/normal var(--font-sans); color: var(--high); }
+.searchLink { display: flex; align-items: flex-end; padding-bottom: 9px; }
+.placeCard { display: flex; flex-direction: column; gap: 12px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.placeHead { display: flex; align-items: flex-start; gap: 10px; color: var(--mid-high); }
+.placeText { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.placeName { font: 500 14px/normal var(--font-sans); color: var(--black); }
+.placeAddress { font: 400 13px/normal var(--font-sans); color: var(--high); }
+.placeParts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 0; }
+.placeParts dt { font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+.placeParts dd { margin: 2px 0 0; font: 400 13px/normal var(--font-sans); color: var(--black); overflow-wrap: anywhere; }
+.placeActions { display: flex; gap: 16px; }
+.description textarea { height: 72px; resize: vertical; }
+.tz select { text-overflow: ellipsis; }
+
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.label { font: 500 13px/normal var(--font-sans); color: var(--black); }
+.opt { font-weight: 400; color: var(--mid-high); }
+.error { font: 400 12px/normal var(--font-sans); color: var(--danger-fg); }
+
+/* The file input covers its drop zone, so drops land natively. */
+.file { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.file:disabled { cursor: default; }
+.dropTitle { font-weight: 500; color: var(--black); }
+
+/* Sections below the details: 24px above a 1px rule. */
+.section { display: flex; flex-direction: column; gap: 16px; margin: 0; padding-top: 24px; border-top: 1px solid var(--border); }
+.toggleRow { display: flex; flex-direction: row; justify-content: space-between; align-items: center; gap: 24px; }
+.toggleText { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.rowTitle { margin: 0; font: 500 15px/normal var(--font-sans); letter-spacing: normal; color: var(--black); }
+.rowHelp { font: 400 13px/normal var(--font-sans); color: var(--high); }
+
+.link { align-self: flex-start; padding: 0; border: 0; background: none; font: 500 13px/normal var(--font-sans); color: var(--brand); cursor: pointer; text-align: left; }
+.link:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); border-radius: 2px; }
+.rowHelp .link { font-size: inherit; }
+.srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.unsaved { color: var(--mid-high); font-weight: 400; }
+
+/* Section navigation (v2 editor: six sections on one page). Sticky under the page top, scrolls sideways on phones. */
+.sectionNav {
+  position: sticky; top: 0; z-index: 5; display: flex; gap: 4px; margin: -8px 0 -8px; padding: 8px 0; overflow-x: auto;
+  background: var(--white); border-bottom: 1px solid var(--border); scrollbar-width: none;
+}
+.sectionNav::-webkit-scrollbar { display: none; }
+/* More tabs to the right than fit: fade the edge so the row reads as scrollable (set from a scroll listener; before
+   it has measured, "pending", the narrow layout below fades too: six tabs never fit a phone). */
+.sectionNav[data-more=""] { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent); }
+.sectionLink {
+  flex: none; display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 12px; border-radius: 999px;
+  font: 500 13px/normal var(--font-sans); color: var(--high); text-decoration: none; white-space: nowrap;
+}
+.sectionLink:hover { background: var(--soft); color: var(--black); text-decoration: none; }
+.sectionLink:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+.sectionLink[data-invalid] { color: var(--danger-fg); }
+.sectionLink[data-invalid]::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--danger); }
+.section[id], .details[id] { scroll-margin-top: 64px; }
+.section:focus, .details:focus { outline: none; }
+.sectionHead { display: flex; flex-direction: column; gap: 2px; }
+.sectionTitle { margin: 0; font: 500 18px/normal var(--font-sans); letter-spacing: -0.01em; color: var(--black); }
+.sectionLoading { min-height: 160px; border-radius: var(--radius-sm); background: var(--ultra-soft); }
+
+/*
+ * Cover images: square (1:1) and banner (10:3) side by side at one height (columns 3 : 10), each frame at its real
+ * aspect ratio with the public cover radius (--radius-md, P-01 .coverDesktop), so nothing shifts while images load.
+ */
+.coverSlots { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 10fr); gap: 16px; align-items: start; }
+.coverSlot { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.slotHead { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.slotTitle { font: 500 13px/normal var(--font-sans); color: var(--black); }
+.slotFrame {
+  position: relative; display: grid; place-items: center; aspect-ratio: 1 / 1; overflow: hidden; box-sizing: border-box;
+  border: 1px dashed color-mix(in srgb, var(--mid) 80%, transparent); border-radius: var(--radius-md); background: var(--ultra-soft);
+  font: 400 12px/1.4 var(--font-sans); color: var(--high); text-align: center;
+  transition: border-color 150ms var(--ease-out), background-color 150ms var(--ease-out);
+}
+.slotWide { aspect-ratio: 10 / 3; }
+.slotFrame:has(.slotImg) { border-style: solid; border-color: var(--border); }
+.slotFrame[data-drag] { border-color: var(--brand); background: color-mix(in srgb, var(--brand) 6%, var(--white)); }
+.slotFrame[data-invalid] { border-color: var(--danger); }
+.slotFrame:focus-within { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+.slotFrame[aria-busy="true"] .slotImg { opacity: 0.6; }
+.cover[data-theme="aqua"] { background: linear-gradient(135deg, #d9f3f1, #a9e0e8 55%, #e9f7f4); }
+.cover[data-theme="sky"] { background: linear-gradient(135deg, #e3edff, #b9cff7 55%, #f0f4ff); }
+.slotFrame[data-theme="aqua"] { background: linear-gradient(135deg, #d9f3f1, #a9e0e8 55%, #e9f7f4); border-style: solid; border-color: transparent; }
+.slotFrame[data-theme="sky"] { background: linear-gradient(135deg, #e3edff, #b9cff7 55%, #f0f4ff); border-style: solid; border-color: transparent; }
+.slotImg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.slotEmpty { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px; }
+.slotProgress { position: absolute; left: 12px; right: 12px; bottom: 10px; width: auto; height: 4px; accent-color: var(--brand); }
+.slotFoot { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 18px; min-width: 0; }
+.slotActions { display: flex; gap: 14px; flex: none; }
+.coverStatus { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 400 12px/normal var(--font-sans); color: var(--high); }
+.link.linkDanger { color: var(--danger-fg); }
+/* Theme picker under the cover slots: content width, with its own caption. */
+.themeField { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; min-width: 0; }
+.theme.theme { max-width: 100%; }
+.link:disabled { color: var(--mid); cursor: default; }
+
+/* Guest page preview (right column, 360px). */
+.preview { position: sticky; top: 64px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.cover { display: grid; place-items: center; height: 160px; background: var(--soft); font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+/* A square cover is cropped into the banner from its top edge, where covers carry their title. */
+.coverImg { width: 100%; height: 160px; object-fit: cover; object-position: center top; }
+.previewBody { display: flex; flex-direction: column; gap: 8px; padding: 20px; }
+.previewEyebrow { font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; color: var(--mid-high); }
+.previewName { font: 500 20px/normal var(--font-sans); letter-spacing: -0.02em; color: var(--black); overflow-wrap: anywhere; }
+.previewName[data-empty] { color: var(--mid); }
+.previewMeta { font: 400 13px/1.5 var(--font-sans); color: var(--high); }
+
+
+/* A-03c saving: fields turn #F8F8F8 and read-only while the action runs. */
+.form[data-pending] input:not([type="file"]), .form[data-pending] textarea, .form[data-pending] select { background: var(--ultra-soft); }
+
+/* Two columns need ~680px for the fields beside the 360px preview. */
+@container eventform (max-width: 1080px) {
+  .grid { grid-template-columns: minmax(0, 1fr); }
+  .preview { display: none; }
+}
+/* The timezone needs ~240px for its city, abbreviation and UTC offset. Four tracks give it that only when the fields
+   column is 900px or wider: a single column of 900–1080px, or beside the preview from 1300px. Narrower, date, start
+   and end keep one line and the timezone takes its own under them, so its value is never cut. */
+@container eventform (max-width: 899px) {
+  .row4 { grid-template-columns: minmax(150px, 1.2fr) minmax(96px, 0.8fr) minmax(160px, 1.2fr); }
+  .row4 > [data-field="timezone"] { grid-column: 1 / span 2; }
+}
+@container eventform (min-width: 1081px) and (max-width: 1299px) {
+  .row4 { grid-template-columns: minmax(150px, 1.2fr) minmax(96px, 0.8fr) minmax(160px, 1.2fr); }
+  .row4 > [data-field="timezone"] { grid-column: 1 / span 2; }
+}
+/* Under 680px the four date fields no longer fit one line: date, then start + end, then timezone. */
+@container eventform (max-width: 680px) {
+  .row4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .row4 > [data-field="date"], .row4 > [data-field="timezone"] { grid-column: 1 / -1; }
+}
+/* Narrow column (phones, and a tablet beside the sidebar): stacked rows, 44px touch targets, 16px inputs (no iOS
+   zoom), and the actions in the bottom save bar. */
+@container eventform (max-width: 640px) {
+  .form > * { --control-h: 44px; --control-h-sm: 44px; }
+  .form :is(input:not([type="hidden"], [type="checkbox"], [type="radio"], [type="file"]), select, textarea) { font-size: 16px; }
+  .head .actions { display: none; }
+  .saveBar { display: flex; flex-wrap: wrap; }
+  .saveBar .saved { display: block; }
+  .saveBar .saved:not(:empty) { flex: 1 1 100%; margin-right: 0; }
+  .saveBar .save { flex: 1; }
+  .sectionLink { min-height: 44px; }
+  .sectionNav[data-more] { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent); }
+  .section[id], .details[id] { scroll-margin-top: 76px; }
+  .coverSlots { grid-template-columns: minmax(0, 1fr); }
+  .coverSlot[data-variant="main"] { max-width: 240px; }
+  .row2 { grid-template-columns: minmax(0, 1fr); }
+  .row3, .location .row3 { grid-template-columns: 1fr 1fr; }
+  .placeParts { grid-template-columns: 1fr 1fr; }
+  .toggleRow { align-items: flex-start; }
+  /* Hosts stack without a tools line of their own: the avatar column holds ↑ and ↓ beside Role and Account email,
+     and × sits at the end of the Name line. */
+  .hostRow { grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 12px; align-items: end; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .hostRow > .hostAvatar { grid-area: 1 / 1; width: 44px; }
+  .hostRow > :nth-child(2) { grid-area: 1 / 2; }
+  .hostRow > :nth-child(3) { grid-area: 2 / 2 / auto / -1; }
+  .hostRow > .hostEmail { grid-area: 3 / 2 / auto / -1; }
+  .hostRow > .hostTools { display: contents; }
+  .hostTools > :nth-child(1) { grid-area: 2 / 1; }
+  .hostTools > :nth-child(2) { grid-area: 3 / 1; }
+  .hostTools > :nth-child(3) { grid-area: 1 / 3; }
+  .hostList > .hostRow:last-child { padding-bottom: 0; border-bottom: 0; }
+  .hostEmail label { white-space: normal; }
+  .iconBtn { width: 44px; height: 44px; }
+  /* Text buttons (Replace, Remove, Search again…) keep their look; the hit area grows to 44px. */
+  .link { position: relative; }
+  .link::after { content: ""; position: absolute; inset: -14px -6px; }
+  .slotActions { gap: 20px; }
+  .theme.theme > label > span { padding: 0 16px; line-height: 40px; }
+}
+/* Start and End share a ~150px track: the duration moves under the End field instead of covering the time. */
+@container eventform (max-width: 440px) {
+  .end [role="combobox"] + span { display: none; }
+  .endHint { display: block; }
+}
+
+/* Phones: inline text actions keep their look but get a 44px-tall hit area. */
+@media (max-width: 640px) { .link { padding-block: 14px; margin-block: -14px; } }

@@ -1,0 +1,90 @@
+/* A-05 Guests tab (design/01 Admin) + 1024 and 390 layouts. */
+.toolbar { display: flex; align-items: center; gap: 12px; }
+.search { flex: none; width: 240px; }
+.chips { flex: 1; min-width: 0; flex-wrap: wrap; }
+.filterMenu, .phoneChips, .compact, .phoneList, .phoneAdd { display: none; }
+
+/* Desktop table: 32px checkbox column as drawn. */
+.table [role="row"] { grid-template-columns: 32px 1.5fr 1.7fr 1fr 1.1fr 0.8fr 1fr 32px !important; column-gap: 12px; }
+.table [role="rowgroup"] + [role="rowgroup"] [role="row"] { height: auto; min-height: 53px; }
+.table [role="rowgroup"] + [role="rowgroup"] [role="row"]:has([data-bounced]) { background: var(--danger-bg); }
+.table [role="row"]:has([aria-colspan]) { grid-template-columns: 1fr !important; }
+.table [aria-colspan] { padding: 0; }
+.nameCell { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.nameCell b { font: 500 14px/normal var(--font-sans); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nameCell span { font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+.email { display: flex; align-items: center; gap: 6px; min-width: 0; font: 400 13px/normal var(--font-sans); color: var(--high); white-space: nowrap; overflow: hidden; }
+.email svg { flex: none; }
+.sending { display: inline-flex; align-items: center; gap: 6px; font: 500 13px/normal var(--font-sans); color: var(--high); }
+.ver { font: 400 13px/normal var(--font-sans); color: var(--high); white-space: nowrap; }
+.ver[data-bounced] { font-weight: 500; color: var(--danger-fg); }
+.ver a { color: inherit; }
+.ci { font: 500 13px/normal var(--font-sans); font-feature-settings: "tnum"; color: var(--black); }
+.ci[data-kind="missing"] { font-weight: 400; color: var(--high); }
+.ci[data-kind="none"] { color: var(--mid); }
+.src { font: 400 13px/normal var(--font-sans); color: var(--high); }
+.more { display: flex; justify-content: center; }
+.more button { min-width: 28px; width: 28px; height: 28px; padding: 0; background: transparent; color: var(--mid-high); font: 500 16px/1 var(--font-sans); }
+.frameMenu { position: absolute; left: 1080px; top: 476px; z-index: 3; width: 240px; }
+.empty.empty { border: 0; border-radius: 0; padding: 96px 24px; gap: 10px; }
+.empty h3 { font-size: 17px; }
+.empty p { font-size: 14px; }
+.empty > :first-child { display: flex; }
+.empty.empty > :last-child { margin-top: 6px; }
+
+/* 1024: stacked name/email, status, checked in. */
+.compactTable { border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+.cRow { display: grid; grid-template-columns: 1.6fr 1fr 0.7fr 24px; gap: 12px; padding: 0 14px; height: 57px; align-items: center; border-bottom: 1px solid var(--border-subtle); box-sizing: border-box; }
+.cRow:last-child { border-bottom-color: transparent; }
+.cHead { height: 37px; background: #F8F8F8; border-bottom-color: var(--border); font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid-high); }
+.cName { display: flex; flex-direction: column; gap: 2px; min-width: 0; text-decoration: none; color: var(--black); }
+.cName b { font: 500 14px/normal var(--font-sans); }
+.cName span { font: 400 12px/normal var(--font-sans); color: var(--mid-high); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cMore { color: var(--mid-high); }
+
+/* 390: avatar list. */
+.pRow { display: flex; align-items: center; gap: 12px; padding: 10px 0; min-height: 44px; border-bottom: 1px solid var(--border-subtle); text-decoration: none; color: var(--black); }
+.pAvatar { width: 36px; height: 36px; border-radius: 50%; background: var(--soft); display: grid; place-items: center; flex: none; font: 500 12px/normal var(--font-sans); color: var(--high); }
+.pText { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.pText b { font: 500 14px/normal var(--font-sans); }
+.pText span { font: 500 13px/normal var(--font-sans); color: var(--black); font-feature-settings: "tnum"; }
+.pText span[data-kind="missing"] { color: var(--warning-fg); }
+.pText span[data-kind="none"] { color: var(--mid); }
+
+/* Up to 1600 the eight status chips don't fit beside the search and the buttons: they take their own row. */
+@container admin (min-width: 1101px) and (max-width: 1600px) {
+  .toolbar { flex-wrap: wrap; }
+  .toolbar .search { margin-right: auto; }
+  .toolbar .chips { order: 3; flex: 1 1 100%; }
+}
+/* `.toolbar .x`: the ui Button and FilterChips rules have one class too, so a single class here would depend on chunk order. */
+@container admin (max-width: 1100px) {
+  .toolbar { gap: 8px; flex-wrap: wrap; }
+  .toolbar .search { flex: 1 1 200px; width: auto; min-width: 0; }
+  .toolbar .chips, .toolbar .export, .desktop { display: none; }
+  .toolbar .add { flex: none; }
+  .filterMenu { display: block; position: relative; flex: none; }
+  .compact { display: block; }
+}
+@container admin (max-width: 600px) {
+  .toolbar, .phoneList { padding: 0 16px; }
+  .toolbar { margin-top: 16px; }
+  .toolbar .search { --control-h: 44px; }
+  .toolbar .search input { font-size: 16px; }
+  .filterMenu, .compact, .addLabelFull { display: none; }
+  .phoneAdd { display: inline; }
+  .toolbar .add { height: 44px; }
+  /* One row that scrolls sideways; each 32px chip gets a 44px tap area. */
+  .phoneChips { display: block; margin-top: 6px; }
+  .phoneChips > nav { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: 6px 16px; }
+  .phoneChips > nav::-webkit-scrollbar { display: none; }
+  .phoneChips > nav > a { position: relative; flex: none; }
+  .phoneChips > nav > a::after { content: ""; position: absolute; inset: -6px 0; }
+  .phoneList { display: block; margin-top: 6px; }
+}
+
+.filterMenu > summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; height: 36px; padding: 0 14px; border-radius: var(--radius-full); background: var(--btn-secondary); font: 500 14px/normal var(--font-sans); white-space: nowrap; }
+.filterMenu > summary::-webkit-details-marker { display: none; }
+.filterMenu > summary:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+.filterPanel { position: absolute; right: 0; top: 42px; z-index: 5; width: 320px; padding: 12px; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow-md, 0 4px 12px rgba(120,120,128,.2)); }
+.filterPanel nav { flex-wrap: wrap; }

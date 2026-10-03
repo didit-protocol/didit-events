@@ -1,0 +1,9 @@
+{
+  "request_id": "99999999-9999-4999-8999-999999999999",
+  "status": "Failed",
+  "message": "The verification code is incorrect. Attempts remaining: 2",
+  "email": null,
+  "vendor_data": null,
+  "metadata": null,
+  "created_at": "2026-09-29T10:00:00Z"
+}

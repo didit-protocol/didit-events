@@ -1,0 +1,20 @@
+/* 04 R-04 code boxes: 6 columns, gap 8; box 60px, radius 12, 500 26px tnum; next box 2px brand; wrong 1px danger on danger-bg. */
+.wrap { position: relative; display: grid; gap: 8px; }
+.input {
+  position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; outline: 0;
+  opacity: 0; font-size: 16px; cursor: text; caret-color: transparent;
+}
+.input:disabled { cursor: not-allowed; }
+.box {
+  box-sizing: border-box; display: grid; place-items: center; height: 60px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border); background: var(--white); color: var(--black);
+  font: 500 26px/normal var(--font-sans); font-feature-settings: "tnum";
+}
+.wrap:focus-within .next, .wrap[data-state="focus"] .next { border: 2px solid var(--brand); }
+.wrap:has(.input:disabled) .box { opacity: var(--disabled-opacity); }
+.invalid .box, .invalid:focus-within .next, .invalid[data-state="focus"] .next {
+  border: 1px solid var(--danger); background: var(--danger-bg); color: var(--danger-fg);
+}
+.invalid { animation: shake var(--duration-base) var(--ease-standard) 1; }
+@keyframes shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+@media (prefers-reduced-motion: reduce) { .invalid { animation: none; } }

@@ -1,0 +1,4 @@
+/* The G of "Continue with Google": bare on the white guest button, in a 20px white disc on the black staff pill.
+ * The button itself is the shared Button (Button.module.css). */
+.disc { display: grid; place-items: center; flex: none; width: 20px; height: 20px; border-radius: 50%; background: var(--white); }
+.bare { display: block; flex: none; }

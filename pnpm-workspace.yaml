@@ -1,0 +1,39 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+# Dependency build scripts: esbuild (drizzle-kit, vite) runs its binary check; unrs-resolver ships prebuilt bindings.
+allowBuilds:
+  esbuild: true
+  sharp: true
+  unrs-resolver: false
+
+# Packages newer than the machine-wide minimumReleaseAge that this workspace pins on purpose.
+minimumReleaseAgeExclude:
+  - '@next/env@16.3.7'
+  - '@next/eslint-plugin-next@16.3.7'
+  - '@next/swc-darwin-arm64@16.3.7'
+  - '@next/swc-darwin-x64@16.3.7'
+  - '@next/swc-linux-arm64-gnu@16.3.7'
+  - '@next/swc-linux-arm64-musl@16.3.7'
+  - '@next/swc-linux-x64-gnu@16.3.7'
+  - '@next/swc-linux-x64-musl@16.3.7'
+  - '@next/swc-win32-arm64-msvc@16.3.7'
+  - '@next/swc-win32-x64-msvc@16.3.7'
+  - '@typescript-eslint/eslint-plugin@8.71.0'
+  - '@typescript-eslint/parser@8.71.0'
+  - '@typescript-eslint/project-service@8.71.0'
+  - '@typescript-eslint/scope-manager@8.71.0'
+  - '@typescript-eslint/tsconfig-utils@8.71.0'
+  - '@typescript-eslint/type-utils@8.71.0'
+  - '@typescript-eslint/types@8.71.0'
+  - '@typescript-eslint/typescript-estree@8.71.0'
+  - '@typescript-eslint/utils@8.71.0'
+  - '@typescript-eslint/visitor-keys@8.71.0'
+  - eslint-config-next@16.3.7
+  - next@16.3.7
+  - typescript-eslint@8.71.0
+
+# drizzle-kit legacy loader does not need the vulnerable esbuild dev server.
+overrides:
+  "esbuild@<0.25.0": "0.25.12"

@@ -1,0 +1,47 @@
+{
+  "name": "@didit-events/ui",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": [
+    "*.css",
+    "./src/frames/index.ts"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./tokens.css": "./src/tokens.css",
+    "./fonts": "./src/fonts.ts",
+    "./logo": "./src/Logo.tsx",
+    "./frames": "./src/frames/index.ts",
+    "./frames/guard": "./src/frames/guard.ts",
+    "./frames/registry": "./src/frames/registry.ts",
+    "./og": "./src/og/EventCoverOg.tsx",
+    "./og/banner": "./src/og/EventBannerOg.tsx",
+    "./og/assets/*": "./src/og/*",
+    "./assets/*": "./src/assets/*",
+    "./kiosk": "./src/kiosk/index.ts",
+    "./qr": "./src/components/QrCode.tsx",
+    "./verified-badge": "./src/components/VerifiedBadge.tsx",
+    "./time": "./src/components/time.ts",
+    "./focus": "./src/components/focus.ts",
+    "./motion": "./src/components/motion.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "next": "16.3.7",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "next": "16.3.7",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "dependencies": {
+    "qrcode-generator": "^2.0.4"
+  }
+}

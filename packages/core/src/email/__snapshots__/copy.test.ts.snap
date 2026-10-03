@@ -1,0 +1,795 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`email copy (snapshot per code) > E-01 copy 1`] = `
+{
+  "preheader": "Your place stays confirmed while you renew.",
+  "subject": "Renew your checks for the Barcelona Office Opening",
+  "text": "RENEWAL NEEDED
+
+Renew your checks, Maria
+
+A previously completed check has expired. Open your event status to renew only what is needed before arrival.
+
+When: Fri 23 Oct 2026, 19:00–23:00 CEST
+Where: Didit HQ, Carrer de Pallars 99, Barcelona
+
+View event status: https://verify.didit.me/session/8b20d4c1
+
+Renew before Fri 23 Oct. Sign in to view your account securely.
+
+--
+You were approved for a Didit event.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Email preferences: https://events.didit.me/me/settings
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > E-02 copy 1`] = `
+{
+  "preheader": "You checked in at 19:42.",
+  "subject": "Welcome to the Barcelona Office Opening, Maria",
+  "text": "CHECKED IN · 19:42
+
+Welcome in, Maria
+
+You checked in at 19:42. Grab a drink, the team is on the ground floor.
+
+TONIGHT
+Wi-Fi · Didit-Guest · EXAMPLE-WIFI-PASSWORD
+20:00 · Welcome from Alberto
+20:30 · Product demos on the 2nd floor
+
+Enjoy the evening,
+The Didit team
+
+--
+You checked in at a Didit event.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Email preferences: https://events.didit.me/me/settings
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > E-03 copy 1`] = `
+{
+  "preheader": "You will hear back by Fri 23 Oct.",
+  "subject": "We got your request for Barcelona Office Opening",
+  "text": "REQUEST RECEIVED
+
+Thanks, Maria
+
+The hosts review every request and will reply by Fri 23 Oct. We will email you when your place is confirmed.
+
+When: Fri 23 Oct 2026, 19:00–23:00 CEST
+Where: Didit HQ, Carrer de Pallars 99, Barcelona
+
+View event: https://events.didit.me/e/barcelona-office-opening
+
+--
+You requested a place on events.didit.me.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Email preferences: https://events.didit.me/me/settings
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-01 copy 1`] = `
+{
+  "preheader": "Enter it to confirm your email. Expires in 10 minutes.",
+  "subject": "Your Didit Events code: 481 903",
+  "text": "CONFIRM YOUR EMAIL
+
+Your code
+
+Enter this code to confirm your email before requesting a place at Building, Raising & Scaling in the AI Era.
+
+481 903
+Expires in 10 minutes. Never share it with anyone.
+
+Did not ask for this? You can ignore this email.
+
+--
+Sent because someone entered this email on events.didit.me.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Privacy: https://events.didit.me/privacy
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-02 copy 1`] = `
+{
+  "preheader": "You will hear back by Fri 2 Oct.",
+  "subject": "We got your request for Building, Raising & Scaling in the AI Era",
+  "text": "REQUEST RECEIVED
+
+Thanks, María
+
+The hosts review every request and will reply by Fri 2 Oct. We will email you when your place is confirmed.
+
+When: Thu 8 Oct 2026, 18:30–21:30 CEST
+Where: Didit HQ, Carrer de Pallars 99, Barcelona
+
+View event: https://events.didit.me/e/ai-era
+
+--
+You requested a place on events.didit.me.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Email preferences: https://events.didit.me/me/settings
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-03 copy 1`] = `
+{
+  "preheader": "Your place stays confirmed while you renew.",
+  "subject": "Renew your checks for the AI Era evening",
+  "text": "RENEWAL NEEDED
+
+Renew your checks, María
+
+A previously completed check has expired. Open your event status to renew only what is needed before arrival.
+
+When: Thu 8 Oct 2026, 18:30–21:30 CEST
+Where: Didit HQ, Carrer de Pallars 99, Barcelona
+
+View event status: https://verify.didit.me/session/3f1c9a2e
+
+Renew before Mon 5 Oct. Sign in to view your account securely.
+
+--
+You were approved for a Didit event.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Email preferences: https://events.didit.me/me/settings
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-04 copy 1`] = `
+{
+  "preheader": "Use it to verify your email. Expires in 10 minutes.",
+  "subject": "730 215 is your Didit verification code",
+  "text": "DIDIT · EMAIL VERIFICATION
+
+Verify your email
+
+Enter this code in your Didit verification to confirm maria.garcia@gmail.com.
+
+730 215
+Expires in 10 minutes. Didit will never ask for this code by phone.
+
+--
+Didit sends this on behalf of Didit Events as part of identity verification.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Didit privacy: https://didit.me/privacy
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-05 copy 1`] = `
+{
+  "preheader": "Your place is confirmed. An expired check needs attention.",
+  "subject": "Renew your event checks, María",
+  "text": "ALMOST THERE
+
+Finish your verification
+
+Open your event status and renew any expired checks before Mon 5 Oct. Your place remains confirmed.
+
+Continue verification: https://verify.didit.me/session/3f1c9a2e
+
+--
+You were approved for a Didit event.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Email preferences: https://events.didit.me/me/settings
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-06 copy 1`] = `
+{
+  "preheader": "Your place is confirmed.",
+  "subject": "You're in: Thu 8 Oct, Didit HQ",
+  "text": "YOU ARE GOING
+
+You're in, María
+
+Your place is confirmed. Check in with the host when you arrive.
+
+When: Thu 8 Oct 2026, 18:30–21:30 CEST
+Where: Didit HQ, Carrer de Pallars 99, Barcelona
+Entry: Host check-in
+
+View your ticket: https://events.didit.me/me/events/ai-era
+
+ADD TO CALENDAR
+Google Calendar: https://events.didit.me/e/ai-era/calendar/google
+Apple / Outlook (.ics): https://events.didit.me/e/ai-era/event.ics
+
+Can’t make it? Cancel your place: https://events.didit.me/me/events/ai-era/cancel
+
+--
+You are going to a Didit event. Cancelling gives your place to someone else.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Email preferences: https://events.didit.me/me/settings
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-07 copy 1`] = `
+{
+  "preheader": "We will email you when the review is complete.",
+  "subject": "We are checking your verification",
+  "text": "IN REVIEW
+
+Almost there
+
+Your required check needs review. We will email you when there is an update. You can return to your event to see its status.
+
+--
+You are verifying for a Didit event.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Email preferences: https://events.didit.me/me/settings
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-08 copy 1`] = `
+{
+  "preheader": "You can try once more.",
+  "subject": "Your verification did not go through",
+  "text": "ACTION NEEDED
+
+Let’s try that again
+
+A required check did not pass. Open your event status to review the result and available next steps. You have 1 attempt left.
+
+Try again: https://verify.didit.me/session/3f1c9a2e
+
+Stuck? Reply to this email and the team will help.
+
+--
+You are verifying for a Didit event.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Email preferences: https://events.didit.me/me/settings
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-09 copy 1`] = `
+{
+  "preheader": "We will email you if a place opens.",
+  "subject": "You are on the waitlist for the AI Era evening",
+  "text": "WAITLIST · #12
+
+You are on the list
+
+The event is full right now. If a place opens and your checks are current, we will confirm your place by email.
+
+View event: https://events.didit.me/e/ai-era
+
+--
+You requested a place on events.didit.me.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Email preferences: https://events.didit.me/me/settings
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-10 copy 1`] = `
+{
+  "preheader": "We could not offer you a place this time.",
+  "subject": "About your request for the AI Era evening",
+  "text": "REQUEST UPDATE
+
+Not approved this time
+
+Thanks for your interest, María. We could not offer you a place this time. You will be first to hear about the next Didit event.
+
+Subscribe to Didit Events: https://events.didit.me/?subscribe=1
+
+--
+You requested a place on events.didit.me.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Email preferences: https://events.didit.me/me/settings
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-11 copy 1`] = `
+{
+  "preheader": "Doors 18:30. No ticket needed.",
+  "subject": "Tomorrow: Building, Raising & Scaling in the AI Era",
+  "text": "TOMORROW · 18:30
+
+See you tomorrow
+
+Two panels, one room. Doors open at 18:30. Check in with the host when you arrive.
+
+AGENDA
+18:30 · Doors open · face check-in
+19:10–19:50 · How to build AI-native companies
+19:55 · Raising in SF vs EU
+20:40 · Drinks
+
+Get directions: https://maps.google.com/?q=Carrer+de+Pallars+99,+Barcelona
+
+--
+You are going to a Didit event.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Email preferences: https://events.didit.me/me/settings
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-12 copy 1`] = `
+{
+  "preheader": "Carrer de Pallars 99. Check in with the host when you arrive.",
+  "subject": "Doors open in 1 hour",
+  "text": "TODAY · 18:30
+
+Doors in 1 hour
+
+Head to Didit HQ, Carrer de Pallars 99. Metro L4 Llacuna, 4 minutes walk. Check in with the host when you arrive.
+
+Open in Maps: https://maps.google.com/?q=Carrer+de+Pallars+99,+Barcelona
+
+--
+You are going to a Didit event.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Email preferences: https://events.didit.me/me/settings
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-13 copy 1`] = `
+{
+  "preheader": "You checked in at 18:42.",
+  "subject": "Welcome to the AI Era evening, María",
+  "text": "CHECKED IN · 18:42
+
+Welcome in, María
+
+You checked in at 18:42. Grab a drink, panels start at 19:10 on the ground floor.
+
+TONIGHT
+Wi-Fi · Didit-Guest · EXAMPLE-WIFI-PASSWORD
+19:10 · Panel 01 · How to build AI-native companies
+19:55 · Panel 02 · Raising in SF vs EU
+
+Enjoy the evening,
+The Didit team
+
+--
+You checked in at a Didit event.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Email preferences: https://events.didit.me/me/settings
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-14 copy 1`] = `
+{
+  "preheader": "Both panels, plus photos.",
+  "subject": "Recordings from Building, Raising & Scaling in the AI Era",
+  "text": "THANK YOU
+
+Thanks for coming
+
+104 founders and operators joined. Both panels are recorded, and the photos are up.
+
+Watch the panels: https://events.didit.me/e/ai-era/recordings
+See photos: https://events.didit.me/e/ai-era/photos
+
+--
+You attended a Didit event.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Email preferences: https://events.didit.me/me/settings
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-15 copy 1`] = `
+{
+  "preheader": "Your place went to the waitlist.",
+  "subject": "You cancelled your place for the AI Era evening",
+  "text": "CANCELLED
+
+Place cancelled
+
+Your place went to the next person on the waitlist. Changed your mind? Request again while places last.
+
+Request again: https://events.didit.me/e/ai-era
+
+--
+You cancelled on events.didit.me.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Email preferences: https://events.didit.me/me/settings
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-16 copy 1`] = `
+{
+  "preheader": "Same place, 15 minutes later.",
+  "subject": "Update: doors now open at 18:45",
+  "text": "EVENT UPDATE
+
+New door time
+
+Doors now open at 18:45 instead of 18:30. Everything else stays the same. Your place is still confirmed.
+
+Before: 18:30 (changed)
+Now: 18:45 · Thu 8 Oct
+Where: Didit HQ, Barcelona
+
+Update my calendar: https://events.didit.me/e/ai-era/event.ics
+
+--
+You are going to a Didit event.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Email preferences: https://events.didit.me/me/settings
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-17 copy 1`] = `
+{
+  "preheader": "Valid for 5 minutes.",
+  "subject": "Your Didit Events sign-in code",
+  "text": "SIGN IN
+
+Sign in to Didit Events
+
+Enter this code to sign in as maria.garcia@gmail.com. It is valid for 5 minutes.
+
+481 903
+Valid for 5 minutes. Never share it with anyone.
+
+Requested: Tue 29 Sep, 18:14 CEST
+Device: Safari on iPhone · Barcelona, ES
+
+If you didn’t ask for this, ignore this email.
+
+--
+Sent because someone entered this email on events.didit.me.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Privacy: https://events.didit.me/privacy
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-18 copy 1`] = `
+{
+  "preheader": "Your account is ready. No password to remember.",
+  "subject": "Welcome to Didit Events",
+  "text": "ACCOUNT CREATED
+
+Welcome, María
+
+Your Didit Events account is ready. Sign in any time with Google or an email code. All your requests and tickets live in My events.
+
+Go to My events: https://events.didit.me/me
+
+--
+You created an account on events.didit.me.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Privacy: https://events.didit.me/privacy
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-19 copy 1`] = `
+{
+  "preheader": "Complete your request to confirm a place. Thu 8 Oct, Didit HQ.",
+  "subject": "Alejandro invited you to Building, Raising & Scaling in the AI Era",
+  "text": "YOU ARE INVITED
+
+Alejandro invited you
+
+You are invited to an evening on building and raising in the AI era. Complete the required checks and submit your request. Your place will be confirmed if space is available, or you can join the waitlist.
+
+“Would love to have you on the SF vs EU panel crowd.” — Alejandro, Didit
+
+Accept invite: https://events.didit.me/e/ai-era/invite/7kQ2xZ
+
+When: Thu 8 Oct 2026, 18:30–21:30 CEST
+Where: Didit HQ, Carrer de Pallars 99, Barcelona
+
+--
+A Didit team member invited this email address.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Privacy: https://events.didit.me/privacy
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-20 copy 1`] = `
+{
+  "preheader": "Your place has been released.",
+  "subject": "You cancelled your place for the AI Era evening",
+  "text": "CANCELLED
+
+Thanks for letting us know
+
+Your place for Thu 8 Oct has been released. Changed your mind? Request again while places last.
+
+Request again: https://events.didit.me/e/ai-era
+
+Reason: Schedule conflict
+Cancelled: Fri 2 Oct, 11:20
+
+--
+You cancelled on events.didit.me.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Privacy: https://events.didit.me/privacy
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-21 copy 1`] = `
+{
+  "preheader": "We had to cancel your place.",
+  "subject": "Update on your place for the AI Era evening",
+  "text": "UPDATE
+
+We had to release your place
+
+Sorry, María. We could not keep your place for Thu 8 Oct. If you think this is a mistake, reply to this email and the team will check.
+
+See other Didit events: https://events.didit.me
+
+--
+You had a place at a Didit event.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Privacy: https://events.didit.me/privacy
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-22 copy 1`] = `
+{
+  "preheader": "We cancelled your upcoming registrations.",
+  "subject": "Your Didit Events account was deleted",
+  "text": "ACCOUNT DELETED
+
+Your account is gone
+
+We deleted your Didit Events profile and cancelled 1 upcoming place and 2 requests. We asked Didit to delete your verification data; they confirm within 30 days.
+
+--
+Final email. We will not contact you again.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Privacy: https://events.didit.me/privacy
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-23 copy 1`] = `
+{
+  "preheader": "The team reviewed your verification.",
+  "subject": "Your place is confirmed: Thu 8 Oct, Didit HQ",
+  "text": "CONFIRMED AFTER REVIEW
+
+You are in, María
+
+The team reviewed your verification and accepted maria.g@gmail.com. Check in with the host when you arrive.
+
+When: Thu 8 Oct 2026, 18:30–21:30 CEST
+Where: Didit HQ, Carrer de Pallars 99, Barcelona
+Entry: Host check-in
+
+View your ticket: https://events.didit.me/me/events/ai-era
+
+ADD TO CALENDAR
+Google Calendar: https://events.didit.me/e/ai-era/calendar/google
+Apple / Outlook (.ics): https://events.didit.me/e/ai-era/event.ics
+
+Can’t make it? Cancel your place: https://events.didit.me/me/events/ai-era/cancel
+
+--
+You are going to a Didit event. Cancelling gives your place to someone else.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Email preferences: https://events.didit.me/me/settings
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-24 copy 1`] = `
+{
+  "preheader": "Alejandro Ruiz undid a check-in at Thu 8 Oct, 17:30.",
+  "subject": "Check-in undone: María García · the AI Era evening",
+  "text": "INTERNAL · CHECK-IN UNDONE
+
+A check-in was undone
+
+Alejandro Ruiz undid the check-in of María García for Building, Raising & Scaling in the AI Era. The guest is back on the missing list.
+
+Guest: María García · maria.garcia@gmail.com
+Checked in: Thu 8 Oct, 18:42 · Kiosk · Main door
+Undone: Thu 8 Oct, 17:30
+By: Alejandro Ruiz (Admin)
+Reason: Matched the wrong guest
+
+Open check-in log: https://events.didit.me/admin/events/ai-era/check-ins
+
+--
+You own this event on Didit Events. Only event owners get this email.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Team settings: https://events.didit.me/admin/team
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-25 copy 1`] = `
+{
+  "preheader": "María García asked for a place. Review the profile and accept or decline.",
+  "subject": "New request: María García for Building, Raising & Scaling in the AI…",
+  "text": "HOSTS · NEW REQUEST
+
+María García wants to join
+
+María García requested a place at Building, Raising & Scaling in the AI Era. Review the profile and accept or decline.
+
+María García
+Verified by Didit
+Building trust infrastructure for fintech
+Founder & CEO, Acme Pay
+
+Email: maria.garcia@gmail.com
+Company: Acme Pay
+Role: Founder & CEO
+LinkedIn: https://www.linkedin.com/in/mariagarcia
+Website: https://acmepay.example
+Phone: +34 600 600 600
+Verified: Email, Human check, Phone
+Requested: Thu 1 Oct, 11:20 CEST
+
+ANSWERS
+
+What are you building?
+Fraud scoring for instant payouts in Spain and Portugal.
+
+Pending: 4 requests
+Places left: 32 of 80
+
+Review request: https://events.didit.me/admin/events/9b0c7f52-3c1e-4a8e-9a55-1f0f6c2d8e11/applicants?applicant=0d3f4b2a-6c1e-4f7a-8b9c-2e5d1a7f9c30
+All requests: https://events.didit.me/admin/events/9b0c7f52-3c1e-4a8e-9a55-1f0f6c2d8e11/applicants
+
+--
+You host or created this event on Didit Events, so you get its new requests.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+All requests: https://events.didit.me/admin/events/9b0c7f52-3c1e-4a8e-9a55-1f0f6c2d8e11/applicants
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-26 copy 1`] = `
+{
+  "preheader": "Requests are arriving quickly, so we grouped them into one email.",
+  "subject": "3 new requests for Building, Raising & Scaling in the AI Era",
+  "text": "HOSTS · NEW REQUESTS
+
+3 new requests
+
+3 more people asked to join Building, Raising & Scaling in the AI Era since Thu 1 Oct, 11:20 CEST. Requests are arriving quickly, so we grouped them into one email.
+
+11:21: María García · Building trust infrastructure for fintech, Acme Pay
+11:24: Jordi Puig · Payments engineer, Solaris
+11:27: Ana Ruiz · Investor, Seaside Ventures · waitlist
+
+Pending: 14 requests
+Waitlist: 1 person
+Places left: 0 of 80
+
+Review requests: https://events.didit.me/admin/events/9b0c7f52-3c1e-4a8e-9a55-1f0f6c2d8e11/applicants
+
+--
+You host or created this event on Didit Events, so you get its new requests.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+All requests: https://events.didit.me/admin/events/9b0c7f52-3c1e-4a8e-9a55-1f0f6c2d8e11/applicants
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-27 copy 1`] = `
+{
+  "preheader": "Alejandro Ruiz added you to the Building, Raising & Scaling in the AI Era team. Thu 8 Oct.",
+  "subject": "You're on the door team for Building, Raising & Scaling in the AI Era",
+  "text": "DOOR TEAM
+
+You're on the door team
+
+Alejandro Ruiz added you as a door operator for Building, Raising & Scaling in the AI Era. You can see the guest list, check guests in by hand and run the door with face check-in. Open the event before doors open to try Test mode.
+
+Open the event: https://events.didit.me/admin/events/ai-era
+
+When: Thu 8 Oct 2026, 18:30–21:30 CEST
+Where: Didit HQ, Carrer de Pallars 99, Barcelona
+
+--
+Sign in with this email address, using Google or a Didit email code. You only see Building, Raising & Scaling in the AI Era.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Didit Events: https://events.didit.me
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-28 copy 1`] = `
+{
+  "preheader": "Your account is ready. Verify once and you're recognised at every Didit event door.",
+  "subject": "Welcome to Didit Events",
+  "text": "ACCOUNT CREATED
+
+Welcome, María
+
+Your Didit Events account is ready. You verify you're human once, with a quick selfie, and you're recognised at every Didit event door. Hosts see your profile, never your selfie.
+
+Explore events: https://events.didit.me/events
+
+Hosts decide from your profile. Complete your profile: https://events.didit.me/me/profile/edit
+
+--
+You created an account on events.didit.me.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Email preferences: https://events.didit.me/me/settings
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > M-29 copy 1`] = `
+{
+  "preheader": "Hosts decide from your profile. It takes a minute.",
+  "subject": "Finish your Didit Events profile",
+  "text": "YOUR PROFILE
+
+Hi María, your profile is almost there
+
+Hosts see your photo, name, role, company and a link when you ask for a place, so a complete profile gets you in faster.
+
+STILL TO ADD
+[ ] Profile photo
+[ ] Headline
+
+Complete my profile: https://events.didit.me/me/profile/edit
+
+--
+You created an account on events.didit.me. This is a one-time reminder.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Email preferences: https://events.didit.me/me/settings
+",
+}
+`;
+
+exports[`email copy (snapshot per code) > T-01 copy 1`] = `
+{
+  "preheader": "You can open the Didit Events admin as Admin. Sign in with Google using uma.bramwell@didit.me.",
+  "subject": "Alberto Rosas invited you to Didit Events",
+  "text": "TEAM INVITE
+
+You are on the Didit Events team
+
+Alberto Rosas invited you to the Didit Events admin as Admin. Runs events and manages the team, except owners. Sign in with Google using your @didit.me account (uma.bramwell@didit.me).
+
+Open Didit Events admin: https://events.didit.me/admin
+
+Invited by: Alberto Rosas (events.owner@didit.me)
+Role: Admin
+Sign in: Google, as uma.bramwell@didit.me
+
+WHAT ADMIN CAN DO
+·  Everything staff can do
+·  Invite teammates as admin or staff
+·  Disable and restore access for admins and staff
+·  Approve guests over capacity
+·  Delete events and recover verifications
+
+Not expecting this? Ignore this email. Nothing happens until you sign in.
+
+--
+A Didit Events owner or admin invited this address on events.didit.me.
+Didit Identity Spain, S.L. · Carrer de Pallars 99, 08018 Barcelona
+Privacy: https://events.didit.me/privacy
+",
+}
+`;

@@ -1,0 +1,57 @@
+/* /admin/calendar: the A-11 Settings section look (17px titles, 28px rhythm, 760 content) + a live P-03 preview. */
+/* The page box is a size container: the image slots, the links grid and the save row follow the content column. */
+.page { container: calendar / inline-size; }
+.content { display: flex; flex-direction: column; gap: 28px; max-width: 760px; min-width: 0; }
+.form { display: flex; flex-direction: column; gap: 28px; }
+.section { display: flex; flex-direction: column; gap: 12px; }
+.form .section { padding-top: 24px; border-top: 1px solid var(--border); }
+.title { margin: 0; font: 500 17px/normal var(--font-sans); color: var(--black); }
+.note { margin: 0; font: 400 13px/normal var(--font-sans); color: var(--high); }
+.hint { font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+.error { margin: 0; font: 400 12px/normal var(--font-sans); color: var(--danger-fg); }
+.bio textarea { height: 112px; }
+.counter { font-feature-settings: "tnum"; }
+.counter[data-over] { color: var(--danger-fg); }
+.linksGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.saveRow { display: flex; align-items: center; gap: 12px; }
+.meta { font: 400 13px/normal var(--font-sans); color: var(--mid-high); }
+
+/* Live preview: the public header, on the same 760px column as the sections under it (one right edge). */
+.preview { display: flex; flex-direction: column; gap: 8px; max-width: 760px; }
+.previewLabel { font: 500 12px/normal var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--mid-high); }
+.previewFrame { display: flex; flex-direction: column; padding: 20px 20px 24px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--white); pointer-events: none; }
+.previewStats { font: 400 13px/normal var(--font-sans); color: var(--mid-high); }
+.fakeButton { display: inline-flex; align-items: center; height: 40px; padding: 0 18px; border-radius: var(--radius-full); background: var(--black); color: var(--white); font: 500 14px/normal var(--font-sans); }
+
+/* Image slots: the cover shown cropped like the banner (880 × 200), the logo as the transparent tile. */
+.slots { display: grid; grid-template-columns: minmax(0, 1fr) 200px; gap: 20px; align-items: start; }
+.slot { position: relative; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.slotLabel { font: 500 13px/normal var(--font-sans); color: var(--black); }
+.slotImage { position: relative; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--soft); }
+.slot[data-kind="cover"] .slotImage { aspect-ratio: 880 / 200; }
+.slot[data-kind="logo"] .slotImage { display: grid; place-items: center; width: 96px; height: 96px; border-radius: var(--radius-md); background: transparent; }
+.slotImage[data-busy]::after { content: ""; position: absolute; inset: 0; background: rgba(255, 255, 255, 0.55); }
+.slotImg { display: block; width: 100%; height: 100%; object-fit: cover; }
+.slotMark { width: 44px; height: 44px; object-fit: contain; }
+.slotButtons { display: flex; gap: 8px; }
+.file { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+
+/* Three ~230px link fields cut the LinkedIn URL: two columns, LinkedIn on its own line. */
+@container calendar (max-width: 900px) {
+  .linksGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .linksGrid > :last-child { grid-column: 1 / -1; }
+}
+/* Narrow column (phones, and a tablet beside the sidebar): one column, 44px controls, 16px inputs (no iOS zoom). */
+@container calendar (max-width: 640px) {
+  .slots, .linksGrid { grid-template-columns: minmax(0, 1fr); }
+  .linksGrid > :last-child { grid-column: auto; }
+  .form { --control-h: 44px; }
+  .form :is(input, textarea) { font-size: 16px; }
+  /* 36px pills with a 44px hit area. */
+  .slotButtons { --control-h-sm: 36px; }
+  .slotButtons button { position: relative; }
+  .slotButtons button::after { content: ""; position: absolute; inset: -4px 0; }
+}
+@container calendar (max-width: 480px) {
+  .saveRow { flex-direction: column; align-items: stretch; gap: 8px; }
+}

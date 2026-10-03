@@ -1,0 +1,246 @@
+/* P-01 public event page (design/04 AI Era Event). Two columns from 768px (a narrower side rail on tablets,
+ * 768–1023px; the 1440 design from 1024px), one column below; frames pick one layout. */
+.page { container-type: inline-size; background: var(--white); color: var(--black); font-family: var(--font-sans); }
+/* Base display before the query: a later plain `.desktop { display }` would win over the query and show both layouts. */
+.desktop { display: flex; }
+.mobile { display: none; }
+@container (max-width: 767px) {
+  .desktop { display: none; }
+  .mobile { display: flex; }
+}
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.tnum { font-feature-settings: "tnum"; }
+.accent { color: var(--brand); }
+.photo { flex: none; }
+
+/* ── Desktop ─────────────────────────────────────────────────── */
+.desktop { flex-direction: column; }
+.grid {
+  box-sizing: border-box; width: min(1000px, calc(100% - 64px)); margin: 0 auto; padding: 40px 0 64px;
+  display: grid; grid-template-columns: 330px minmax(0, 1fr); gap: 48px;
+}
+.side { display: flex; flex-direction: column; gap: 24px; }
+.coverDesktop, .coverMobile { position: relative; overflow: hidden; border-radius: var(--radius-md); flex: none; }
+.coverDesktop { width: 330px; height: 330px; box-shadow: var(--shadow-md); }
+.coverMobile { width: 358px; height: 358px; }
+.coverArt { transform-origin: 0 0; }
+.coverDesktop .coverArt { transform: scale(0.30556); }
+/* The art is a fixed 1080px canvas, scaled: the phone cover steps with the column (width − 32px gutters) and is
+ * centred in it, from 288px on a 320px phone up to 480px. scale = size / 1080. */
+.coverMobile { align-self: center; }
+.coverMobile .coverArt { transform: scale(0.33148); }
+@container (max-width: 389px) {
+  .coverMobile { width: 328px; height: 328px; }
+  .coverMobile .coverArt { transform: scale(0.3037); }
+}
+@container (max-width: 359px) {
+  .coverMobile { width: 288px; height: 288px; }
+  .coverMobile .coverArt { transform: scale(0.26667); }
+}
+@container (min-width: 420px) and (max-width: 767px) {
+  .coverMobile { width: 388px; height: 388px; }
+  .coverMobile .coverArt { transform: scale(0.35926); }
+}
+@container (min-width: 480px) and (max-width: 767px) {
+  .coverMobile { width: 448px; height: 448px; }
+  .coverMobile .coverArt { transform: scale(0.41481); }
+}
+@container (min-width: 512px) and (max-width: 767px) {
+  .coverMobile { width: 480px; height: 480px; }
+  .coverMobile .coverArt { transform: scale(0.44444); }
+}
+/* Tablet: a 260px rail leaves the main column 400px+ (the 330px rail squeezed it to 326px at 768). 260 / 1080. */
+@container (min-width: 768px) and (max-width: 1023px) {
+  .grid { grid-template-columns: 260px minmax(0, 1fr); gap: 32px; }
+  .coverDesktop { width: 260px; height: 260px; }
+  .coverDesktop .coverArt { transform: scale(0.24074); }
+}
+
+.sideBlock { display: flex; flex-direction: column; gap: 12px; padding-bottom: 20px; border-bottom: 1px solid var(--border-subtle); }
+.goingBlock { gap: 10px; }
+.eyebrow { margin: 0; font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; color: var(--mid-high); }
+.presenter { display: flex; align-items: center; gap: 12px; }
+.presenterMark { width: 40px; height: 40px; border-radius: var(--radius-sm); background: transparent; display: grid; place-items: center; flex: none; }
+.markImg { width: 24px; height: 24px; object-fit: contain; }
+.presenterText { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.presenterName { font: 500 15px/normal var(--font-sans); }
+.presenterTag { font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+.subscribe.subscribe { height: 28px; min-width: 0; padding: 0 12px; font-size: 13px; }
+.hosts { display: flex; flex-direction: column; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.host { display: flex; align-items: center; gap: 10px; }
+.hostName { flex: 1; font: 500 14px/normal var(--font-sans); }
+.hostRole { font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+.goingLine { font: 400 13px/normal var(--font-sans); color: var(--high); }
+.sideLinks { display: flex; flex-direction: column; gap: 8px; font: 500 13px/normal var(--font-sans); }
+.sideLinks a { color: var(--high); text-decoration: none; align-self: flex-start; }
+.sideLinks a:hover { color: var(--black); text-decoration: underline; }
+
+.main { display: flex; flex-direction: column; gap: 28px; min-width: 0; }
+.head { display: flex; flex-direction: column; gap: 14px; }
+.featured {
+  display: inline-flex; align-self: flex-start; align-items: center; gap: 6px; height: 24px; padding: 0 10px;
+  border-radius: var(--radius-full); background: var(--brand-soft); color: var(--brand-deep);
+  font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em;
+}
+.title { margin: 0; font: 500 44px/1.06 var(--font-sans); letter-spacing: -0.035em; text-wrap: balance; color: var(--black); }
+/* Tablet: the title scales with the page (34px at 768, 44px from 1000). After the base rule, so it wins. */
+@container (min-width: 768px) and (max-width: 1023px) {
+  .title { font-size: clamp(32px, 4.4cqi, 44px); }
+}
+.meta { display: flex; flex-direction: column; gap: 14px; }
+.metaRow { display: flex; align-items: center; gap: 14px; }
+.metaText { display: flex; flex-direction: column; gap: 2px; }
+.metaMain { font: 500 16px/normal var(--font-sans); color: var(--black); text-decoration: none; align-self: flex-start; }
+a.metaMain:hover { text-decoration: underline; color: var(--black); }
+.metaSub { font: 400 14px/normal var(--font-sans); color: var(--high); }
+
+.section { display: flex; flex-direction: column; gap: 14px; }
+.locationSection, .pastSection { gap: 12px; }
+/* The agenda's first row sits on the title's rule: the rows bring their own padding. */
+.agendaSection { gap: 0; }
+.sectionTitle, .pastTitle { margin: 0; font: 500 13px/normal var(--font-sans); letter-spacing: normal; color: var(--mid-high); }
+.sectionTitle { padding-bottom: 8px; border-bottom: 1px solid var(--border-subtle); }
+.about { margin: 0; font: 400 16px/1.6 var(--font-sans); }
+/* About event: the vertical rhythm of the Markdown description, in both layouts. 14px between blocks (12px on
+ * phones), 24px before a heading and 8px after it, 6px between list items. */
+.about, .mAbout { overflow-wrap: anywhere; }
+:is(.about, .mAbout) > * { margin: 0; }
+/* The global `p` sets its own size and line height: paragraphs take the section's. */
+:is(.about, .mAbout) p { font-size: inherit; line-height: inherit; }
+:is(.about, .mAbout) > * + * { margin-top: 14px; }
+.mAbout > * + * { margin-top: 12px; }
+:is(.about, .mAbout) :is(h2, h3, h4) { font-weight: 500; letter-spacing: -0.015em; color: var(--black); text-wrap: balance; }
+:is(.about, .mAbout) h2 { font-size: 20px; line-height: 1.3; }
+:is(.about, .mAbout) h3 { font-size: 17px; line-height: 1.35; }
+:is(.about, .mAbout) h4 { font-size: 15px; line-height: 1.4; letter-spacing: normal; }
+:is(.about, .mAbout) > * + :is(h2, h3, h4) { margin-top: 24px; }
+:is(.about, .mAbout) > :is(h2, h3, h4) + * { margin-top: 8px; }
+:is(.about, .mAbout) :is(ul, ol) { padding-left: 22px; }
+:is(.about, .mAbout) li + li, :is(.about, .mAbout) li > :is(ul, ol) { margin-top: 6px; }
+:is(.about, .mAbout) :is(li, blockquote) > p { margin: 0; }
+:is(.about, .mAbout) :is(li, blockquote) > p + p { margin-top: 6px; }
+:is(.about, .mAbout) blockquote { padding-left: 14px; border-left: 2px solid var(--border); color: var(--high); }
+:is(.about, .mAbout) a { color: var(--brand); text-decoration: underline; text-underline-offset: 2px; }
+:is(.about, .mAbout) code { padding: 1px 4px; border-radius: 4px; background: var(--soft); font: 400 0.875em/1.5 var(--font-mono, ui-monospace, monospace); }
+:is(.about, .mAbout) pre { padding: 12px 14px; border-radius: var(--radius-xs); background: var(--soft); overflow-x: auto; overflow-wrap: normal; }
+:is(.about, .mAbout) pre code { padding: 0; background: none; }
+:is(.about, .mAbout) img { display: block; border-radius: var(--radius-sm); }
+/* A YouTube line of the description: a 16:9 embed (sized inline by the renderer), set apart from the text. */
+:is(.about, .mAbout) > * + iframe, :is(.about, .mAbout) > iframe + * { margin-top: 20px; }
+
+/* Agenda: a two-column table. The time column is as wide as its longest time ("19:10–20:00") and never wraps; the
+ * item wraps inside its own column, so nothing overflows on a 320px phone. Rows are separated by the line token. */
+.agenda { width: 100%; margin: 0; border-collapse: collapse; border-spacing: 0; }
+.agendaRow > td { padding: 12px 0; vertical-align: baseline; text-align: left; }
+.agendaRow + .agendaRow > td { border-top: 1px solid var(--border-subtle); }
+.agendaRow > .agendaTime {
+  width: 1%; padding-right: 20px; white-space: nowrap; font: 500 14px/1.45 var(--font-sans); color: var(--mid-high);
+  font-variant-numeric: tabular-nums; font-feature-settings: "tnum";
+}
+.agendaLabel { font: 400 16px/1.45 var(--font-sans); color: var(--black); overflow-wrap: anywhere; text-wrap: pretty; }
+.agendaStrong { font-weight: 500; }
+
+.panel { border: 1px solid var(--border); border-radius: var(--radius-md); padding: 22px; display: flex; flex-direction: column; gap: 16px; }
+.panelTop { display: flex; justify-content: space-between; align-items: center; }
+.panelKicker { font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; color: var(--brand); }
+.panelTime { font: 500 12px/normal var(--font-sans); color: var(--mid-high); font-feature-settings: "tnum"; }
+.panelTitle { margin: 0; font: 500 24px/1.2 var(--font-sans); letter-spacing: -0.025em; }
+.panelBody { margin: 0; font: 400 14px/1.55 var(--font-sans); color: var(--high); }
+.people { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 0; padding: 6px 0 0; list-style: none; }
+.person { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.personText { display: flex; flex-direction: column; gap: 2px; }
+.personName { font: 500 13px/normal var(--font-sans); }
+.personRole { font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+
+.venueName { font: 500 16px/normal var(--font-sans); }
+.venueLine { font: 400 14px/normal var(--font-sans); color: var(--high); }
+.map {
+  height: 220px; border-radius: var(--radius-sm); background: var(--soft); display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 10px; font: 500 14px/normal var(--font-sans); color: var(--high); text-decoration: none;
+}
+.map:hover { text-decoration: none; color: var(--black); }
+
+.pastHead { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 8px; border-bottom: 1px solid var(--border-subtle); }
+.seeAll { font: 500 13px/normal var(--font-sans); color: var(--brand); text-decoration: none; }
+.pastGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 0; padding: 0; list-style: none; }
+.pastCard { display: flex; flex-direction: column; gap: 8px; color: inherit; text-decoration: none; }
+.pastCard:hover { text-decoration: none; color: inherit; }
+.pastThumb {
+  position: relative; overflow: hidden; box-sizing: border-box; height: 140px; border-radius: var(--radius-sm); display: flex; align-items: flex-end; padding: 12px;
+  border: 1px solid var(--border-subtle);
+}
+/* The cover photo fills its thumb (a lazy <img>, under the title). */
+.thumbImg { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
+.pastThumbTitle { position: relative; font: 500 15px/1.15 var(--font-sans); letter-spacing: -0.02em; color: var(--black); max-width: 150px; }
+.pastName { font: 500 14px/normal var(--font-sans); }
+.pastMeta { font: 400 12px/normal var(--font-sans); color: var(--mid-high); font-feature-settings: "tnum"; }
+
+.sideLinks a:focus-visible, .metaMain:focus-visible, .map:focus-visible, .pastCard:focus-visible, .seeAll:focus-visible, .mPastRow:focus-visible, .mMetaMain:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); border-radius: 4px;
+}
+
+/* ── Mobile 390 ──────────────────────────────────────────────── */
+.mobile { flex-direction: column; position: relative; }
+.mBody { padding: 0 16px 31px; display: flex; flex-direction: column; gap: 22px; }
+.mTitle { margin: 0; font: 500 30px/1.08 var(--font-sans); letter-spacing: -0.035em; }
+.mMeta { display: flex; flex-direction: column; gap: 12px; }
+.mMetaRow { display: flex; align-items: center; gap: 12px; }
+.mMetaText { display: flex; flex-direction: column; }
+.mMetaMain { font: 500 15px/normal var(--font-sans); color: var(--black); text-decoration: none; align-self: flex-start; }
+/* The venue link jumps to the map: a 44px touch target around the same line of text. */
+a.mMetaMain { padding: 13px 0; margin: -13px 0; }
+.mMetaSub { font: 400 14px/normal var(--font-sans); color: var(--high); }
+.notice { padding: 14px; border-radius: var(--radius-sm); background: var(--ultra-soft); display: flex; flex-direction: column; gap: 6px; }
+.noticeTitle { font: 500 14px/normal var(--font-sans); }
+.noticeBody { font: 400 14px/1.5 var(--font-sans); color: var(--high); }
+.mobileCard { width: 100%; }
+.mSection { display: flex; flex-direction: column; gap: 10px; }
+.mSectionTitle { margin: 0; font: 500 13px/normal var(--font-sans); letter-spacing: normal; color: var(--mid-high); }
+.mAbout { margin: 0; font: 400 15px/1.6 var(--font-sans); }
+/* Phones: the section title has no rule, so the table opens with one; a narrower gap after the time. */
+.mobile .agenda { border-top: 1px solid var(--border-subtle); }
+.mobile .agendaRow > .agendaTime { padding-right: 14px; }
+.mobile .agendaLabel { font-size: 15px; }
+.mPanel { border: 1px solid var(--border); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+.mPanelTitle { margin: 0; font: 500 18px/1.25 var(--font-sans); letter-spacing: -0.02em; }
+.mPeople { display: flex; margin: 0; padding: 4px 0 0; list-style: none; }
+.mPeople li { display: flex; margin-right: -6px; }
+.mPeople .photo { border: 2px solid var(--white); }
+.mHosts { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.mHost { display: flex; align-items: center; gap: 10px; }
+.mHost .hostName { flex: none; }
+.mPast { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.mPastRow { display: flex; gap: 12px; align-items: center; color: inherit; text-decoration: none; }
+.mPastRow:hover { text-decoration: none; color: inherit; }
+.mPastRow { min-height: 56px; }
+.mPastThumb { position: relative; overflow: hidden; width: 56px; height: 56px; border-radius: var(--radius-sm); flex: none; }
+.mPastText { display: flex; flex-direction: column; }
+.mPastMeta { font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+
+/* What the desktop side rail holds, on a phone: presenter + Subscribe (a 36px pill in a 44px touch target) and the
+ * contact / report links (44px rows). The footer is SiteFooter (it stacks by its own width). */
+.mobile .subscribe.subscribe { height: 44px; padding: 0 14px; border: solid transparent; border-width: 4px 0; background-clip: padding-box; }
+.mobile .sideLinks { gap: 0; font-size: 14px; }
+.mobile .sideLinks a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Sticky bottom bar: 12px 16px, plus the home-indicator inset where the viewport covers it; subtle top rule;
+ * 48px CTA, 0 20px, 500 15px. */
+.bar {
+  position: sticky; bottom: 0; z-index: 1; box-sizing: border-box; padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)); background: var(--white);
+  border-top: 1px solid var(--border-subtle); display: flex; align-items: center; gap: 12px;
+}
+.barText { flex: 1; display: flex; flex-direction: column; }
+.barMain { font: 500 14px/normal var(--font-sans); }
+.barSub { font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+.barCta.barCta { height: 48px; }
+
+/* Location: a live Google Maps preview with the open-in-Maps link on top. */
+.mVenue { display: flex; flex-direction: column; gap: 4px; }
+.locationSection, .mSection[id] { scroll-margin-top: 80px; }
+.mapEmbed { position: relative; margin-top: 12px; border-radius: 12px; overflow: hidden; background: var(--color-surface-muted, #f1f1f3); aspect-ratio: 16 / 7; min-height: 200px; }
+.mapEmbed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* Phones: the cover fills the body column (same left/right edge as the title) at any width; the 1080px art scales
+ * by column / 1080 (tan(atan2()) turns the length ratio into a number). */
+.mBody .coverMobile { width: 100%; height: auto; aspect-ratio: 1 / 1; align-self: stretch; container-type: inline-size; }
+.mBody .coverMobile .coverArt { transform: scale(tan(atan2(100cqw, 1080px))); }

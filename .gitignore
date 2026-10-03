@@ -1,0 +1,18 @@
+node_modules/
+.next/
+.data/
+.env*
+!.env.example
+.vitest-tmp/
+coverage/
+.mcp.json
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+.pnpm-store/
+
+# Alternate Next dist dirs (NEXT_DIST_DIR), e.g. local browser gates
+.next-*/
+
+# Local email audit output (pnpm email:audit)
+tmp/

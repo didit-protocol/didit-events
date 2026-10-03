@@ -1,0 +1,119 @@
+/* A-09 check-in log (design/01b Admin, "log" block). Text sets line-height: normal (the app body uses 1.55). */
+
+/* Filter bar: segmented · chips (flex 1) · door select · "Show only people". */
+.toolbar { display: flex; align-items: center; gap: 12px; }
+.seg { align-self: center; flex: none; padding: 2px; font: 500 13px/normal var(--font-sans); }
+.seg > a { padding: 6px 14px; }
+.chips { flex: 1; min-width: 0; }
+.filterForm { display: flex; align-items: center; gap: 12px; flex: none; }
+.door select { width: auto; height: 32px; padding: 0 30px 0 12px; font: 400 13px/normal var(--font-sans); }
+.door svg { right: 10px; }
+.people { color: var(--black); white-space: nowrap; }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.chipsPending { display: flex; gap: 6px; flex: 1; }
+
+/* Table: 36px head + 48px rows (design boxes are content-box, so each row is 49px with its 1px rule). */
+.table { --row-h: 49px; }
+.table [role="row"] { column-gap: 12px; font: 400 13px/normal var(--font-sans); font-feature-settings: "tnum"; }
+.table [role="rowgroup"]:first-child [role="row"] { height: 37px; font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; }
+.table [role="rowgroup"] + [role="rowgroup"] [role="row"]:last-child { border-bottom-color: var(--border-subtle); }
+.table [role="row"]:has([aria-colspan]) { border-bottom-color: transparent !important; }
+.table [aria-colspan] { padding: 0; }
+.missing { --row-h: 53px; }
+.muted { color: var(--high); }
+.none { color: var(--mid); }
+.guest { font-weight: 500; }
+.low { color: var(--danger-fg); }
+.name { font: 500 14px/normal var(--font-sans); }
+.phone { color: var(--brand); font-weight: 500; }
+.phone:hover { color: var(--brand-deep); }
+.actions { font-weight: 500; color: var(--black); }
+.actions a { color: inherit; }
+.actions a:hover { color: var(--brand-deep); }
+
+/* Empty (A-09c/d): 96px 24px, 44px face-scan icon, 500 17px title, 400 14px help. */
+.empty { border: 0; border-radius: 0; padding: 96px 24px; gap: 8px; }
+.empty h3 { font-size: 17px; }
+.empty p { font-size: 14px; }
+.empty svg { display: block; }
+
+/* v5: the guest cell (avatar, name, badge) and the TEST tag; rows open the drawer. */
+.guestCell { display: flex; min-width: 0; }
+.guestCell a { color: inherit; text-decoration: none; }
+.guestCell a:hover { text-decoration: underline; }
+.guestCell a:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 2px; }
+.anon { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.face { display: inline-grid; place-items: center; flex: none; border-radius: 50%; background: var(--soft); color: var(--mid); box-shadow: inset 0 0 0 1px var(--border-subtle); }
+.result { display: inline-flex; align-items: center; gap: 6px; min-width: 0; }
+
+/* The scan panel (rows without a registration). */
+.facts { margin: 0; display: flex; flex-direction: column; }
+.fact { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border-subtle); font: 400 14px/normal var(--font-sans); }
+.fact dt { color: var(--high); }
+.fact dd { margin: 0; color: var(--black); font-feature-settings: "tnum"; }
+
+/* 1024 and tablets: the result chips take their own row; the table fits its box (no clipped columns) without Latency. */
+@container admin (max-width: 1100px) {
+  .toolbar { flex-wrap: wrap; row-gap: 10px; }
+  .toolbar .chips, .chipsPending { order: 3; flex: 1 1 100%; }
+  .chipsPending { flex-wrap: wrap; }
+  .toolbar .chips:empty { display: none; }
+  .filterForm { margin-left: auto; }
+  .table [role="table"] { min-width: 0; }
+  .table:not(.missing) [role="row"] { grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr) minmax(0, 1.6fr) minmax(0, 0.6fr) minmax(0, 1fr) !important; }
+  .table:not(.missing) [role="row"] > :nth-child(6) { display: none; }
+  .missing [role="row"] { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.6fr) minmax(0, 1fr) 180px !important; }
+  .missing [role="row"] > :nth-child(4) { display: none; }
+}
+/* Phones: 16px gutters, 44px controls, one chip row that scrolls inside the gutters (the right edge fades to show
+   there is more). Each scan is a card: result and time on the first line, the guest and the door on the second; the
+   whole card opens the drawer, which has the rest. */
+@container admin (max-width: 600px) {
+  .toolbar { padding: 16px 16px 0; }
+  .toolbar .seg { flex: 1 1 100%; }
+  .toolbar .seg > a { flex: 1; display: inline-flex; align-items: center; justify-content: center; min-height: 44px; box-sizing: border-box; }
+  .toolbar .chips {
+    flex-wrap: nowrap; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; margin: -6px 0; padding: 6px 28px 6px 0;
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
+  }
+  .toolbar .chips::-webkit-scrollbar { display: none; }
+  .toolbar .chips > a { position: relative; flex: none; }
+  .toolbar .chips > a::after { content: ""; position: absolute; inset: -6px 0; }
+  .filterForm { flex: 1 1 100%; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-left: 0; --control-h: 44px; }
+  .filterForm .door select { height: 44px; font-size: 16px; }
+  /* The whole label is the 44px target, with the switch centred on the select beside it. */
+  .filterForm .people { align-items: center; min-height: 44px; }
+  .table { margin: 16px 16px 0; }
+  /* The column names stay for screen readers; the cards speak for themselves. */
+  .table:not(.missing) [role="rowgroup"]:first-child { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .table:not(.missing) [role="rowgroup"] + [role="rowgroup"] [role="row"]:not(:has([aria-colspan])) {
+    position: relative; grid-template-columns: minmax(0, 1fr) auto !important; grid-template-areas: "result time" "guest door";
+    gap: 8px 12px; height: auto; min-height: 44px; padding: 12px 16px;
+  }
+  .table:not(.missing) [role="row"] > :nth-child(1):not([aria-colspan]) { grid-area: time; justify-self: end; overflow: visible; text-overflow: clip; }
+  .table:not(.missing) [role="row"] > :nth-child(2) { grid-area: result; }
+  .table:not(.missing) [role="row"] > :nth-child(3) { grid-area: guest; }
+  .table:not(.missing) [role="row"] > :nth-child(5) { display: block; grid-area: door; justify-self: end; max-width: 40cqi; }
+  .table:not(.missing) [role="row"] > :nth-child(4) { display: none; }
+  /* A scan that matched nobody: the result pill already says so ("Unknown face"), so the second line is the door
+     alone. The name link stays for the keyboard and screen readers. */
+  .table:not(.missing) [role="row"]:has(.anon) > :nth-child(3) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .table:not(.missing) [role="row"]:has(.anon) > :nth-child(5) { grid-area: guest; justify-self: start; max-width: none; }
+  .missing [role="row"] { grid-template-columns: minmax(0, 1fr) auto !important; }
+  .missing [role="row"] > :nth-child(2), .missing [role="row"] > :nth-child(3) { display: none; }
+  .actions a { display: inline-block; padding-block: 14px; }
+  .empty { padding: 48px 16px; }
+}
+
+/* 390: both drawers are a bottom sheet (portalled outside the admin container: a viewport query). */
+@media (max-width: 600px) {
+  .sheet.sheet { align-self: end; width: 100vw; height: auto; max-height: 92dvh; border-radius: 16px 16px 0 0; }
+  .sheet > div:nth-child(2) { padding: 8px 16px 24px; }
+  .fact { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+}
+@media (max-width: 600px) and (prefers-reduced-motion: no-preference) {
+  .sheet.sheet { animation: sheet var(--motion-ui) var(--ease-enter); }
+}
+@keyframes sheet { from { transform: translateY(24px); opacity: 0; } }
+
+@media (max-width: 640px) { a.guest { display: inline-block; padding-block: 14px; margin-block: -14px; } }

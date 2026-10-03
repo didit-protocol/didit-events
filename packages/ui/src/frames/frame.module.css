@@ -1,0 +1,14 @@
+/* Shared layout of the T-00 / C-00 foundation frames (00 Foundations.dc.html). */
+.frame {
+  display: flex; flex-direction: column; gap: 56px; box-sizing: border-box; width: 1440px; padding: 64px;
+  background: var(--white); border-radius: 4px; box-shadow: var(--shadow-segment); color: var(--black);
+  font-family: var(--font-sans);
+}
+.head { display: flex; flex-direction: column; gap: 8px; }
+.kicker { font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand); }
+.title { font: 500 48px/1.05 var(--font-sans); letter-spacing: -0.035em; }
+.lede { font: 400 16px/1.5 var(--font-sans); color: var(--high); max-width: 640px; }
+.section { display: flex; flex-direction: column; gap: 16px; }
+.eyebrow { font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid-high); }
+.caption { font: 400 13px/normal var(--font-sans); color: var(--high); }
+.row { display: flex; gap: 12px; align-items: center; }

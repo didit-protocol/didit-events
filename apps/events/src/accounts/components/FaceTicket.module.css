@@ -1,0 +1,19 @@
+/* 04 R-19 face ticket: radius 24, 150px cover head, 18px padding, dashed 2×2 grid. */
+.ticket { overflow: hidden; border: 1px solid var(--border); border-radius: 24px; box-shadow: var(--shadow-md); }
+.head {
+  box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; height: 150px; padding: 18px;
+  border-bottom: 1px solid var(--border-subtle); background-position: center; background-size: cover; color: var(--black);
+}
+.head img { display: block; align-self: flex-start; }
+.name { margin: 0; font: 500 20px/1.15 var(--font-sans); letter-spacing: -0.02em; }
+.accent { color: var(--brand); }
+.foot { display: flex; flex-direction: column; gap: 14px; padding: 18px; }
+.who { display: flex; align-items: center; gap: 12px; }
+.check { display: grid; place-items: center; flex: none; width: 48px; height: 48px; border-radius: 50%; background: var(--success); }
+.whoText { display: flex; flex-direction: column; min-width: 0; overflow-wrap: anywhere; }
+.guest { font: 500 17px/normal var(--font-sans); }
+.verified { font: 400 13px/normal var(--font-sans); color: var(--success-fg); }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0; padding-top: 12px; border-top: 1px dashed var(--border-dashed); }
+.cell { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.k { font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; color: var(--mid-high); }
+.v { margin: 0; font: 500 14px/normal var(--font-sans); overflow-wrap: anywhere; }

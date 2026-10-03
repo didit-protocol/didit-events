@@ -1,0 +1,66 @@
+/* C-00 Buttons: 36px pill, 0 16px, 500 14px, min-width 88; icon button 36×36. */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+  height: var(--control-h);
+  min-width: 88px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: var(--radius-full);
+  font: 500 14px/normal var(--font-sans);
+  letter-spacing: normal;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  background: var(--bg);
+  color: var(--fg);
+  transition: background-color var(--duration-fast) var(--ease-standard), opacity var(--duration-fast) var(--ease-standard), transform var(--duration-fast) var(--ease-standard);
+  -webkit-tap-highlight-color: transparent;
+}
+.button:hover { text-decoration: none; }
+.button:hover:not(:disabled, [aria-disabled="true"]), .button[data-state="hover"] { background: var(--bg-hover); }
+.button:active:not(:disabled, [aria-disabled="true"]), .button[data-state="pressed"] { background: var(--bg-pressed); transform: scale(var(--press-scale)); }
+.button:focus-visible, .button[data-state="focus"] {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+.button:disabled, .button[aria-disabled="true"] { opacity: var(--disabled-opacity); cursor: not-allowed; }
+.button[aria-busy="true"] { opacity: 1; cursor: progress; }
+/* A disabled destructive button is a danger tint with the dark danger label (4.9:1): white on faded red (≈1.6:1)
+ * read as a broken error state, and the neutral grey pill was identical to the secondary "Keep…" button below it. */
+.destructive:disabled:not([aria-busy="true"]), .destructive[aria-disabled="true"]:not([aria-busy="true"]) { --bg: var(--danger-bg); --fg: var(--danger-fg); opacity: 1; }
+
+.primary     { --bg: var(--btn-primary);   --bg-hover: var(--btn-primary-hover);   --bg-pressed: var(--btn-primary-pressed);   --fg: var(--white); }
+.secondary,
+.icon        { --bg: var(--btn-secondary); --bg-hover: var(--btn-secondary-hover); --bg-pressed: var(--btn-secondary-pressed); --fg: var(--black); }
+.ghost       { --bg: transparent;          --bg-hover: var(--btn-ghost-hover);     --bg-pressed: var(--btn-ghost-pressed);     --fg: var(--black); }
+.destructive { --bg: var(--btn-danger);    --bg-hover: var(--btn-danger-hover);    --bg-pressed: var(--btn-danger-pressed);    --fg: #FFFFFF; }
+/* 01b Revoke / End event: 1px #FF4141 outline, #C42121 label, white fill. */
+.dangerOutline { --bg: transparent; --bg-hover: var(--danger-bg); --bg-pressed: var(--danger-bg); --fg: var(--danger-fg); border: 1px solid var(--danger); }
+
+/* "Continue with Google" (05 U-01, DA-01): white pill, 1px mid @60% border. Sizes are the shared ones, so it always
+ * matches the button next to it. */
+.outline { --bg: var(--white); --bg-hover: var(--ultra-soft); --bg-pressed: var(--soft); --fg: var(--black); border: 1px solid rgba(157,161,161,0.6); }
+
+/* xs: the 28px table-row action (05 AP-01 Approve / Waitlist / Reject). */
+.xs { height: 28px; min-width: 0; padding: 0 12px; font-size: 12px; gap: 6px; }
+.sm { height: var(--control-h-sm); min-width: 0; padding: 0 14px; font-size: 13px; gap: 6px; }
+.lg { height: var(--control-h-lg); padding: 0 20px; font-size: 15px; gap: 10px; }
+/* xl: the 52px guest-page CTA (02 Guest, 04 AI Era): 500 16px. A surface with its own button size (the guest sheets:
+ * 44px / 500 15px, like the join sheet) sets --cta-h, --cta-pad and --cta-font once for every CTA inside it. */
+.xl { height: var(--cta-h, 52px); padding: 0 var(--cta-pad, 24px); font-size: var(--cta-font, 16px); gap: 10px; }
+.icon { width: var(--control-h); min-width: var(--control-h); padding: 0; }
+.icon.sm { width: var(--control-h-sm); min-width: var(--control-h-sm); padding: 0; }
+.icon.lg { width: var(--control-h-lg); min-width: var(--control-h-lg); padding: 0; }
+.block { display: flex; width: 100%; }
+
+/* Phones: every button is at least a 44px tap target (the visual design above 640px is unchanged). */
+@media (max-width: 640px) { .button { min-height: 44px; } }
+/* Reduced motion: the pressed colour still answers the tap; nothing scales. */
+@media (prefers-reduced-motion: reduce) {
+  .button { transition: none; }
+  .button:active:not(:disabled, [aria-disabled="true"]), .button[data-state="pressed"] { transform: none; }
+}

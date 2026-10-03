@@ -1,0 +1,46 @@
+/* The one site header. The bar sizes itself from its own width (the header is its container): 56px with a 16px
+ * gutter below 768px, 64px above, where the logo and the account control sit on a 1000px column (--header-max-w),
+ * never closer than 32px to the edge. Logo 24px and avatar 32px on every page; each is a 44px touch target. */
+.header { container: site-header / inline-size; position: relative; z-index: 50; box-sizing: border-box; flex: none; width: 100%; background: var(--white); }
+.bar {
+  box-sizing: border-box; height: var(--header-h); display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 0 max(32px, calc((100% - var(--header-max-w)) / 2));
+}
+/* The logo keeps its size; the link box around it is a 44px touch target. */
+.brand { display: flex; flex: none; align-items: center; gap: 10px; min-height: var(--tap-target); border-radius: 4px; text-decoration: none; }
+.brand:hover { text-decoration: none; }
+.brand img { display: block; width: auto; height: var(--header-logo-h); }
+.tag {
+  padding: 3px 7px; border-radius: var(--radius-xs); background: var(--chip);
+  font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; color: var(--mid-high);
+}
+.nav { display: flex; align-items: center; gap: 24px; min-width: 0; font: 500 14px/normal var(--font-sans); color: var(--high); }
+.clock { font-feature-settings: "tnum"; color: var(--mid-high); white-space: nowrap; }
+.link { color: var(--high); text-decoration: none; white-space: nowrap; }
+.link:hover { color: var(--black); text-decoration: none; }
+.brand:focus-visible, .link:focus-visible, .avatarLink:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset);
+}
+/* Sign in pill: 32px, 0 14px, 500 13px (P-03). */
+.signIn.signIn { height: 32px; min-width: 0; padding: 0 14px; font-size: 13px; }
+/* Right-side note of the Didit-hosted steps ("Secure verification"). */
+.note { font: 500 12px/normal var(--font-sans); color: var(--mid-high); white-space: nowrap; }
+/* A plain avatar link (flow screens that know only the guest's initials): the menu's 32px avatar and 44px target. */
+.avatarLink {
+  display: flex; padding: calc((var(--tap-target) - var(--header-avatar)) / 2); margin: calc((var(--header-avatar) - var(--tap-target)) / 2);
+  border-radius: 50%; text-decoration: none;
+}
+.avatarLink:hover { text-decoration: none; }
+
+/* Signed-in staff (admin session) on public pages. */
+.staff { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: #eef6f0; color: #1f6b3a; font-size: 13px; text-decoration: none; white-space: nowrap; }
+.staff:hover { text-decoration: underline; }
+.staffDot { width: 6px; height: 6px; border-radius: 50%; background: #2fa35a; }
+
+/* Phones: only the logo and the avatar (or Sign in): no EVENTS tag. Explore events and My events move into the avatar menu. */
+@container site-header (max-width: 767px) {
+  .bar { height: var(--header-h-phone); padding: 0 16px; }
+  .clock, .staff, .link, .tag { display: none; }
+  /* Still a 36px pill: the transparent 4px borders make the box a 44px touch target. */
+  .signIn.signIn { height: var(--tap-target); border: solid transparent; border-width: 4px 0; background-clip: padding-box; }
+}

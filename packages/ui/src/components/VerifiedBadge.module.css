@@ -1,0 +1,11 @@
+.badge { position: relative; display: inline-flex; flex: none; vertical-align: -0.15em; border-radius: 50%; cursor: default; }
+.badge svg { display: block; }
+.badge:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.tip {
+  position: fixed; z-index: 1000; transform: translate(-50%, -100%); display: flex; flex-direction: column; gap: 3px;
+  max-width: 260px; padding: 9px 11px; border-radius: 8px; background: #1A1A1A; color: #FEFEFE;
+  font: 400 12px/1.4 var(--font-sans); letter-spacing: -0.01em; box-shadow: 0 6px 20px -6px rgba(26, 26, 26, 0.45); pointer-events: none;
+}
+.tip b { font-weight: 500; }
+.tip span { color: rgba(254, 254, 254, 0.78); }
+.below { transform: translate(-50%, 0); }

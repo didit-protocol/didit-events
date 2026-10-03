@@ -1,0 +1,26 @@
+{
+  "session_id": "10000000-0000-4000-8000-000000000001",
+  "workflow_id": "00000000-0000-4000-8000-00000000face",
+  "vendor_data": "fixture@example.test",
+  "status": "Approved",
+  "created_at": "2026-09-30T10:00:00Z",
+  "events": [
+    {
+      "event_type": "SESSION_STATUS_CHANGED",
+      "feature_step": null,
+      "created_at": "2026-09-30T10:05:00Z",
+      "details": {
+        "current_status": "Approved"
+      }
+    }
+  ],
+  "liveness_checks": [
+    {
+      "node_id": "age",
+      "status": "Approved",
+      "age_estimation": 17.99,
+      "matches": [],
+      "warnings": []
+    }
+  ]
+}

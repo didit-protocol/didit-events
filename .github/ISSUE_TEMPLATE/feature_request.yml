@@ -1,0 +1,46 @@
+name: Feature request
+description: Suggest an improvement or a new feature.
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Issues are public. Please do not include API keys, secrets, real guest data or photos of real people, also
+        not in examples or screenshots.
+
+        **Security problem?** This is the wrong form. Report it privately: https://github.com/didit-protocol/didit-events/security/advisories/new
+        (see [SECURITY.md](https://github.com/didit-protocol/didit-events/blob/main/SECURITY.md)).
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What are you trying to do, and what gets in the way today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What you would like
+      description: Describe the behaviour you have in mind. A sketch or an example helps.
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: An example
+      description: A concrete case that shows the need, as steps. Who does what, and what should happen at the end?
+      placeholder: |
+        1. A host opens ...
+        2. They ...
+        3. The app should ...
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you considered
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Contribution
+      options:
+        - label: I would like to work on this myself.

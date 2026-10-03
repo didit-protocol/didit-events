@@ -1,0 +1,80 @@
+/* A-11 Settings (design/01b Admin): 200px section nav, 40px gap, content max 760 with 28px between sections. */
+.layout { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 40px; min-height: 0; }
+.nav { display: flex; flex-direction: column; gap: 2px; font: 500 14px/normal var(--font-sans); position: sticky; top: 0; align-self: start; }
+.nav a { padding: 8px 10px; border-radius: var(--radius-xs); color: var(--high); text-decoration: none; }
+.nav a:hover { background: rgba(0, 0, 0, 0.04); color: var(--black); text-decoration: none; }
+.nav a[aria-current="true"] { background: rgba(0, 0, 0, 0.06); color: var(--black); }
+.nav a.navDanger { color: var(--danger-fg); }
+.content { container: settings / inline-size; display: flex; flex-direction: column; gap: 28px; max-width: 760px; min-width: 0; }
+.section { display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 24px; }
+.section + .section { padding-top: 24px; border-top: 1px solid var(--border); }
+.title { margin: 0; font: 500 17px/normal var(--font-sans); letter-spacing: normal; color: var(--black); }
+.titleRow { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.details { display: flex; flex-direction: column; gap: 12px; }
+/* End carries the duration hint beside its time, so it gets more room than Start. The form column (not the viewport) decides when the row folds. */
+.detailsGrid { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.2fr) minmax(0, 0.9fr) minmax(0, 1.3fr); gap: 12px; align-items: start; }
+@container settings (max-width: 700px) { .detailsGrid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .detailsGrid > :first-child { grid-column: 1 / -1; } }
+.note { margin: 0; font: 400 13px/normal var(--font-sans); color: var(--high); }
+.note a { font-weight: 500; }
+.formBody { display: flex; gap: 16px; }
+.formText { flex: 1; margin: 0; font: 400 13px/1.6 var(--font-sans); color: var(--high); }
+.preview { width: 200px; height: 120px; flex: none; box-sizing: border-box; padding: 12px; display: flex; flex-direction: column; gap: 6px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: #F8F8F8; }
+.preview span { display: block; border-radius: 2px; }
+.pvTitle { height: 8px; width: 70%; background: var(--black); }
+.pvSub { height: 6px; width: 50%; background: var(--mid-soft); }
+.pvField { height: 16px; border: 1px solid var(--mid-soft); border-radius: 4px !important; background: var(--white); box-sizing: border-box; }
+.pvButton { height: 16px; margin-top: auto; border-radius: 999px !important; background: var(--black); }
+.fields { display: flex; flex-direction: column; gap: 12px; }
+.block textarea { height: 64px; min-height: 64px; padding: 8px 12px; font: 400 14px/1.5 var(--font-sans); resize: vertical; }
+.saveRow { display: flex; align-items: center; gap: 12px; }
+.saved { font: 400 13px/normal var(--font-sans); color: var(--success-fg); }
+.formError { margin: 0; font: 400 13px/normal var(--font-sans); color: var(--danger-fg); }
+
+/* A-18 Spend and limits. */
+.limitsGrid { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 12px 16px; align-items: center; font: 400 13px/normal var(--font-sans); }
+.limitsGrid > .label { font: 500 13px/normal var(--font-sans); color: var(--black); }
+/* The 140px is the number box only: the hint runs the full column. */
+.budget input, .strictness input { width: 140px; }
+.usage { display: flex; flex-direction: column; gap: 6px; }
+.usageText { font: 400 13px/normal var(--font-sans); color: var(--high); font-feature-settings: "tnum"; }
+.usage[data-tone="warn"] .usageText { color: var(--warning-fg); }
+.usage[data-tone="full"] .usageText { color: var(--danger-fg); }
+.usage[data-tone="warn"] [role="progressbar"] > div { background: var(--warning); }
+.usage[data-tone="full"] [role="progressbar"] > div { background: var(--danger); }
+.hint { font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+
+/* Danger zone. */
+.danger { padding: 20px; border: 1px solid rgba(255, 65, 65, 0.4); border-radius: var(--radius-sm); }
+.section + .danger { padding-top: 20px; border-top: 1px solid rgba(255, 65, 65, 0.4); }
+.danger .title { color: var(--danger-fg); }
+.dangerRow { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.dangerRow + .dangerRow { padding-top: 12px; border-top: 1px solid var(--border-subtle); }
+.dangerText { display: flex; flex-direction: column; gap: 2px; font: 400 13px/normal var(--font-sans); color: var(--high); }
+.dangerText strong { font: 500 14px/normal var(--font-sans); color: var(--black); }
+
+/* A-11b delete confirm: 480px, 24px padding, title 20px. */
+.deleteModal.deleteModal { --modal-pad: 24px; max-width: 480px; padding: 24px; gap: 14px; }
+.deleteModal > h2 { font-size: 20px; }
+.deleteModal > p { font-size: 14px; }
+.frameScrim { position: absolute; inset: 0; z-index: 5; display: grid; place-items: center; background: rgba(26, 26, 26, 0.24); }
+.frameScrim > * { width: 480px; }
+
+@container admin (max-width: 1100px) {
+  .layout { grid-template-columns: 1fr; gap: 20px; }
+  .nav { flex-direction: row; gap: 4px; position: static; overflow-x: auto; scrollbar-width: none; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a { flex: none; white-space: nowrap; }
+}
+@container admin (max-width: 600px) {
+  /* 44px controls and 16px inputs (no zoom on focus). */
+  .layout { padding: 16px; --control-h: 44px; --control-h-sm: 44px; }
+  .layout input, .layout textarea, .layout select { font-size: 16px; }
+  .nav { margin: 0 -16px; padding: 0 16px; }
+  .nav a { display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box; }
+  .detailsGrid, .limitsGrid { grid-template-columns: minmax(0, 1fr); }
+  .detailsGrid > :first-child { grid-column: auto; }
+  /* The decorative form thumbnail reads as a stray box under the text on phones. */
+  .preview { display: none; }
+  .formBody { flex-direction: column; }
+  .dangerRow { flex-direction: column; align-items: flex-start; }
+}

@@ -1,0 +1,17 @@
+/* C-00 copy field: 36px, radius 6, value on --ultra-soft, Copy button split by a 1px line. */
+.field { display: flex; height: var(--control-h); border: 1px solid var(--border); border-radius: var(--radius-xs); overflow: hidden; font: 400 13px/normal var(--font-sans); }
+.value {
+  flex: 1; min-width: 0; display: flex; align-items: center; padding: 0 12px; background: var(--ultra-soft); color: var(--high);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.value > span { overflow: hidden; text-overflow: ellipsis; }
+.copy {
+  display: flex; align-items: center; gap: 4px; padding: 0 12px; margin: 0; border: 0; border-left: 1px solid var(--border);
+  background: var(--white); color: var(--black); font: 500 13px/normal var(--font-sans); letter-spacing: normal; cursor: pointer; white-space: nowrap;
+}
+.copy:hover { background: var(--ultra-soft); }
+.copy:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: -2px; }
+.copied { color: var(--success-fg); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (max-width: 640px) { .copy { min-height: 44px; } }

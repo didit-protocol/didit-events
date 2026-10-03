@@ -1,0 +1,177 @@
+/* Event editor v2 sections (form builder, verification, door, emails, leave guard). Admin tokens, 8px rhythm. */
+.stack { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.block { display: flex; flex-direction: column; gap: 8px; min-width: 0; margin: 0; padding: 0; border: 0; }
+.blockTitle { padding: 0; font: 500 13px/normal var(--font-sans); color: var(--black); }
+.help { font: 400 13px/1.45 var(--font-sans); color: var(--high); }
+.opt { font-weight: 400; color: var(--mid-high); }
+.note { margin: 0; padding: 10px 12px; border-radius: var(--radius-xs); background: var(--soft); font: 400 13px/1.45 var(--font-sans); color: var(--high); }
+.error { font: 400 12px/normal var(--font-sans); color: var(--danger-fg); }
+.srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.segmented.segmented { width: max-content; max-width: 100%; }
+.row2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.toggleRow { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-width: 0; }
+/* Requests close: the editor's date picker and time field (long date : time), on its own line under the waitlist. */
+.closeRow { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 12px; align-items: start; max-width: 420px; }
+.closeFoot { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+.toggleText { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.rowTitle { display: inline-flex; align-items: center; gap: 8px; margin: 0; font: 500 14px/normal var(--font-sans); color: var(--black); }
+
+.link { align-self: flex-start; padding: 0; border: 0; background: none; font: 500 13px/normal var(--font-sans); color: var(--brand); cursor: pointer; text-align: left; white-space: nowrap; }
+.link:disabled { color: var(--mid); cursor: default; }
+.link.danger { color: var(--danger-fg); }
+.link:focus-visible, .iconBtn:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); border-radius: 2px; }
+.iconBtn {
+  display: grid; place-items: center; width: 32px; height: 32px; padding: 0; border: 1px solid transparent; border-radius: var(--radius-xs); background: none;
+  font: 500 15px/1 var(--font-sans); color: var(--high); cursor: pointer;
+}
+.iconBtn:hover:not(:disabled) { border-color: var(--border); color: var(--black); }
+.iconBtn:disabled { color: var(--mid); cursor: default; }
+
+/* Fixed (locked) rows: the profile block and the verification baseline. */
+.fixedList { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.fixedList li { display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 0 12px; font: 400 14px/normal var(--font-sans); color: var(--black); }
+.fixedList li + li { border-top: 1px solid var(--border-subtle, var(--border)); }
+.lock { font-size: 12px; opacity: 0.6; }
+.fixedLabel { flex: 1; min-width: 0; }
+.fixedRule { font: 400 12px/normal var(--font-sans); color: var(--mid-high); text-align: right; }
+.baseline { display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border-radius: var(--radius-sm); background: var(--ultra-soft); }
+.baseline .fixedList { background: var(--white); }
+
+/* Questions. */
+.qList { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.qCard { display: flex; flex-direction: column; gap: 10px; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.qHead { display: grid; grid-template-columns: 24px minmax(0, 1fr) 170px; gap: 10px; align-items: start; }
+.qNum { display: grid; place-items: center; height: 36px; font: 500 13px/1 var(--font-sans); color: var(--mid-high); }
+.qLabel, .qKind { min-width: 0; }
+.options { display: flex; flex-direction: column; gap: 6px; margin: 0 0 0 34px; padding: 0; border: 0; min-width: 0; }
+.optionRow { display: grid; grid-template-columns: 16px minmax(0, 1fr) 32px; gap: 8px; align-items: center; }
+.optionMark { color: var(--mid-high); }
+.qFoot { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-left: 34px; }
+.qTools { display: flex; align-items: center; gap: 4px; }
+.qTools .link { margin-left: 8px; }
+.addBtn.addBtn { align-self: flex-start; }
+
+.previewBox { display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; border: 1px dashed var(--border); border-radius: var(--radius-sm); }
+.previewBox > summary { font: 500 13px/normal var(--font-sans); color: var(--black); cursor: pointer; }
+.previewBox[open] > summary { margin-bottom: 10px; }
+.kv { display: flex; flex-direction: column; gap: 10px; margin: 0; }
+.kvRow dt { font: 500 13px/normal var(--font-sans); color: var(--black); }
+.kvRow dd { margin: 2px 0 0; font: 400 13px/1.45 var(--font-sans); color: var(--high); overflow-wrap: anywhere; }
+
+/* Verification. */
+.checkList { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.checkRow { display: flex; flex-direction: column; gap: 10px; padding: 12px 14px; }
+.checkRow + .checkRow { border-top: 1px solid var(--border-subtle, var(--border)); }
+.checkRow[data-on] { background: color-mix(in srgb, var(--brand) 4%, transparent); }
+.checkText { display: flex; flex-direction: column; gap: 2px; }
+/* The box sits on the title's line, not centred against the two-line text. */
+.checkRow > label { align-items: flex-start; }
+.checkRow > label > :first-child { margin-top: 1px; }
+.fresh { max-width: 240px; }
+.ageRow { display: grid; grid-template-columns: 140px minmax(0, 240px); gap: 12px; align-items: end; }
+.steps { display: flex; flex-direction: column; gap: 6px; margin: 0; padding-left: 20px; font: 400 14px/1.45 var(--font-sans); color: var(--black); }
+
+/* Emails. */
+.senderBox { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 16px; margin: 0; padding: 12px 14px; border-radius: var(--radius-sm); background: var(--ultra-soft); }
+.senderBox > div { display: contents; }
+.senderBox dt { font: 500 13px/normal var(--font-sans); color: var(--mid-high); }
+.senderBox dd { margin: 0; font: 400 13px/normal var(--font-sans); color: var(--black); overflow-wrap: anywhere; }
+.senderBox > p { grid-column: 1 / -1; margin: 4px 0 0; }
+.emailList { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.emailRow { display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; min-width: 0; }
+.emailRow + .emailRow { border-top: 1px solid var(--border-subtle, var(--border)); }
+.emailRow[data-off] .emailText { opacity: 0.6; }
+.emailHead { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.code { flex: none; min-width: 44px; padding: 2px 6px; border-radius: var(--radius-xs); background: var(--chip); font: 500 11px/1.5 var(--font-sans); letter-spacing: 0.04em; color: var(--mid-high); text-align: center; }
+.emailText { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+.badge { padding: 1px 6px; border-radius: 999px; background: color-mix(in srgb, var(--brand) 12%, transparent); font: 500 11px/1.5 var(--font-sans); color: var(--brand); }
+.emailTools { display: flex; align-items: center; gap: 14px; flex: none; }
+.lockWrap { display: inline-flex; }
+.lockNote { margin-left: 56px; font-size: 12px; }
+.emailPanel { display: flex; flex-direction: column; gap: 16px; margin-top: 8px; padding-top: 14px; border-top: 1px dashed var(--border); min-width: 0; }
+.emailPanel .row2 { grid-template-columns: minmax(0, 1fr); }
+.previewHead { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.sampleBanner.sampleBanner { padding: 8px 12px; font-size: 13px; }
+.previewScroll { overflow-x: auto; min-width: 0; padding: 12px; border-radius: var(--radius-sm); background: var(--soft); }
+.previewScroll > * { margin: 0 auto; }
+.testRow { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: start; }
+.testRow > button { margin-top: 22px; }
+.testStatus { margin: -8px 0 0; min-height: 18px; font: 400 13px/1.45 var(--font-sans); color: var(--high); }
+
+/* Leave guard dialog. */
+.leaveActions { display: flex; justify-content: flex-end; gap: 8px; flex-wrap: wrap; width: 100%; }
+
+/* Narrow form column (see EventForm.module.css: the form is the `eventform` size container). */
+@container eventform (max-width: 640px) {
+  .row2 { grid-template-columns: minmax(0, 1fr); }
+  .qHead { grid-template-columns: 20px minmax(0, 1fr); }
+  .qKind { grid-column: 2; }
+  .options, .qFoot { margin-left: 0; }
+  .qFoot { flex-wrap: wrap; }
+  .emailHead { flex-wrap: wrap; }
+  .emailTools { width: 100%; justify-content: space-between; }
+  .lockNote { margin-left: 0; }
+  .ageRow { grid-template-columns: minmax(0, 1fr); }
+  .fresh { max-width: none; }
+  .testRow { grid-template-columns: minmax(0, 1fr); }
+  .testRow > button { margin-top: 0; justify-self: start; }
+  .previewScroll { padding: 0; background: none; }
+  /* 44px touch targets: icon buttons grow, text buttons keep their look behind a larger hit area. */
+  .iconBtn { width: 44px; height: 44px; }
+  .optionRow { grid-template-columns: 16px minmax(0, 1fr) 44px; }
+  .link { position: relative; }
+  .link::after { content: ""; position: absolute; inset: -14px -6px; }
+  .emailTools { gap: 20px; }
+  /* Segmented controls fill the row and share it equally, so three long labels never push past the edge. */
+  .segmented.segmented { display: flex; width: 100%; box-sizing: border-box; }
+  .segmented.segmented > label { flex: 1 1 0; min-width: 0; }
+  .segmented.segmented > label > span { padding: 0 6px; line-height: 40px; text-align: center; overflow: hidden; text-overflow: ellipsis; }
+  /* Locked rows: the rule drops under its label instead of squeezing it into a sliver. */
+  .fixedList li { flex-wrap: wrap; row-gap: 2px; padding: 10px 12px; }
+  .fixedRule { flex-basis: 100%; padding-left: 22px; text-align: left; }
+}
+/* The leave dialog is a modal over the viewport, so it follows the viewport. */
+@media (max-width: 600px) {
+  .leaveActions { flex-direction: column-reverse; }
+  .leaveActions > button { width: 100%; }
+}
+
+/* Agenda: one row per item (handle, time, label, row tools) on a fixed grid, like the hosts list. */
+.agendaList { display: flex; flex-direction: column; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.agendaRow {
+  display: grid; grid-template-columns: 32px 112px 120px minmax(0, 1fr) auto; gap: 12px 16px; align-items: end;
+  border-radius: var(--radius-xs); transition: background-color 120ms ease, opacity 120ms ease;
+}
+.agendaRow > * { min-width: 0; }
+/* Time and Until are equal narrow tracks, so "What happens" gets the room: the duration stays in the option list. */
+.agendaRow > [data-agenda-until] [role="combobox"] + span { display: none; }
+.agendaRow[data-dragging] { opacity: 0.5; }
+.agendaRow[data-over] { box-shadow: 0 -2px 0 0 var(--brand); }
+.grip { height: var(--control-h, 36px); cursor: grab; font-size: 16px; }
+.grip:disabled { cursor: default; }
+.agendaTools { display: flex; align-items: center; gap: 2px; height: var(--control-h, 36px); }
+.agendaWarn { grid-column: 2 / -1; font: 400 12px/normal var(--font-sans); color: var(--warning-fg); }
+.agendaFoot { display: flex; align-items: center; gap: 12px; }
+/* One line per item: the column labels show once, on the first row (later rows keep them for screen readers). */
+@container eventform (min-width: 641px) {
+  .agendaList { gap: 8px; }
+  .agendaRow:not(:first-child) label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+@container eventform (max-width: 640px) {
+  /* A compact card per item, with no tools line of its own: "What happens" leads on a wide line with × at its end
+     (long titles stay readable), then Time, Until, ↑ and ↓. The drag handle is hidden (no drag on touch); ↑ and ↓
+     reorder. The field names show on the first card only (later cards keep them for screen readers). */
+  .agendaRow { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 44px 44px; gap: 8px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .agendaRow > .grip { display: none; }
+  .agendaRow > [data-agenda-label] { grid-area: 1 / 1 / auto / 4; }
+  .agendaRow > :nth-child(2) { grid-area: 2 / 1; }
+  .agendaRow > [data-agenda-until] { grid-area: 2 / 2; }
+  .agendaRow > .agendaTools { display: contents; }
+  .agendaTools > :nth-child(1) { grid-area: 2 / 3; }
+  .agendaTools > :nth-child(2) { grid-area: 2 / 4; }
+  .agendaTools > :nth-child(3) { grid-area: 1 / 4; }
+  .agendaRow > .agendaWarn { grid-column: 1 / -1; }
+  .agendaRow:not(:first-child) label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .agendaList > .agendaRow:last-child { padding-bottom: 0; border-bottom: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .agendaRow { transition: none; } }

@@ -1,0 +1,22 @@
+/* Status icon: a tinted circle (size set inline: 44 / 48 / 56 / 64 / 88) with a stroked SVG mark at half the circle.
+   Tones key off data-status-icon so the module exports one class (every guest route ships this map). */
+.icon { display: grid; place-items: center; flex: none; border-radius: 50%; background: var(--status-bg); color: var(--status-fg); }
+.icon svg { display: block; width: 50%; height: 50%; overflow: visible; }
+
+.icon[data-status-icon="success"] { --status-bg: var(--success);      --status-fg: var(--white); }
+.icon[data-status-icon="pending"],
+.icon[data-status-icon="review"]  { --status-bg: var(--feature-soft); --status-fg: var(--feature-deep); }
+.icon[data-status-icon="info"]    { --status-bg: var(--brand-soft);   --status-fg: var(--brand-deep); }
+.icon[data-status-icon="warning"] { --status-bg: var(--warning-bg);   --status-fg: var(--warning-fg); }
+.icon[data-status-icon="error"]   { --status-bg: var(--danger-bg);    --status-fg: var(--danger-fg); }
+.icon[data-status-icon="neutral"] { --status-bg: var(--soft);         --status-fg: var(--high); }
+
+/* Success: the circle scales in, then the check draws (~450 ms in all). */
+.icon[data-animate] { animation: pop 300ms cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.icon[data-animate] path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 260ms cubic-bezier(0.65, 0, 0.35, 1) 190ms forwards; }
+@keyframes pop { from { transform: scale(0.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .icon[data-animate] { animation: none; }
+  .icon[data-animate] path { animation: none; stroke-dashoffset: 0; }
+}

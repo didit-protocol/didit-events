@@ -1,0 +1,18 @@
+/* Full-screen kiosk page: black behind the scaled stage, no cursor unless the operator panel is open. */
+.page { position: fixed; inset: 0; overflow: hidden; background: var(--kiosk-bg); cursor: none; }
+.page[data-operator] { cursor: auto; }
+/* Long-press target for the operator panel (top-left, 2 s). */
+.hotspot { position: fixed; top: 0; left: 0; z-index: 10; width: 160px; height: 160px; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+.boot { position: fixed; inset: 0; display: grid; place-content: center; justify-items: center; gap: 24px; background: var(--kiosk-bg); color: var(--kiosk-fg-2); font: 400 22px var(--font-sans); }
+.boot img { height: 40px; width: auto; }
+/* D-03: Test mode is never subtle. A persistent strip across the top of the stage. */
+.test { position: absolute; top: 0; left: 0; right: 0; z-index: 6; padding: 14px 24px; background: var(--warning-bg); color: var(--warning-fg); font: 600 22px/1.2 var(--font-sans); letter-spacing: 0.04em; text-align: center; }
+/* Notices over the door (new version, PIN entry, sign-in). */
+.notice { position: fixed; left: 50%; bottom: 32px; z-index: 12; transform: translateX(-50%); display: flex; gap: 16px; align-items: center; padding: 14px 20px; border-radius: 16px; background: var(--white); color: var(--high); box-shadow: 0 12px 40px rgb(0 0 0 / 0.35); font: 400 18px/1.3 var(--font-sans); cursor: auto; }
+.notice button, .notice a { font: 500 18px var(--font-sans); }
+/* PIN entry: the field (and its error) over a footer with the two actions, the primary one last (right). */
+.pinCard { flex-direction: column; align-items: stretch; gap: 12px; }
+.pinFoot { display: flex; justify-content: flex-end; gap: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+.pin { display: flex; gap: 12px; align-items: center; }
+.pin input { width: 9ch; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font: 500 22px var(--font-mono, ui-monospace); letter-spacing: 0.2em; }
+.error { color: var(--warning-fg); }

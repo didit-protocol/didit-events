@@ -1,0 +1,25 @@
+{
+  "payload": {
+    "event_id": "11111111-1111-4111-8111-111111111111",
+    "session_id": "22222222-2222-4222-8222-222222222222",
+    "status": "Approved",
+    "timestamp": 1790683200,
+    "vendor_data": "acct_33333333-3333-4333-8333-333333333333",
+    "webhook_type": "status.updated",
+    "decision": {
+      "score": 90.0,
+      "fraction": 93.125,
+      "tiny": 1e-06,
+      "negative": -0.0,
+      "name": "José 😀",
+      "large": 1000000000000000000000,
+      "10": "ten",
+      "2": "two"
+    }
+  },
+  "raw": "{\"decision\":{\"10\":\"ten\",\"2\":\"two\",\"fraction\":93.125,\"large\":1000000000000000000000,\"name\":\"Jos\\u00e9 \\ud83d\\ude00\",\"negative\":0,\"score\":90,\"tiny\":1e-06},\"event_id\":\"11111111-1111-4111-8111-111111111111\",\"session_id\":\"22222222-2222-4222-8222-222222222222\",\"status\":\"Approved\",\"timestamp\":1790683200,\"vendor_data\":\"acct_33333333-3333-4333-8333-333333333333\",\"webhook_type\":\"status.updated\"}",
+  "canonical": "{\"decision\":{\"10\":\"ten\",\"2\":\"two\",\"fraction\":93.125,\"large\":1000000000000000000000,\"name\":\"José 😀\",\"negative\":0,\"score\":90,\"tiny\":1e-06},\"event_id\":\"11111111-1111-4111-8111-111111111111\",\"session_id\":\"22222222-2222-4222-8222-222222222222\",\"status\":\"Approved\",\"timestamp\":1790683200,\"vendor_data\":\"acct_33333333-3333-4333-8333-333333333333\",\"webhook_type\":\"status.updated\"}",
+  "signature": "d2aa80ebb7ae9b8b00d068414220e05b682756fc6c91899960838e2a62a2b577",
+  "signatureV2": "f94da8d0b5b1abfc965f8d0983a2bf30e1a0d82bc706c207397edc977fab0bd1",
+  "secret": "fixture-secret"
+}

@@ -1,0 +1,21 @@
+/* G-02 default (02 Guest, 390): body 20px 16px (the header's gutter) / gap 24; steps card radius 20; 52px CTA pinned to the bottom. */
+.page {
+  box-sizing: border-box; display: flex; flex-direction: column; width: 100%; max-width: 480px; margin: 0 auto;
+  min-height: var(--page-min-h, 100dvh); background: var(--white); color: var(--black); font-family: var(--font-sans);
+}
+.body { flex: 1; display: flex; flex-direction: column; gap: 24px; padding: 20px 16px; }
+.intro { display: flex; flex-direction: column; gap: 10px; }
+.hi { font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; color: var(--mid-high); }
+.title { margin: 0; font: 500 32px/1.1 var(--font-sans); letter-spacing: -0.03em; }
+.accent { color: var(--brand); }
+.when { margin: 0; font: 400 15px/1.5 var(--font-sans); color: var(--high); font-feature-settings: "tnum"; }
+.steps { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
+.step { display: flex; align-items: center; gap: 14px; padding: 16px; border-bottom: 1px solid var(--border-subtle); }
+.stepIcon { width: 40px; height: 40px; border-radius: 50%; background: var(--black); color: var(--white); display: grid; place-items: center; flex: none; }
+.stepText { display: flex; flex-direction: column; gap: 2px; }
+.stepTitle { font: 500 15px/normal var(--font-sans); }
+.stepHint { font: 400 13px/normal var(--font-sans); color: var(--high); }
+.privacy { margin: 0; display: flex; gap: 10px; align-items: flex-start; font: 400 13px/1.5 var(--font-sans); color: var(--high); }
+.shield { flex: none; margin-top: 1px; color: var(--mid-high); }
+.bottom { margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
+.duration { font: 400 12px/normal var(--font-sans); color: var(--mid-high); text-align: center; }

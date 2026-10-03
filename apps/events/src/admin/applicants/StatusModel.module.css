@@ -1,0 +1,16 @@
+/* S-00 (design/05): 1800 wide, 40px padding, 32px between groups; tables 180px 170px 1.3fr 1.1fr 170px 1.2fr. */
+.model { box-sizing: border-box; padding: 40px; display: flex; flex-direction: column; gap: 32px; }
+.group { display: flex; flex-direction: column; gap: 10px; }
+.title { display: flex; align-items: baseline; gap: 12px; }
+.title h2 { margin: 0; font: 500 20px/normal var(--font-sans); letter-spacing: -0.02em; color: var(--black); }
+.key { font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; color: var(--brand); }
+.flow { font: 400 13px/normal var(--font-sans); color: var(--mid-high); }
+.table { border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+.row {
+  display: grid; grid-template-columns: 180px 170px 1.3fr 1.1fr 170px 1.2fr; gap: 16px; align-items: start; padding: 12px 16px;
+  border-bottom: 1px solid var(--border-subtle); font: 400 13px/1.45 var(--font-sans); color: var(--black);
+}
+.head { height: 34px; box-sizing: border-box; align-items: center; padding: 0 16px; background: var(--ultra-soft); border-bottom-color: var(--border); font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; color: var(--mid-high); }
+.dim { color: var(--high); }
+.mail { color: var(--brand-deep); font-weight: 500; }
+.model .midDot { --pill-dot: var(--mid); }

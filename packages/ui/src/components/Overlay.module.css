@@ -1,0 +1,74 @@
+.scrim {
+  position: fixed; inset: 0; z-index: 900; display: grid; place-items: center; padding: 24px;
+  background: var(--overlay); animation: fade var(--duration-base) var(--ease-standard);
+}
+.inline { position: relative; inset: auto; z-index: auto; display: block; padding: 0; background: none; animation: none; }
+/* Leaving (Layer keeps the layer mounted until these end): quicker than entering, and nothing underneath is blocked. */
+.scrim[data-leaving] { pointer-events: none; animation: fadeOut var(--duration-fast) var(--ease-exit) forwards; }
+.scrim[data-leaving] .modal { animation: sink var(--duration-fast) var(--ease-exit) forwards; }
+.scrim[data-leaving] .drawer { animation: slideOut var(--duration-fast) var(--ease-exit) forwards; }
+
+/* Modal: radius 24, 20px padding (`--modal-pad`: a consumer that changes the padding sets it, so the footer follows),
+ * modal shadow; title 500 17px -.02em; body 400 13px/1.5. */
+.modal {
+  --modal-pad: 20px;
+  display: flex; flex-direction: column; gap: 10px; box-sizing: border-box; width: 100%; max-width: var(--modal-w, 440px);
+  max-height: calc(100dvh - 48px); overflow: auto; padding: var(--modal-pad); border-radius: var(--radius-lg);
+  background: var(--white); box-shadow: var(--shadow-modal); outline: none;
+  animation: rise var(--duration-base) var(--ease-emphasized);
+}
+.inline .modal { animation: none; max-height: none; }
+.title { margin: 0; font: 500 17px/normal var(--font-sans); letter-spacing: -0.02em; color: var(--black); }
+.body { margin: 0; font: 400 13px/1.5 var(--font-sans); color: var(--high); }
+.modalHead { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+/* The actions: one footer on the bottom edge of the dialog (primary last / right). It bleeds through the padding and
+ * stays there while a long body scrolls under it; 12px above the buttons and an 8px gap, like the Drawer footer. */
+.footer {
+  position: sticky; bottom: 0; z-index: 1; display: flex; justify-content: flex-end; gap: 8px;
+  margin: -6px calc(-1 * var(--modal-pad)) calc(-1 * var(--modal-pad)); padding: 12px var(--modal-pad) var(--modal-pad);
+  background: var(--white);
+}
+/* The footer's top rule shows only while the body scrolls under it (gone at the end, and when nothing scrolls). */
+@supports (animation-timeline: scroll()) {
+  .footer { animation: footRule linear both; animation-timeline: scroll(nearest block); animation-range: calc(100% - 12px) 100%; }
+}
+
+/* Drawer: 480 wide, right edge, full height. */
+.drawerScrim { place-items: stretch end; padding: 0; }
+.drawer {
+  display: flex; flex-direction: column; box-sizing: border-box; width: min(var(--drawer-w, 480px), 100vw); height: 100dvh;
+  background: var(--white); box-shadow: var(--shadow-modal); outline: none; animation: slide var(--duration-slow) var(--ease-emphasized);
+}
+.inline .drawer { height: 100%; animation: none; }
+.drawerHead { display: flex; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.drawerHead .title { flex: 1; min-width: 0; }
+/* Stacked head (01b A-06): 20px 24px, 10px gap; eyebrow 500 11px .08em; title 500 22px −.02em; subtitle 13px. */
+.drawerHeadStacked { flex-direction: column; align-items: stretch; gap: 10px; padding: 20px 24px; }
+.drawerEyebrowRow { display: flex; align-items: center; gap: 8px; }
+.drawerEyebrow { flex: 1; font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid-high); }
+.drawerTitleRow { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.drawerTitle { margin: 0; font: 500 22px/normal var(--font-sans); letter-spacing: -0.02em; color: var(--black); overflow-wrap: anywhere; }
+.drawerMediaRow { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.drawerMediaText { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.drawerSubtitle { font: 400 13px/normal var(--font-sans); color: var(--high); }
+.drawerBody { flex: 1; overflow: auto; padding: 20px; }
+/* In-place record swap (Drawer `contentKey`): the title block and the body fade in; the panel itself never moves. */
+.drawerSwapHead { display: flex; flex-direction: column; gap: inherit; min-width: 0; }
+.drawerSwapHead[data-swap], .drawerSwap[data-swap] { animation: swap var(--duration-fast) var(--ease-standard); }
+.drawerFoot { display: flex; justify-content: flex-end; gap: 8px; padding: 12px 20px max(12px, env(safe-area-inset-bottom)); border-top: 1px solid var(--border); }
+
+/* Modals fade and scale; drawers slide in from their edge. */
+@keyframes fade { from { opacity: 0; } }
+@keyframes fadeOut { to { opacity: 0; } }
+@keyframes rise { from { opacity: 0; transform: scale(0.96); } }
+@keyframes sink { to { opacity: 0; transform: scale(0.98); } }
+@keyframes slide { from { transform: translateX(100%); } }
+@keyframes slideOut { to { transform: translateX(100%); } }
+@keyframes swap { from { opacity: 0; transform: translateY(4px); } }
+@keyframes footRule { from { box-shadow: inset 0 1px 0 var(--border); } to { box-shadow: inset 0 1px 0 transparent; } }
+/* Reduced motion: opacity only, in and out. */
+@media (prefers-reduced-motion: reduce) {
+  .scrim, .modal, .drawer { animation: fade var(--duration-base) linear; }
+  .scrim[data-leaving], .scrim[data-leaving] .modal, .scrim[data-leaving] .drawer { animation: fadeOut var(--duration-fast) linear forwards; }
+  .drawerSwapHead[data-swap], .drawerSwap[data-swap] { animation: none; }
+}

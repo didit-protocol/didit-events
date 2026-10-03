@@ -1,0 +1,26 @@
+/* 02 Guest message frames: 390 × ≥844; body 20px 16px (the header's gutter, so the logo and the content share an edge), gap 20; the message block starts near the top (not floating
+ * mid-screen over 200px of white: 24 to 32px under the event chip), gap 14; a CTA stays pinned to the bottom. */
+.page {
+  box-sizing: border-box; display: flex; flex-direction: column; width: 100%; max-width: 480px; margin: 0 auto;
+  min-height: var(--page-min-h, 100dvh); background: var(--white); color: var(--black); font-family: var(--font-sans);
+}
+.body { flex: 1; display: flex; flex-direction: column; gap: 20px; padding: 20px 16px; }
+.chip { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border-radius: var(--radius-sm); background: var(--ultra-soft); }
+.chipName { font: 500 14px/normal var(--font-sans); }
+.chipMeta { font: 400 13px/normal var(--font-sans); color: var(--high); font-feature-settings: "tnum"; }
+.center { flex: 1; display: flex; flex-direction: column; justify-content: flex-start; gap: 14px; padding: clamp(4px, 1.5vh, 12px) 0 40px; }
+/* A dead end (not found): the message starts at the top like the flow screens and its one button follows it. */
+.centerInline { flex: none; padding: 4px 0 4px; }
+/* Desktop card: the block hugs its content, so the card's 32px padding is even top and bottom. */
+@container (min-width: 768px) {
+  .center { flex: none; padding: 8px 0 0; }
+}
+.title { margin: 0; font: 500 30px/1.12 var(--font-sans); letter-spacing: -0.03em; color: var(--black); }
+.text { margin: 0; font: 400 16px/1.5 var(--font-sans); color: var(--high); }
+.ctaForm { display: flex; }
+.foot { margin: 0; font: 400 13px/1.5 var(--font-sans); color: var(--mid-high); text-align: center; }
+.foot a { color: inherit; }
+
+/* G-03 approved: two calendar chips, 44px, 500 14px. */
+.cal { display: flex; gap: 8px; margin-top: 8px; }
+.calLink.calLink { flex: 1; min-width: 0; font-size: 14px; }

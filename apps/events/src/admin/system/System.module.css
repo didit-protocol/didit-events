@@ -1,0 +1,50 @@
+/* A-13 system states (design/01b Admin, `sys`). */
+
+/* 404 / 403 / 500: centred in the page column, 12px gap, 40px bottom bias. */
+.message {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  padding: 0 24px 40px; box-sizing: border-box; text-align: center;
+}
+.code { font: 500 13px/normal var(--font-sans); letter-spacing: 0.08em; color: var(--mid-high); font-feature-settings: "tnum"; }
+.title { margin: 0; font: 500 36px/normal var(--font-sans); letter-spacing: -0.03em; color: var(--black); }
+.help { margin: 0; max-width: 440px; font: 400 15px/normal var(--font-sans); color: var(--high); }
+.action { margin-top: 8px; display: flex; }
+
+/* Offline / Didit API strip: full width, 10px 40px, 13px, 8px current-colour dot. */
+/* Overrides of ui primitives use a doubled class so they win regardless of stylesheet order. */
+.live { flex: none; }
+.strip.strip { flex: none; gap: 10px; padding: 10px 40px; border-radius: 0; }
+.strip > :first-child { display: flex; align-items: center; gap: 10px; }
+.strip.offline { background: var(--black); color: var(--white); }
+.dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.stripCta { font-weight: 500; color: inherit; text-decoration: none; white-space: nowrap; }
+.stripCta:hover { color: inherit; text-decoration: underline; }
+.stripCta:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); border-radius: 2px; }
+
+/* Session expired modal: 420 wide, 28px padding, 12px gap, 20px title, 14px/1.5 body, the 44px CTA in the footer. */
+.modal.modal { --modal-pad: 28px; gap: 12px; padding: 28px; }
+.modal h2 { font-size: 20px; }
+.modal p { font-size: 14px; }
+/* Frame gallery only: the design's 24% scrim over the whole frame (sidebar included). */
+.frameScrim { position: absolute; inset: 0; z-index: 5; display: grid; place-items: center; background: rgba(26,26,26,0.24); }
+.frameScrim > * { width: 420px; }
+
+/* The dimmed page behind A-13d/e/f. */
+.placeholder { flex: 1; display: flex; flex-direction: column; gap: 20px; padding: 32px 40px; opacity: 0.9; min-height: 0; }
+.placeholderTitle { font: 500 28px/normal var(--font-sans); letter-spacing: -0.025em; color: var(--black); }
+.placeholderTiles { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.placeholderTile {
+  height: 104px; box-sizing: border-box; display: flex; flex-direction: column; gap: 10px; padding: 16px;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+}
+.placeholderBox { flex: 1; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--ultra-soft); }
+
+@container admin (max-width: 1100px) {
+  .strip.strip { padding: 10px 28px; }
+  .title { font-size: 30px; }
+}
+@container admin (max-width: 600px) {
+  .strip.strip { padding: 10px 16px; align-items: flex-start; }
+  .title { font-size: 26px; }
+  .help { font-size: 14px; }
+}

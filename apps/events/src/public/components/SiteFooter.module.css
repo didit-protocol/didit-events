@@ -1,0 +1,24 @@
+/* The public footer. The rule is full-bleed; the content sits on the header's column (--header-max-w, never closer
+ * than 32px to the edge) from 768px and on the 16px phone gutter below it. */
+.footer {
+  container: site-footer / inline-size; box-sizing: border-box; flex: none; width: 100%; border-top: 1px solid var(--border-subtle);
+  background: var(--white); font: 400 13px/normal var(--font-sans); color: var(--mid-high);
+}
+.inner {
+  box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 64px;
+  padding: 10px max(32px, calc((100% - var(--header-max-w)) / 2));
+}
+.end { display: flex; align-items: center; gap: 12px; }
+.legal a { color: inherit; text-decoration: none; }
+.legal a:hover { color: var(--black); text-decoration: underline; }
+.legal a:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); border-radius: 4px; }
+/* The 20px marks sit 12px inside their 44px targets: the margin puts the last mark on the column's edge. */
+.social { margin-right: -12px; }
+
+@container site-footer (max-width: 767px) {
+  .inner { flex-direction: column; align-items: flex-start; gap: 4px; padding: 16px 16px 20px; }
+  /* The logos on their own row, above the legal links (44px rows). */
+  .end { flex-direction: column-reverse; align-items: flex-start; gap: 0; }
+  .social { margin: 0 0 0 -12px; }
+  .legal a { display: inline-flex; align-items: center; min-height: var(--tap-target); }
+}

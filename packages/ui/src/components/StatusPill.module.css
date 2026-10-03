@@ -1,0 +1,36 @@
+/* C-00 status pill: 22px, 0 8px, 500 10px +.08em uppercase, 6px dot, gap 6. */
+.pill {
+  display: inline-flex; align-items: center; gap: 6px; box-sizing: border-box;
+  width: max-content; height: 22px; padding: 0 8px; border-radius: var(--radius-full);
+  background: var(--pill-bg); color: var(--pill-fg);
+  font: 500 10px/normal var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
+}
+.dot { flex: none; width: 6px; height: 6px; border-radius: var(--radius-full); background: var(--pill-dot); }
+
+.requested   { --pill-bg: var(--neutral-pill);  --pill-fg: var(--high);       --pill-dot: var(--mid-high); }
+.approved,
+.open        { --pill-bg: var(--brand-soft);    --pill-fg: var(--brand-deep); --pill-dot: var(--brand); }
+.verifying   { --pill-bg: var(--brand-soft);    --pill-fg: var(--brand-deep); --pill-dot: var(--brand-light); }
+.linkSent,
+.missing     { --pill-bg: var(--warning-bg);    --pill-fg: var(--warning-fg); --pill-dot: var(--warning); }
+.verified,
+.live        { --pill-bg: var(--success-bg);    --pill-fg: var(--success-fg); --pill-dot: var(--success); }
+.inReview    { --pill-bg: var(--feature-soft);  --pill-fg: var(--feature-deep); --pill-dot: var(--feature); }
+.declined,
+.rejected,
+.revoked     { --pill-bg: var(--danger-bg);     --pill-fg: var(--danger-fg);  --pill-dot: var(--danger); }
+.checkedIn   { --pill-bg: var(--success-fg);    --pill-fg: #FFFFFF;           --pill-dot: var(--success); }
+.unknownFace { --pill-bg: var(--black);         --pill-fg: var(--white);      --pill-dot: var(--mid); }
+.draft       { --pill-bg: var(--neutral-pill);  --pill-fg: var(--high);       --pill-dot: var(--mid); }
+.ended       { --pill-bg: var(--soft);          --pill-fg: var(--high);       --pill-dot: var(--mid-high); }
+
+/* Guest statuses (04 / 05 pill map): GOING + PROFILE VERIFIED green, PENDING / WAITLIST / PROFILE INCOMPLETE amber,
+   NOT APPROVED red, ATTENDED / CANCELLED / WITHDRAWN soft. */
+.going, .profileVerified { --pill-bg: var(--success-bg); --pill-fg: var(--success-fg); --pill-dot: var(--success); }
+.pending, .waitlist, .profileIncomplete { --pill-bg: var(--warning-bg); --pill-fg: var(--warning-fg); --pill-dot: var(--warning); }
+.notApproved { --pill-bg: var(--danger-bg); --pill-fg: var(--danger-fg); --pill-dot: var(--danger); }
+.attended, .cancelled, .withdrawn { --pill-bg: var(--soft); --pill-fg: var(--high); --pill-dot: var(--mid-high); }
+
+/* Event registration (05 AP-24 FULL amber, AP-25 CLOSED soft with the mid-high dot). */
+.full { --pill-bg: var(--warning-bg); --pill-fg: var(--warning-fg); --pill-dot: var(--warning); }
+.closed { --pill-bg: var(--soft); --pill-fg: var(--high); --pill-dot: var(--mid-high); }

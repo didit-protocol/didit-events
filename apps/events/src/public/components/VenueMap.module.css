@@ -1,0 +1,15 @@
+/* P-01 Location map: radius 12, 16:7 (min 200) on desktop, 16:9 on mobile (4:3 was a 270px block, the largest on a
+ * phone page); soft fill while the tiles load. */
+.map, .mapMobile { position: relative; overflow: hidden; border-radius: 12px; background: var(--soft); isolation: isolate; }
+.map { margin-top: 12px; aspect-ratio: 16 / 7; min-height: 200px; }
+.mapMobile { aspect-ratio: 16 / 9; min-height: 200px; }
+/* The interactive embed fills the rounded box (Google's place card and controls included). */
+.frame { position: absolute; inset: 0; display: block; width: 100%; height: 100%; border: 0; }
+/* Marks the box until the embed mounts (it fills the box so "is this layout displayed and near" can be observed). */
+.sentinel { position: absolute; inset: 0; pointer-events: none; }
+/* Under the embed while its tiles load: pin + venue name, centred. */
+.placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 12px; color: var(--high); font: 500 14px/1.3 var(--font-sans); text-align: center; }
+/* Without a place: the box is one link to Google Maps. */
+.open { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 12px; color: var(--black); font: 500 14px/normal var(--font-sans); }
+.open:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: -3px; border-radius: 12px; }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }

@@ -1,0 +1,27 @@
+.page { min-height: 100dvh; display: grid; place-items: center; padding: 24px 16px; background: var(--white); }
+.card { width: 100%; max-width: 480px; display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 40px 32px 32px;
+  background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg, 20px); text-align: center; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04); }
+.logo { margin-bottom: 8px; }
+.title { margin: 0; font: 500 24px/1.25 var(--font-sans); letter-spacing: -0.02em; color: var(--black); }
+.lead { margin: 0; font: 400 15px/1.55 var(--font-sans); color: var(--high); }
+.account { display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius-md, 14px); text-align: left; }
+.who { display: flex; flex-direction: column; min-width: 0; }
+.name { font: 500 15px/1.3 var(--font-sans); color: var(--black); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.email { font: 400 13px/1.3 var(--font-sans); color: var(--high); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chip { margin-left: auto; flex: none; font: 500 12px/1 var(--font-sans); color: var(--high); padding: 6px 8px; border-radius: 999px; background: var(--ultra-soft, #f1f1f3); }
+.actions { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 8px; }
+.actions form { display: contents; }
+.request { font: 400 14px/1.4 var(--font-sans); color: var(--high); }
+.request a { color: var(--blue, #2567ff); }
+.eyebrow { font: 500 12px/1 var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--high); }
+.srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Phones: the refused account's email shows in full (the chip drops under it, past the avatar), and both actions are 44px. */
+@media (max-width: 600px) {
+  .card { padding: 24px 4px; border: 0; box-shadow: none; }
+  .account { flex-wrap: wrap; row-gap: 8px; }
+  .who { flex: 1 1 calc(100% - 52px); }
+  .name, .email { white-space: normal; overflow-wrap: anywhere; }
+  .chip { margin-left: 52px; }
+  .actions { --control-h: 44px; }
+}

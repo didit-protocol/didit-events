@@ -1,0 +1,13 @@
+{
+  "request_id": "22222222-2222-4222-8222-222222222222",
+  "status": "Approved",
+  "email": {
+    "node_id": "email_verification",
+    "status": "Approved",
+    "email": "alex@example.test",
+    "verified_at": "2026-09-29T10:02:00Z",
+    "verification_attempts": 1,
+    "matches": []
+  },
+  "created_at": "2026-09-29T10:00:00Z"
+}

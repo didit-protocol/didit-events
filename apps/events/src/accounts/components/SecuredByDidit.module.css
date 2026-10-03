@@ -1,0 +1,7 @@
+/* "Secured by [Didit wordmark]": 400 12px mid-high, 14px official logo, centred under the CTA. */
+.caption { margin: 0; display: flex; justify-content: center; font: 400 12px/1.5 var(--font-sans); color: var(--mid-high); }
+.start { justify-content: flex-start; }
+.visual { display: inline-flex; align-items: center; gap: 6px; }
+.lock { flex: none; }
+.logo { display: block; height: 14px; width: auto; transform: translateY(-0.5px); }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }

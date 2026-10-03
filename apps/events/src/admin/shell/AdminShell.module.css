@@ -1,0 +1,53 @@
+/* Admin layout (design/01 + 01b: sidebar 232px absolute left, page box on the right). */
+.host { container: admin / inline-size; min-height: 100dvh; background: var(--white); color: var(--black); font-family: var(--font-sans); }
+.host[data-fill] { min-height: 0; height: 100%; }
+.shell { display: grid; grid-template-columns: 232px minmax(0, 1fr); min-height: inherit; height: 100%; }
+/* `.shell > .sidebar`: the ui sidebar's own rule has one class too, so a single class here would depend on chunk order. */
+.shell > .sidebar { position: sticky; top: 0; height: 100dvh; min-height: 0; }
+.host[data-fill] .shell > .sidebar { position: static; height: 100%; }
+.main { position: relative; display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+/* `.shell > .mobileBar`: two classes, so the header's own single-class rules never decide whether it shows. */
+.shell > .mobileBar { display: none; }
+
+/* Below 900px (phones and tablet portrait) the sidebar gives way to the site header (SiteHeader.module.css: the
+ * same logo, avatar and sizes as the public pages), so the page gets the full width. */
+@container admin (max-width: 900px) {
+  .shell { display: flex; flex-direction: column; }
+  .shell > .sidebar { display: none; }
+  .shell > .mobileBar { display: block; }
+}
+
+/* ── Page boxes shared by the admin screens ─────────────────────── */
+/* A-02 / A-03 / A-12: 32px 40px, 24px gap. */
+.page { display: flex; flex-direction: column; gap: 24px; padding: 32px 40px; box-sizing: border-box; flex: 1; min-height: 0; }
+/* Event tabs (A-04, A-05, A-09…A-11): 28px 40px, 20px gap. */
+.pageTight { display: flex; flex-direction: column; gap: 20px; padding: 28px 40px; box-sizing: border-box; flex: 1; min-height: 0; }
+/* design/05 (applicants, U3) spaces its sections 18px apart; the tab marks itself with a hidden [data-gap="18"]. */
+@container admin (min-width: 1101px) {
+  .pageTight:has(> [data-gap="18"]) { gap: 18px; }
+}
+
+@container admin (max-width: 1100px) {
+  .page { padding: 28px; gap: 20px; }
+  .pageTight { padding: 24px; gap: 16px; }
+}
+/* Under the site header (no sidebar) the page takes the header's gutter, so the logo and the title share a left
+   edge: 32px from 768px, 16px below (SiteHeader.module.css). */
+@container admin (min-width: 768px) and (max-width: 900px) {
+  .page, .pageTight { padding-inline: 32px; }
+}
+@container admin (min-width: 601px) and (max-width: 767px) {
+  .page, .pageTight { padding-inline: 16px; }
+}
+@container admin (max-width: 600px) {
+  .page { padding: 20px 16px; gap: 16px; }
+  .pageTight { padding: 0 0 16px; gap: 0; }
+}
+
+/* Account block: the public header's avatar menu (AccountMenu) + name and email. In the sidebar it opens upwards. */
+.account { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
+.accountWho { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.accountName, .accountEmail { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.accountName { font: 500 13px/normal var(--font-sans); color: var(--black); }
+.accountEmail { font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+.accountUp [role="menu"] { top: auto; right: auto; bottom: calc(100% + 8px); left: 0; }

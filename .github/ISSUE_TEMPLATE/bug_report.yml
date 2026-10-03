@@ -1,0 +1,96 @@
+name: Bug report
+description: Something in Didit Events does not work as it should.
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time. Issues are public, so please leave out:
+
+        - API keys, webhook secrets, session cookies and the contents of your `.env` files
+        - real guest data: names, email addresses, Didit session ids, verification results
+        - photos or screenshots that show a real person's face or identity document
+
+        **Security problem?** Stop here and report it privately: https://github.com/didit-protocol/didit-events/security/advisories/new
+        (see [SECURITY.md](https://github.com/didit-protocol/didit-events/blob/main/SECURITY.md)). Never describe it in a public issue.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you got, including the exact error message if there was one.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: The shortest list of steps that shows the problem on a fresh clone, if you can.
+      placeholder: |
+        1. Run `pnpm dev`
+        2. Open ...
+        3. Click ...
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Guest pages (event page, request, profile)
+        - Sign-in
+        - Verification (Didit sessions, webhooks)
+        - Admin
+        - Door check-in
+        - Emails
+        - MCP server
+        - Setup, Docker or deployment
+        - Something else
+    validations:
+      required: true
+  - type: dropdown
+    id: how-run
+    attributes:
+      label: How are you running it
+      options:
+        - pnpm dev
+        - docker compose
+        - Docker image on my own host
+        - Standalone Node server
+        - pnpm smoke:local or pnpm e2e:journey
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: 0.1.0, or the output of git rev-parse --short HEAD
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Node version, operating system, browser, and Postgres or PGlite.
+      placeholder: Node 22.12, macOS 15, Chrome 141, Postgres 17
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Server output or browser console, with secrets and personal data removed.
+      render: text
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you send
+      options:
+        - label: This report contains no secrets, no real guest data and no photos of real people.
+          required: true
+        - label: This is not a security vulnerability (those go to the private report linked above).
+          required: true

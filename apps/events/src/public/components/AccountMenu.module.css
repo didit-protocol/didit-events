@@ -1,0 +1,40 @@
+/* Header avatar menu: 32px avatar in a 44px touch target (6px padding, pulled back by the margin so the header
+ * layout and the avatar's position are unchanged), 232px panel under the avatar, right-aligned. The panel never
+ * outgrows a short window (a phone on its side): it scrolls inside. */
+.root { position: relative; z-index: 100; display: flex; }
+.trigger {
+  display: flex; padding: 6px; margin: -6px; border: 0; border-radius: 50%; background: none; cursor: pointer;
+}
+.trigger:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: calc(var(--focus-ring-offset) - 6px); }
+.trigger[aria-expanded="true"] > * { border-radius: 50%; box-shadow: 0 0 0 2px var(--border); }
+
+.menu {
+  position: absolute; top: calc(100% + 8px); right: 0; z-index: 100; box-sizing: border-box; isolation: isolate;
+  display: flex; flex-direction: column; min-width: 232px; max-width: calc(100vw - 32px); max-height: calc(100dvh - 72px); overflow-y: auto; padding: 6px;
+  border: 1px solid var(--border); border-radius: 12px; background: #fefefe; background: var(--white, #fefefe); box-shadow: var(--shadow-lg);
+  font: 500 14px/normal var(--font-sans); text-align: left;
+}
+.who { display: flex; flex-direction: column; gap: 2px; padding: 8px 10px 10px; margin-bottom: 4px; border-bottom: 1px solid var(--border-subtle); }
+.whoName { overflow: hidden; color: var(--black); white-space: nowrap; text-overflow: ellipsis; }
+.whoEmail { overflow: hidden; font-weight: 400; font-size: 12px; color: var(--mid-high); white-space: nowrap; text-overflow: ellipsis; }
+
+.item {
+  display: flex; align-items: center; box-sizing: border-box; width: 100%; min-height: 36px; padding: 0 10px;
+  border: 0; border-radius: 8px; background: none; color: var(--high); font: inherit; text-align: left; text-decoration: none; cursor: pointer;
+}
+.item:hover, .item:focus-visible, .item:focus { background: var(--ultra-soft); color: var(--black); text-decoration: none; outline: none; }
+.item:disabled { cursor: progress; opacity: 0.6; }
+.item[aria-current="page"] { color: var(--brand); }
+/* Explore events: in the bar from 768px, in this menu below (the phone header is only the logo and the avatar). */
+.phoneOnly { display: none; }
+@container site-header (max-width: 767px) {
+  .phoneOnly { display: flex; }
+}
+/* Touch: every row is a 44px target. */
+@media (max-width: 767px), (pointer: coarse) {
+  .item { min-height: 44px; }
+}
+.signOut { color: var(--danger-fg); }
+.signOut:hover, .signOut:focus { color: var(--danger-fg); }
+.sep { height: 1px; margin: 4px 0; background: var(--border-subtle); }
+.form { display: contents; }

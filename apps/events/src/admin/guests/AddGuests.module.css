@@ -1,0 +1,47 @@
+/* A-07 Add guests (design/01b Admin): 640px modal, radius 24, header 24px 24px 0, body 20px 24px (min 420), footer 16px 24px. */
+.modal.modal { max-width: 640px; padding: 0; gap: 0; overflow: hidden; }
+.modal > :first-child { padding: 24px 24px 0; }
+.modal > :first-child h2 { font-size: 20px; }
+/* The footer keeps its own rule (always on), so the kit's scroll-linked one is off. */
+.modal > :last-child { margin: 0; padding: 16px 24px; border-top: 1px solid var(--border); animation: none; }
+.tabs { margin: 16px 24px 0; gap: 20px; }
+.tabs a, .tabs button { padding: 10px 0; margin-bottom: -1px; }
+.body { padding: 20px 24px; display: flex; flex-direction: column; gap: 14px; min-height: 420px; box-sizing: border-box; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.note textarea { height: 72px; min-height: 72px; }
+.sendBox { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 14px; background: #F8F8F8; border-radius: var(--radius-sm); cursor: pointer; }
+.sendText { display: flex; flex-direction: column; gap: 2px; }
+.sendText b { font: 500 14px/normal var(--font-sans); color: var(--black); }
+.sendText span { font: 400 12px/normal var(--font-sans); color: var(--high); }
+.paste textarea { height: 240px; padding: 12px; font: 400 13px/1.6 "SF Mono", ui-monospace, monospace; white-space: pre; resize: vertical; }
+.paste textarea::placeholder { color: var(--mid); }
+.paste[data-drag] textarea { border-color: var(--brand); background: var(--brand-tint); }
+.hint { margin: 0; font: 400 12px/normal var(--font-sans); color: var(--high); }
+.hint label { color: var(--brand); font-weight: 500; cursor: pointer; }
+.chips { display: flex; gap: 8px; font: 500 13px/normal var(--font-sans); }
+.chip { padding: 4px 10px; border-radius: 999px; }
+.ok { background: var(--success-bg); color: var(--success-fg); }
+.bad { background: var(--danger-bg); color: var(--danger-fg); }
+.dup { background: var(--warning-bg); color: var(--warning-fg); }
+.preview { border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+.pRow { display: grid; grid-template-columns: 1fr 1fr 1.6fr 1.2fr; gap: 8px; padding: 0 12px; height: 36px; align-items: center; border-top: 1px solid var(--border-subtle); font: 400 13px/normal var(--font-sans); box-sizing: border-box; }
+.pRow > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pHead { height: 32px; border-top: 0; background: #F8F8F8; font: 500 11px/normal var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid-high); }
+.pRow[data-status="invalid-email"], .pRow[data-status="missing-name"] { background: var(--danger-bg); }
+.pRow[data-status="duplicate"], .pRow[data-status="duplicate-in-list"] { background: var(--warning-bg); }
+.pNote { font-weight: 500 !important; font-size: 12px !important; color: var(--success-fg); }
+.pRow[data-status="invalid-email"] .pNote, .pRow[data-status="missing-name"] .pNote { color: var(--danger-fg); }
+.pRow[data-status="duplicate"] .pNote, .pRow[data-status="duplicate-in-list"] .pNote { color: var(--warning-fg); }
+.more { padding: 8px 12px; font: 400 12px/normal var(--font-sans); color: var(--mid-high); }
+.adding { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 12px; padding: 40px 0; }
+.adding b { font: 500 17px/normal var(--font-sans); }
+.adding span { font: 400 13px/normal var(--font-sans); color: var(--high); font-feature-settings: "tnum"; }
+.done { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 40px 0; }
+.check { width: 56px; height: 56px; border-radius: 50%; background: var(--success-bg); display: grid; place-items: center; }
+.done b { font: 500 20px/normal var(--font-sans); letter-spacing: -0.02em; }
+.done p { margin: 0; font: 400 14px/normal var(--font-sans); color: var(--high); }
+.done a { font-weight: 500; }
+.skipped { align-self: stretch; text-align: left; }
+.error { margin: 0; font: 400 13px/normal var(--font-sans); color: var(--danger-fg); }
+.frame { position: absolute; inset: 0; display: grid; place-items: center; }
+.frame > * { width: 640px; }
