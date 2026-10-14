@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.8",
-    "drizzle-orm": "^0.45.3",
+    "drizzle-orm": "^0.45.4",
     "markdown-it": "14.3.2",
     "postgres": "^3.4.9",
     "sanitize-html": "2.18.0",
