@@ -25,7 +25,7 @@ describe("the browser Sentry client", () => {
     const event = sent[0]!;
     expect(event).toMatchObject({ release: "sha-test", environment: "staging" });
     expect(event.exception!.values!.at(-1)!.value).toBe("could not save <email>");
-    expect(event.request?.url).toBe("https://events.didit.me/i/[token]?email=[redacted]");
+    expect(event.request?.url).toBe("https://events.didit.me/i/[token]");
     expect(event.user).toBeUndefined();
     expect(event.sdk?.settings?.infer_ip).toBe("never");
     expect(JSON.stringify(event)).not.toMatch(/example\.com|abc123/);

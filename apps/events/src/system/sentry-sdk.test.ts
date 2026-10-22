@@ -30,7 +30,7 @@ describe("the Sentry SDK as configured", () => {
     const event = sent[0]!;
     expect(event).toMatchObject({ release: "sha-test", environment: "staging" });
     expect(event.exception!.values!.at(-1)).toMatchObject({ type: "Error", value: "no guest <email> at /e/summit/v/[token]" });
-    expect(event.contexts!.nextjs).toMatchObject({ request_path: "/i/[token]?email=[redacted]", router_path: "/i/[token]", route_type: "action" });
+    expect(event.contexts!.nextjs).toMatchObject({ request_path: "/i/[token]", router_path: "/i/[token]", route_type: "action" });
     expect(event.user).toBeUndefined();
     expect(event.request?.cookies).toBeUndefined();
     expect(event.request?.data).toBeUndefined();
