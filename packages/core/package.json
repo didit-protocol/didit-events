@@ -27,7 +27,7 @@
     "db:migrate": "node --experimental-strip-types src/db/migrate-cli.ts"
   },
   "dependencies": {
-    "@electric-sql/pglite": "^0.5.10",
+    "@electric-sql/pglite": "^0.5.11",
     "drizzle-orm": "^0.45.4",
     "markdown-it": "14.3.3",
     "postgres": "^3.4.9",
