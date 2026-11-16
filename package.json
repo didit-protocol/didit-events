@@ -34,14 +34,14 @@
     "email:audit": "node --experimental-transform-types --no-warnings packages/core/scripts/email-audit.ts"
   },
   "devDependencies": {
-    "@playwright/test": "^1.65.0",
+    "@playwright/test": "^1.65.1",
     "@types/jsdom": "^30.0.0",
     "@types/node": "^26.6.6",
     "eslint": "^9.39.5",
-    "eslint-config-next": "16.4.5",
+    "eslint-config-next": "16.4.6",
     "jsdom": "^30.1.3",
     "typescript": "~6.0.3",
-    "typescript-eslint": "^8.72.1",
+    "typescript-eslint": "^8.72.2",
     "vitest": "^4.1.12"
   }
 }
